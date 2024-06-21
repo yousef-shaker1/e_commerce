@@ -1,0 +1,92 @@
+@extends('layouts.master_admin')
+@section('css')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #d4d4d4;
+        }
+    </style>
+@endsection
+
+@section('title')
+    العملاء
+@endsection
+
+@section('content')
+
+    @if (session()->has('delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('delete') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mg-b-20">
+                <div class="card-header pb-0">
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                      <table id="example1" class="table key-buttons text-md-nowrap">
+                          <thead>
+                              <tr>
+                                  <th class="border-bottom-0">#</th>
+                                  <th class="border-bottom-0">اسم العميل</th>
+                                  <th class="border-bottom-0">ايميل العميل</th>
+                                  <th class="border-bottom-0">هاتف العميل</th>
+                                  <th class="border-bottom-0">السلة</th>
+                                  <th class="border-bottom-0">الاوردرات</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <?php $i = 0; ?>
+                              @foreach ($customers as $customer)
+                                  <?php $i++; ?>
+                                  <tr>
+                                      <td>{{ $i }}</td>
+                                      <td>{{ $customer->name }}</td>
+                                      <td>{{ $customer->email }}</td>
+                                      <td>{{ $customer->phone }}</td>
+                                      <td>{{ \App\Models\basket::where('customer_id', $customer->id)->count() + \App\Models\clothesbasket::where('customer_id', $customer->id)->count()}}</td>
+                                      <td>{{ \App\Models\order::where('customer_id', $customer->id)->count() + \App\Models\clothingorder::where('customer_id', $customer->id)->count() }}</td>
+                                  </tr>
+                              @endforeach
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+
+        <!-- End Basic modal -->
+    </div>
+
+
+
+
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+@endsection
+@section('js')
+    <!-- تأكد من إضافة سكربتات الجافا سكريبت في نهاية البودي -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@endsection

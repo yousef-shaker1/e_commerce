@@ -1,0 +1,183 @@
+@extends('layouts.master_admin')
+
+@section('css')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar-custom {
+            background-color: #343a40;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #d4d4d4;
+        }
+    </style>
+@endsection
+
+@section('title')
+    اوردرات الملابس 
+@endsection
+
+@section('content')
+    @if (session()->has('Add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('delete') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('edit'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class='alert alert-danger'>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+                <br>
+            @endforeach
+        </div>
+    @endif
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card mg-b-20">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example1" class="table key-buttons text-md-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="border-bottom-0">#</th>
+                                    <th class="border-bottom-0">اسم العميل</th>
+                                    <th class="border-bottom-0">ايميل العميل</th>
+                                    <th class="border-bottom-0">تليفون العميل</th>
+                                    <th class="border-bottom-0">عنوان العميل</th>
+                                    <th class="border-bottom-0">تاريخ وصول الاوردر</th>
+                                    <th class="border-bottom-0">اسم المنتج</th>
+                                    <th class="border-bottom-0">المقاس</th>
+                                    <th class="border-bottom-0">الكمية</th>
+                                    <th class="border-bottom-0">سعر المنتج</th>
+                                    <th class="border-bottom-0">المجموع</th>
+                                    <th class="border-bottom-0">القسم التابع للمنتج</th>
+                                    <th class="border-bottom-0">حالة الاوردر</th>
+                                    <th class="border-bottom-0">العمليات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 0; ?>
+                                @foreach ($orders as $order)
+                                    <?php $i++; ?>
+                                    <tr>
+                                        <td>{{ $i }}</td>
+                                        <td>{{ $order->customer->name }}</td>
+                                        <td>{{ $order->customer->email }}</td>
+                                        <td>{{ $order->customer->phone }}</td>
+                                        <td>{{ $order->customer->address }}</td>
+                                        <td>{{ $order->day }}</td>
+                                        <td>{{ $order->product->name }}</td>
+                                        <td>{{ $order->size }}</td>
+                                        <td>{{ $order->count }}</td>
+                                        <td>{{ $order->product->price }}</td>
+                                        <td>{{ $order->product->price * $order->count }}</td>
+                                        <td>{{ $order->product->section->name }}</td>
+                                        <td style="width: 100px; padding: 17px; text-align: center; vertical-align: middle;" class="text-white 
+                                            @if ($order->status == 'يتم مراجعة الطلب') bg-secondary 
+                                            @elseif($order->status == 'قبول') bg-primary 
+                                            @elseif($order->status == 'رفض') bg-danger 
+                                            @elseif($order->status == 'اتمام') bg-success 
+                                            @endif">
+                                            {{ $order->status }}
+                                        </td>
+                                        <td>
+                                            @can('قبول اوردر الملابس')
+                                                <a href="{{ route('clothing_order.status1', $order->id) }}" class="btn btn-primary btn-sm mb-1">قبول</a>
+                                            @endcan
+                                            @can('رفض اوردر الملابس')
+                                                <a href="{{ route('clothing_order.status2', $order->id) }}" class="btn btn-danger btn-sm mb-1">رفض</a>
+                                            @endcan
+                                            @can('اتمام اوردر الملابس')
+                                            <a href="{{ route('clothing_order.status3', $order->id) }}" class="btn btn-success btn-sm mb-1">اتمام</a>
+                                            @endcan
+                                            @can('حذف اوردر الملابس')
+                                            <a class="btn btn-danger btn-sm" data-effect="effect-scale"
+                                            data-id="{{ $order->id }}" data-name="{{ $order->customer->name }}"
+                                            data-toggle="modal" href="#modaldemo9" title="حذف">حذف<i
+                                            class="las la-trash"></i></a>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="modaldemo9">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content modal-content-demo">
+                        <div class="modal-header">
+                            <h6 class="modal-title">حذف المنتج</h6><button aria-label="Close" class="close"
+                                data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <form action="{{ route('delete_clothingorder', $i) }}" method="post">
+                            @method('delete')
+                            @csrf
+                            <div class="modal-body">
+                                <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                                <input type="hidden" name="id" id="id" value="">
+                                <input class="form-control" name="name" id="name" type="text" vlaue=""
+                                    readonly>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                                <button type="submit" class="btn btn-danger">تاكيد</button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+            $(document).ready(function() {
+            $('#modaldemo9').on('show.bs.modal', function(event) {
+                // الحصول على الزر الذي أطلق الحدث
+                var button = $(event.relatedTarget);
+                // استخراج المعلومات من سمات البيانات
+                var id = button.data('id');
+                var name = button.data('name');
+                // تحديث محتوى الحقول في النموذج داخل الـ modal
+                var modal = $(this);
+                modal.find('.modal-body #id').val(id);
+                modal.find('.modal-body #name').val(name);
+            });
+        });
+    </script>
+@endsection

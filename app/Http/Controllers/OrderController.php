@@ -30,7 +30,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::all();
+        $orders = order::paginate(10);
         return view('admin.order',compact('orders'));
     }
 
@@ -168,7 +168,7 @@ class OrderController extends Controller
     }
 
     public function show_message(){
-        $messages = message::get();
+        $messages = message::paginate(5);
         return view('admin.show_message', compact('messages'));
     }
 

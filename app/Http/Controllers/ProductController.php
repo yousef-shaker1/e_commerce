@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = product::all();
+        $products = product::paginate(10);
         $sections = section::all();
         return view('admin.product', compact('products', 'sections'));
     }

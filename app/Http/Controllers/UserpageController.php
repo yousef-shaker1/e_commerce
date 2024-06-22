@@ -24,8 +24,8 @@ class UserpageController extends Controller
     public function index()
     {
         $messages = message::get();
-        $products = product::get();
-        $clothing_products = clothingproduct::get();
+        $products = product::paginate(9);
+        $clothing_products = clothingproduct::paginate(9);
         return view('user_page.home', compact('products', 'clothing_products', 'messages'));
     }
 
@@ -53,14 +53,14 @@ class UserpageController extends Controller
     public function Previousorders()
     {
         $customer = customer::where('email', Auth::user()->email)->first();
-        $orders = order::where('customer_id', $customer->id)->get();
+        $orders = order::where('customer_id', $customer->id)->paginate(5);
         $clothingorders = clothingorder::where('customer_id', $customer->id)->get();
         return view('user_page.Previousorders', compact('orders', 'clothingorders'));
     }
     
     public function bestseller()
     {
-        $products = order::select('product_id', DB::raw('count(*) as total'))->groupBy('product_id')->having('total', '>', 5) ->orderByDesc('total')->take(10)->get();
+        $products = order::select('product_id', DB::raw('count(*) as total'))->groupBy('product_id')->having('total', '>', 5) ->orderByDesc('total')->take(10)->paginate(8);
         $clothing_products = clothingorder::select('product_id', DB::raw('count(*) as total'))->groupBy('product_id')->having('total', '>', 5) ->orderByDesc('total')->take(10)->get();
         return view('user_page.bestseller', compact('products', 'clothing_products'));
     }
@@ -76,13 +76,13 @@ class UserpageController extends Controller
                 ->from('orders')
                 ->where('customer_id', $customer->id);
                 });
-        })->get();
+        })->paginate(9);
 
         $productIds = clothingorder::where('customer_id', $customer->id)->pluck('product_id')->toArray();
         $clothingproducts = clothingproduct::whereIn('id', $productIds)->get();
         // return $products;
         $clothingsection = $clothingproducts->pluck('section_id');
-        $clothingsections = clothingproduct::whereIn('section_id', $clothingsection)->get();
+        $clothingsections = clothingproduct::whereIn('section_id', $clothingsection)->paginate(9);
         return view('user_page.importantproducts', compact('sections', 'clothingsections'));
         
     }

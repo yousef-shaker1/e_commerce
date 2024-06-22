@@ -24,7 +24,7 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $sections = section::all();
+        $sections = section::paginate(5);
         return view('admin.section',compact('sections'));
     }
 

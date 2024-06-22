@@ -58,37 +58,92 @@
   
 <div class="product-section mt-120 mb-120">
 	<div class="container">
-			<div class="row product-lists">
-					@foreach ($sections as $section)
-							<div class="col-lg-4 col-md-6 text-center strawberry">
-									<div class="single-product-item">
-											<div class="product-image">
-													<img src="{{ Storage::url($section->img) }}" style="width: 200px; height: 160px; object-fit: cover;">
-											</div>
-											<h3>{{ $section->name }} </h3>
-											<h3>{{ $section->description }}</h3>
-											<h3>{{ $section->price }} $</h3>
-											<a href="{{ route('product_view', $section->id) }}" class="cart-btn"><i class="fas fa-shopping-cart"></i>view</a>
-									</div>
-							</div>
-					@endforeach
-          @foreach ($clothingsections as $clothingsection)
-          <div class="col-lg-4 col-md-6 text-center {{ $clothingsection->type }}">
-              <div class="single-product-item">
-                  <div class="product-image">
-                      <img src="{{ Storage::url($clothingsection->img) }}" style="width: 200px; height: 200px; object-fit: cover;">
-                  </div>
-                  <h2>{{ $clothingsection->name }}</h2>
-                  <h3>{{ $clothingsection->description }}</h3>
-                  <h3>{{ $clothingsection->price }} $</h3>                                
-                  <a href="{{ route('clothing_product_view', $clothingsection->id) }}" class="cart-btn">
-                      <i class="fas fa-shopping-cart"></i>view
-                  </a>
-              </div>
-          </div>
-      @endforeach
-			</div>
-	</div>
+        <div class="row product-lists">
+            <!-- عرض منتجات القسم العادي -->
+            @foreach ($sections as $section)
+                <div class="col-lg-4 col-md-6 text-center strawberry">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <img src="{{ Storage::url($section->img) }}" style="width: 200px; height: 160px; object-fit: cover;">
+                        </div>
+                        <h3>{{ $section->name }}</h3>
+                        <h3>{{ $section->description }}</h3>
+                        <h3>{{ $section->price }} $</h3>
+                        <a href="{{ route('product_view', $section->id) }}" class="cart-btn"><i class="fas fa-shopping-cart"></i>view</a>
+                    </div>
+                </div>
+            @endforeach
+    
+            <!-- عرض منتجات قسم الملابس -->
+            @foreach ($clothingsections as $clothingsection)
+                <div class="col-lg-4 col-md-6 text-center {{ $clothingsection->type }}">
+                    <div class="single-product-item">
+                        <div class="product-image">
+                            <img src="{{ Storage::url($clothingsection->img) }}" style="width: 200px; height: 200px; object-fit: cover;">
+                        </div>
+                        <h2>{{ $clothingsection->name }}</h2>
+                        <h3>{{ $clothingsection->description }}</h3>
+                        <h3>{{ $clothingsection->price }} $</h3>
+                        <a href="{{ route('clothing_product_view', $clothingsection->id) }}" class="cart-btn">
+                            <i class="fas fa-shopping-cart"></i>view
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    
+        <!-- Pagination للقسم العادي -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4 class="my-4">الاجهزة</h4>
+            </div>
+        </div>
+        <ul class="pagination justify-content-center">
+            @if ($sections->onFirstPage())
+                <li class="page-item disabled"><span class="page-link">السابق</span></li>
+            @else
+                <li class="page-item"><a href="{{ $sections->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+            @endif
+    
+            @foreach(range(1, $sections->lastPage()) as $page)
+                <li class="page-item {{ $page == $sections->currentPage() ? 'active' : '' }}">
+                    <a href="{{ $sections->url($page) }}" class="page-link">{{ $page }}</a>
+                </li>
+            @endforeach
+    
+            @if ($sections->hasMorePages())
+                <li class="page-item"><a href="{{ $sections->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+            @else
+                <li class="page-item disabled"><span class="page-link">التالي</span></li>
+            @endif
+        </ul>
+    
+        <!-- Pagination لقسم منتجات الملابس -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4 class="my-4">الملابس</h4>
+            </div>
+        </div>
+        <ul class="pagination justify-content-center">
+            @if ($clothingsections->onFirstPage())
+                <li class="page-item disabled"><span class="page-link">السابق</span></li>
+            @else
+                <li class="page-item"><a href="{{ $clothingsections->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+            @endif
+    
+            @foreach(range(1, $clothingsections->lastPage()) as $page)
+                <li class="page-item {{ $page == $clothingsections->currentPage() ? 'active' : '' }}">
+                    <a href="{{ $clothingsections->url($page) }}" class="page-link">{{ $page }}</a>
+                </li>
+            @endforeach
+    
+            @if ($clothingsections->hasMorePages())
+                <li class="page-item"><a href="{{ $clothingsections->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+            @else
+                <li class="page-item disabled"><span class="page-link">التالي</span></li>
+            @endif
+        </ul>
+    </div>
 </div>
 
 

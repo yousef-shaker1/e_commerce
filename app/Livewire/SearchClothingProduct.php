@@ -4,22 +4,33 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\ClothingProduct;
+use Livewire\WithPagination;
 
 class SearchClothingProduct extends Component
 {
+    use WithPagination;
+
     public $search = '';
-    public $clothing_products = [];
     public $sectionId;
 
     public function render()
     {
-        $this->clothing_products = ClothingProduct::where('name', 'like', "%{$this->search}%")->where('section_id', $this->sectionId)->get();
-        return view('livewire.search-clothing-product', ['clothing_products' => $this->clothing_products]);
+        // استخدام paginate() بدلاً من get()
+        $clothing_products = ClothingProduct::where('name', 'like', "%{$this->search}%")
+            ->where('section_id', $this->sectionId)
+            ->paginate(10);
+
+        return view('livewire.search-clothing-product', [
+            'clothing_products' => $clothing_products,
+        ]);
     }
 
     public function searchProducts()
     {
-        $this->clothing_products = ClothingProduct::where('name', 'like', '%' . $this->search . '%')->get();
+        // استخدام paginate() بدلاً من get()
+        $this->clothing_products = ClothingProduct::where('name', 'like', '%' . $this->search . '%')
+            ->where('section_id', $this->sectionId)
+            ->paginate(10);
     }
 
     public function updatedSearch()
@@ -32,6 +43,4 @@ class SearchClothingProduct extends Component
         $this->sectionId = $sectionId;
         $this->search = request()->query('search', $this->search);
     }
-
 }
-?>

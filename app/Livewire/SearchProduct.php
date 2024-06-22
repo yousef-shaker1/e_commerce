@@ -14,7 +14,7 @@ class SearchProduct extends Component
     {
         $products = Product::where('name', 'like', "%{$this->search}%")
         ->where('section_id', $this->sectionId)
-        ->get();
+        ->paginate(10);
         return view('livewire.search-product', compact('products'));
     }
 

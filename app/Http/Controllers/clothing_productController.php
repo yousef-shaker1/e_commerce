@@ -26,7 +26,7 @@ class clothing_productController extends Controller
      */
     public function index()
     {
-        $products = clothingproduct::all();
+        $products = clothingproduct::paginate(10);
         $sections = clothingsection::all();
         return view('admin.clothingproduct', compact('products', 'sections'));
     }

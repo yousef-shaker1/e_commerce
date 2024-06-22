@@ -67,6 +67,28 @@
                               @endforeach
                           </tbody>
                       </table>
+                      <ul class="pagination justify-content-center">
+                          <!-- زر الصفحة السابقة -->
+                          @if ($customers->onFirstPage())
+                              <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                          @else
+                              <li class="page-item"><a href="{{ $customers->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                          @endif
+                  
+                          <!-- أرقام الصفحات -->
+                          @foreach(range(1, $customers->lastPage()) as $page)
+                              <li class="page-item {{ $page == $customers->currentPage() ? 'active' : '' }}">
+                                  <a href="{{ $customers->url($page) }}" class="page-link">{{ $page }}</a>
+                              </li>
+                          @endforeach
+                  
+                          <!-- زر الصفحة التالية -->
+                          @if ($customers->hasMorePages())
+                              <li class="page-item"><a href="{{ $customers->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                          @else
+                              <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                          @endif
+                      </ul>
                   </div>
               </div>
             </div>

@@ -63,7 +63,7 @@
         <div class="col-md-12 col-lg-12 col-xl-7">
             <div class="card mb-3">
                 <div class="card-header bg-transparent">
-                    <h4 class="card-title mb-0">نسبة احصائية الفواتير</h4>
+                    <h4 class="card-title mb-0">اوردرات المنتجات و الملابس</h4>
                 </div>
                 <div style="max-width: 400px; margin: auto;">
                     {{ $chart1->render() }}
@@ -73,7 +73,7 @@
         <div class="col-lg-12 col-xl-5">
             <div class="card mb-3">
                 <div class="card-header bg-transparent">
-                    <label class="main-content-label">نسبة احصائية الفواتير</label>
+                    <h4 class="main-content-label">الاوردرات</h4>
                 </div>
                 <div style="max-width: 900px; margin: auto;">
                     {{ $chartjs2->render() }}

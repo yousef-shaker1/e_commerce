@@ -21,6 +21,7 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="{{URL::asset('assets/css/responsive.css')}}">
 
+    
 	<style>
 .nav-btn {
     padding: 10px 20px;
@@ -69,7 +70,30 @@
             margin-top: -10px; /* رفع الشعار لأعلى */
         }
 
+.main-header-notification {
+    position: absolute;
+    top: 5px; 
+    left: -25px; 
+}
 
+.notification-badge {
+    position: absolute;
+    top: -10px; /* تعديل هذه القيمة حسب الحاجة */
+    right: 0;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* تكبير عرض القائمة المنسدلة */
+.dropdown-menu {
+    width: 350px; /* تعديل العرض حسب الحاجة */
+}
+
+.main-notification-list.Notification-scroll {
+    max-height: 300px; /* تعديل الارتفاع حسب الحاجة */
+    overflow-y: auto;
+}
 
 	</style>
 	@yield('css')

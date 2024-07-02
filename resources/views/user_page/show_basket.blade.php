@@ -116,7 +116,7 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
                                         </form>
                                     </div>
                                     <div class="col-6">
-                                        <a href="{{ route('show_single_basket', $basket->id) }}" class="btn buy-now-btn">
+                                        <a href="{{ route('show_single_basket', $basket->product->id) }}" class="btn buy-now-btn">
                                             <i class="fas fa-shopping-cart"></i> شراء الآن
                                         </a>
                                     </div>
@@ -145,7 +145,7 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
                                     </form>
                                 </div>
                                 <div class="col-6">
-                                    <a href="{{ route('show_single_clohing_basket', $clothesbasket->id) }}" class="btn buy-now-btn">
+                                    <a href="{{ route('show_single_clohing_basket', $clothesbasket->product->id) }}" class="btn buy-now-btn">
                                         <i class="fas fa-shopping-cart"></i> شراء الآن
                                     </a>
                                 </div>

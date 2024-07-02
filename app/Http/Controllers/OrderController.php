@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Stripe\Stripe;
 use App\Mail\okorder;
 use App\Models\order;
+use App\Models\basket;
 use App\Models\message;
 use App\Models\product;
 use App\Models\customer;
@@ -77,10 +78,13 @@ class OrderController extends Controller
         $product->update([
             'amount' => $product->amount - $count,
         ]);
-        $nameproduct = $product->name;
+
+        basket::where('customer_id', $customer->id)->where('product_id', $id)->delete();
         
+        $nameproduct = $product->name;
         $address = $customer->address;
         Mail::to(Auth::user()->email)->send(new completedorder($nameproduct, $date, $address));
+
             
         return redirect()->away($session->url);
 

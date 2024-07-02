@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class ClothesbasketController extends Controller
 {
     public function add_clothing_basket($id1, $id2){
-
         $customer = customer::where('email', Auth::user()->email)->first();
         clothesbasket::create([
             'customer_id' => $customer->id,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\order;
 use App\Models\message;
 use App\Models\product;
@@ -48,6 +49,21 @@ class UserpageController extends Controller
     public function checkout()
     {
         return view('user_page.checkout');
+    }
+
+    public function markall(){
+        $user = User::where('id', Auth::user()->id)->first();
+        foreach($user->unreadNotifications as $notifiate){
+            $notifiate->MarkAsRead();
+        }
+        return redirect()->back();
+    }
+
+    public function show_single_product($id){
+        $product = product::where('id', $id)->first();
+        $get_id = DB::table('notifications')->where('data->pro_id', $id)->where('notifiable_id', Auth::user()->id)->pluck('id');
+        DB::table('notifications')->where('id', $get_id)->update(['read_at' => now()]);
+        return view('user_page.view_single_product', compact('product'));
     }
 
     public function Previousorders()

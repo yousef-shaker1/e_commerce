@@ -36,6 +36,8 @@ Route::controller(UserpageController::class)->group(function(){
     Route::get('/shop','shop')->name('shop');
     Route::get('/contact','contact')->name('contact');
     Route::get('/bestseller', 'bestseller')->name('bestseller');
+    Route::get('/notification/markall', 'markall')->name('notification.markall');
+    Route::get('/show_single_product/{id}', 'show_single_product')->name('show_single_product');
     Route::get('/importantproducts', 'importantproducts')->name('importantproducts')->middleware('auth');
     Route::get('/Previousorders', 'Previousorders')->name('Previousorders')->middleware('auth');
     Route::Post('/mesage_customer', 'mesage_customer')->name('mesage_customer')->middleware('auth');

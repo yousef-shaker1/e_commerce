@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Stripe\Stripe;
+use App\Models\size;
 use App\Mail\okorder;
 use App\Models\order;
 use App\Models\customer;
@@ -41,10 +42,10 @@ class ClothingOrderController extends Controller
     $count = request()->input('count');
     $customer = customer::where('email', Auth::user()->email)->first();
     $basket = clothesbasket::where('product_id', $id)->where('customer_id', $customer->id)->first();
+    
     $size_id = $basket->size_id;
     $size = relationsize::where('product_id', $id)->where('size_id', $size_id)->first();
     if ($request->count < $size->amount){
-        
         Stripe::setApiKey(config('services.stripe.secret'));
     
         $session = Session::create([
@@ -80,6 +81,8 @@ class ClothingOrderController extends Controller
         $productName = $clothing_product->name;
         $address = $customer->address;
         Mail::to(Auth::user()->email)->send(new okorder($productName, $date, $address));
+
+        clothesbasket::where('customer_id', $customer->id)->where('product_id', $id)->delete();
 
         return redirect()->away($session->url);
 

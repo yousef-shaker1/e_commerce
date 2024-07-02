@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\size;
 use App\Models\basket;
+use App\Models\product;
 use App\Models\customer;
+use App\Models\relationsize;
 use Illuminate\Http\Request;
 use App\Models\clothesbasket;
+use App\Models\clothingproduct;
 use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
@@ -36,16 +40,16 @@ class BasketController extends Controller
     }
     
     public function show_single_basket($id){
-        $customer = customer::where('email' , Auth::user()->email)->first();
-        $basket = basket::where('customer_id', $customer->id)->where('id', $id)->first();
-        return view('user_page.show_single_basket', compact('basket'));
+        $product = product::where('id', $id)->first();
+        return view('user_page.show_single_basket', compact('product'));
     }
 
 
     public function show_single_clohing_basket($id){
-        $customer = customer::where('email' , Auth::user()->email)->first();
-        $basket = clothesbasket::where('customer_id', $customer->id)->where('id', $id)->first();
-        return view('user_page.show_single_clohing_basket', compact('basket'));
+        $clothingproduct = clothingproduct::where('id', $id)->first();
+        $size_id = relationsize::where('product_id', $clothingproduct->id)->first();
+        $size = size::where('id', $size_id->size_id)->first();
+        return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size'));
     }
 
     /**

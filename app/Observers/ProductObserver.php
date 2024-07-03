@@ -16,7 +16,7 @@ class ProductObserver
     public function created(product $product): void
     {
         $user = auth()->user();
-        $users = User::where('id', '!=', Auth::user()->id)->get();
+        $users = User::where('id', '!=', auth()->id())->get();
         if ($users->isNotEmpty()) {
             Notification::send($users, new ProductNotification(
                 $product->id,

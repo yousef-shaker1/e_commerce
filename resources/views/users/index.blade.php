@@ -58,9 +58,9 @@ users
     <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
     @endcan
     @can('حذف المستخدم')
-    {{ Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) }}
-    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
-    {{ Form::close() }}
+    {{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) }}
+    {{ Form::submit('Delete', ['class' => 'btn', 'style' => 'background-color: #dc3545; color: #fff; font-size: 0.8rem;']) }}
+    {{ Form::close() }}    
     @endcan
   </td>
 </tr>

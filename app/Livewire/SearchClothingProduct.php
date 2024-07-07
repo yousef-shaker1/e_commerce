@@ -12,11 +12,12 @@ class SearchClothingProduct extends Component
 
     public $search = '';
     public $sectionId;
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
         // استخدام paginate() بدلاً من get()
-        $clothing_products = ClothingProduct::where('name', 'like', "%{$this->search}%")
+        $clothing_products = ClothingProduct::where('name', 'like', "%{$this->search}%")->orwhere('description', 'like', "%{$this->search}%")
             ->where('section_id', $this->sectionId)
             ->paginate(10);
 

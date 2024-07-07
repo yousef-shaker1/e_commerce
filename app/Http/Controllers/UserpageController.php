@@ -110,9 +110,7 @@ class UserpageController extends Controller
     
     public function shop()
     {
-    $sections = section::get();
-    $clothing_sections = clothingsection::get();
-    return view('user_page.shop', compact('sections', 'clothing_sections'));
+    return view('user_page.shop');
     }
     
 

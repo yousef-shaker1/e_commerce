@@ -73,48 +73,10 @@
             text-decoration: underline;
         }
     </style>
+@livewireStyles
 </head>
 <body>
-    <div class="register-container">
-        <h2>Register</h2>
-        @if (Session()->has('add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ Session()->get('add') }}</strong>
-        </div>
-      @endif
-        <form action="{{ route('customer.store') }}" method="POST">
-            @csrf
-            <input type="text" name="name" placeholder="Name" class="@error('name') is-invalid @enderror" value="{{ old('name') }}">
-            @error('name')
-            <div class="btn btn-danger">{{ $message }}</div>
-            @enderror
-            <input type="email" name="email" placeholder="Email" class="@error('email') is-invalid @enderror" value="{{ old('email') }}">
-            @error('email')
-            <div class="btn btn-danger">{{ $message }}</div>
-            @enderror
-            <input type="password" name="password" placeholder="Password" class="@error('password') is-invalid @enderror" value="{{ old('password') }}">
-            @error('password')
-            <div class="btn btn-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="tel" name="phone" placeholder="Phone" class="@error('phone') is-invalid @enderror" value="{{ old('phone') }}">
-            @error('phone')
-            <div class="btn btn-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="date" name="birthdate" placeholder="Birthdate" class="@error('birthdate') is-invalid @enderror" value="{{ old('birthdate') }}">
-            @error('birthdate')
-            <div class="btn btn-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="text" name="address" placeholder="Address" class="@error('address') is-invalid @enderror" value="{{ old('address') }}">
-            @error('address')
-            <div class="btn btn-danger">{{ $message }}</div>
-            @enderror
-            
-            <button type="submit">Register</button>
-        </form>
-        <a href="{{ route('login') }}">Already have an account? Login</a>
-    </div>
+    @livewire('register')
+    @livewireScripts
 </body>
 </html>

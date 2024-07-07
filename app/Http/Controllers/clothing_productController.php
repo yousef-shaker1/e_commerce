@@ -40,8 +40,8 @@ class clothing_productController extends Controller
     }
     public function show_size()
     {
-        $sizes = size::get();
-        return view('admin.all_size', compact('sizes'));
+        
+        return view('admin.all_size');
     }
 
     public function add_size(Request $request)

@@ -60,24 +60,29 @@
         .login-container a:hover {
             text-decoration: underline;
         }
+        .error {
+            background-color: #fcbabf;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .error ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .error li {
+            margin-bottom: 5px;
+        }
     </style>
+    @livewireStyles
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <input type="text" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <a href="{{ route('register') }}">Don't have an account? Register</a>
-        {{-- <a href="{{ __('Forgot your password?') }}">forget password</a> --}}
-        @if (Route::has('password.request'))
-        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-            {{ __('Forgot your password?') }}
-        </a>
-    @endif
-    </div>
+    @livewire('Login')
+    @livewireScripts
 </body>
 </html>

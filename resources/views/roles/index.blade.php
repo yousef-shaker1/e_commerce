@@ -50,7 +50,7 @@ roles
           @can('حذف الصلاحية')
           @if ($role->name !== 'owner')
               {{ Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) }}
-                  {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                  {{ Form::submit('Delete',  ['class' => 'btn', 'style' => 'background-color: #dc3545; color: #fff; font-size: 0.8rem;']) }}
               {{ Form::close() }}
           @endif
           @endcan

@@ -24,6 +24,7 @@
             color: #51495e; /* اللون البنفسجي */
         }
 </style>
+@livewireStyles
 @endsection
 
 
@@ -59,30 +60,7 @@
                 </div>
             </div>
         </div>
-			<div class="row product-lists">
-					@foreach ($sections as $section)
-							<div class="col-lg-4 col-md-6 text-center strawberry">
-									<div class="single-product-item">
-											<div class="product-image">
-												<img src="{{ Storage::url($section->img) }}" style="width: 200px; height: 160px; object-fit: cover;">
-											</div>
-											<h3>{{ $section->name }}</h3>
-											<a href="{{ route('section_product_view', $section->id) }}" class="cart-btn"><i ></i>View</a>		
-									</div>
-							</div>
-					@endforeach
-					@foreach ($clothing_sections as $clothing_section)
-							<div class="col-lg-4 col-md-6 text-center strawberry">
-									<div class="single-product-item">
-											<div class="product-image">
-												<img src="{{ Storage::url($clothing_section->img) }}" style="width: 200px; height: 160px; object-fit: cover;">
-											</div>
-											<h3>{{ $clothing_section->name }}</h3>
-											<a href="{{ route('clothing_section_product_view', $clothing_section->id) }}" class="cart-btn"><i ></i>View</a>		
-									</div>
-							</div>
-					@endforeach
-			</div>
+			@livewire('Shop')
 	</div>
 </div>
 
@@ -114,6 +92,7 @@
         </div>
     </div>
     <!-- end logo carousel -->
+    @livewireScripts
 @endsection
 
 @section('js')

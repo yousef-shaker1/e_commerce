@@ -172,8 +172,7 @@ class OrderController extends Controller
     }
 
     public function show_message(){
-        $messages = message::paginate(5);
-        return view('admin.show_message', compact('messages'));
+        return view('admin.show_message');
     }
 
     public function del_massage(Request $request, $id){

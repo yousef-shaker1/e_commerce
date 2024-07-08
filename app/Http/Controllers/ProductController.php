@@ -71,7 +71,6 @@ class ProductController extends Controller
     {
         $product = product::findorfail($request->id);
         $data = $request->validated();
-        if(auth()->user()->roles_name !== ["user"]){
             if($request->hasFile('img')){
                 if (!empty($product->img) && Storage::disk('public')->exists($product->img)) {
                     Storage::disk('public')->delete($product->img);
@@ -81,7 +80,6 @@ class ProductController extends Controller
                 unset($data['img']);
             }
         $product->update($data);
-        }
         session()->flash('edit', 'تم تعديل المنتج بنجاح');
         return redirect()->back();
     }

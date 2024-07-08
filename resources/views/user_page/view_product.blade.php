@@ -24,6 +24,7 @@
 @endsection
 
 @section('content')
+
 <div class="loader">
     <div class="loader-inner">
         <div class="circle"></div>
@@ -53,7 +54,6 @@
             </div>
         </div>
     </div>
-    {{-- <livewire:SearchProduct /> --}}
     @livewire('SearchProduct', ['sectionId' => $section->id])
     
 </div>

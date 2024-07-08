@@ -5,9 +5,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteMassageModalLabel">Delete Message</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closeModal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                    wire:click="closeModal">&times;</button>
             </div>
             <form wire:submit.prevent="destroyStudent">
                 <div class="modal-body">

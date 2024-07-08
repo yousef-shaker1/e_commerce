@@ -72,7 +72,7 @@
                                     <th class="border-bottom-0">ايميل العميل</th>
                                     <th class="border-bottom-0">تليفون العميل</th>
                                     <th class="border-bottom-0">عنوان العميل</th>
-                                    <th class="border-bottom-0">تاريخ وصول الاوردر</th>
+                                    <th class="border-bottom-0">تاريخ الوصول </th>
                                     <th class="border-bottom-0">اسم المنتج</th>
                                     <th class="border-bottom-0">المقاس</th>
                                     <th class="border-bottom-0">الكمية</th>

@@ -14,7 +14,7 @@
                         <div class="col-lg-4 col-md-6 text-center strawberry">
                             <div class="single-product-item">
                                 <div class="product-image">
-                                    <img src="{{ Storage::url($product->img) }}" style="width: 200px; height: 160px; object-fit: cover;">
+                                    <img src="{{ Storage::url($product->img) }}" style="width: 200px; height: 160px; object-fit: cover;" loading="lazy">
                                 </div>
                                 <h3>{{ $product->name }} </h3>
                                 <h3>{{ $product->description }}</h3>

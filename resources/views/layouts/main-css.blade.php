@@ -2,6 +2,9 @@
 	<title>@yield('title')</title>
 	<link rel="shortcut icon" type="image/png" href="{{URL::asset('assets/img/favicon.png')}}">
 	<!-- google font -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 	<!-- fontawesome -->
@@ -39,19 +42,19 @@
 }
 
 .header-icons .nav-btn {
-    margin-left: 20px; /* إضافة مسافة إضافية هنا */
+    margin-left: 20px; 
 }
         .main-menu ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
             display: flex;
-            justify-content: space-around; /* يمكن تغيير هذه القيمة حسب التوزيع المرغوب */
+            justify-content: space-around; 
             align-items: center;
         }
 
         .main-menu li {
-            margin: 0 10px; /* المسافة بين العناصر، يمكن تعديلها حسب الحاجة */
+            margin: 0 10px; 
         }
 
         .header-icons {
@@ -63,11 +66,11 @@
             margin: 0 5px;
         }
         .site-logo img {
-        width: 100px; /* تحديد عرض الشعار */
-        height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+        width: 100px; 
+        height: auto; 
         }
         .site-logo {
-            margin-top: -10px; /* رفع الشعار لأعلى */
+            margin-top: -10px; 
         }
 
 .main-header-notification {
@@ -78,20 +81,20 @@
 
 .notification-badge {
     position: absolute;
-    top: -10px; /* تعديل هذه القيمة حسب الحاجة */
+    top: -10px;
     right: 0;
     border-radius: 50%;
     padding: 5px 10px;
     font-size: 12px;
 }
 
-/* تكبير عرض القائمة المنسدلة */
+
 .dropdown-menu {
-    width: 350px; /* تعديل العرض حسب الحاجة */
+    width: 350px;
 }
 
 .main-notification-list.Notification-scroll {
-    max-height: 300px; /* تعديل الارتفاع حسب الحاجة */
+    max-height: 300px; 
     overflow-y: auto;
 }
 

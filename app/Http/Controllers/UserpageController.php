@@ -203,13 +203,13 @@ class UserpageController extends Controller
         $chart1 = app()->chartjs
         ->name('ordersPieChart')
         ->type('pie')
-    ->size(['width' => 300, 'height' => 400]) // تعديل الحجم ليكون أكبر
+    ->size(['width' => 300, 'height' => 400]) 
     ->labels(['Order product', 'Order clothing'])
     ->datasets([
         [
             'backgroundColor' => ['#FF6384', '#36A2EB'],
             'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
-            'data' => [order::count(), clothingorder::count()] // تعديل القيم بناءً على عدد الأوامر
+            'data' => [order::count(), clothingorder::count()] 
         ]
         ])
     ->options([]);
@@ -225,8 +225,8 @@ class UserpageController extends Controller
          ->datasets([
              [
                 //  "label" => "orderRejected","Acceptorder","ordercomplate",
-                 'backgroundColor' => ['#B22222', '#4169E1', '#00FF7F'],//الغير مدفوعة + المدفوعة جزيا
-                 'data' => [$orderRejected, $Acceptorder, $ordercomplate] // الغير مدفوعة / جزيا
+                 'backgroundColor' => ['#B22222', '#4169E1', '#00FF7F'],
+                 'data' => [$orderRejected, $Acceptorder, $ordercomplate] 
                 ],
                 ])
                 ->options([]);

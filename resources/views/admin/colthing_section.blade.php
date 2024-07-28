@@ -13,7 +13,9 @@
         .navbar-custom .nav-link:hover {
             color: #d4d4d4;
         }
+
     </style>
+     
 @endsection
 
 @section('title')
@@ -225,8 +227,7 @@
     <!-- Container closed -->
     </div>
 @endsection
-@section('js')
-    
+@section('js')     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $('#exampleModal2').on('show.bs.modal', function(event) {

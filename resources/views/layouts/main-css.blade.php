@@ -24,7 +24,7 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="{{URL::asset('assets/css/responsive.css')}}">
 
-    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 .nav-btn {
     padding: 10px 20px;

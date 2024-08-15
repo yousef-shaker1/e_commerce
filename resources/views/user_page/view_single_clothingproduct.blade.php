@@ -78,6 +78,14 @@
         </button>
     </div>
 @endif
+@if (session()->has('message'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ session()->get('message') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
 <div class="container mt-5">
     <h2 class="mb-4 text-center">عرض المنتج</h2>
@@ -104,12 +112,15 @@
                         <td><h5>{{ $product->description }}</h5></td>
                         <td><h5>{{ $product->price }} $</h5></td>
                         <td>
-                            <select class="form-control" id="product_size" name="product_size">
-                                <option value="">من فضلك اختار مقاس</option>
-                                @foreach ($sizes as $size)
-                                <option value="{{ $size->size->id }}">{{ $size->size->size }}</option>
-                            @endforeach                  
-                              </select>
+                            <div class="form-group">
+                                <label for="product_size">مقاس المنتج</label>
+                                <select class="form-control custom-select" id="product_size" name="product_size">
+                                    <option value="">من فضلك اختار مقاس</option> 
+                                    @foreach ($sizes as $size)
+                                        <option value="{{ $size->size->id }}">{{ $size->size->size }}</option>
+                                    @endforeach                  
+                                </select>
+                            </div>
                             <input type="hidden" id="selected_id" name="selected_id" value="{{ $sizes->first()->size->id }}">
                         </td>
                     </tr>
@@ -121,7 +132,7 @@
                 <div class="card-body text-center">
                     @if(!empty(Auth::user()->name))
                     <div class="mb-3">
-                        <a class="btn btn-custom-primary btn-block" href="{{ route('add_clohing_to_basket', ['id1' => $sizes->first()->size->id, 'id2' => $product->id]) }}" id="add_to_basket">إضافة إلى السلة</a>
+                        <a class="btn btn-custom-primary btn-block"  href="{{ route('add_clohing_to_basket', ['id1' => $sizes->first()->size->id, 'id2' => $product->id]) }}" id="add_to_basket" onclick="if(document.getElementById('product_size').value === '') { alert('من فضلك اختار مقاس المنتج.'); return false; }">إضافة إلى السلة</a>
                     </div>
                     @else
                         <div class="mb-3">
@@ -143,26 +154,37 @@
 @section('js')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-       var productSizeSelect = document.getElementById("product_size");
-       var selectedIdInput = document.getElementById("selected_id");
-       var addToBasketLink = document.getElementById("add_to_basket");
-   
-       // وظيفة لتحديث قيمة الـ input ورابط "إضافة إلى السلة"
-       function updateSelectedSize() {
-           var selectedSize = productSizeSelect.value;
-           selectedIdInput.value = selectedSize;
-   
-           // استخدام route() بدلاً من replace() لتوليد الرابط بشكل ديناميكي
-           var basketLink = "{{ route('add_clohing_to_basket', ['id1' => ':id1', 'id2' => ':id2']) }}";
-           basketLink = basketLink.replace(':id1', selectedSize).replace(':id2', {{ $product->id }});
-           addToBasketLink.href = basketLink;
-       }
-   
-       // تحديث عند تحميل الصفحة لأول مرة
-       updateSelectedSize();
-   
-       // تحديث عند تغيير الحجم المختار
-       productSizeSelect.addEventListener("change", updateSelectedSize);
-   });
-         </script>
+        var productSizeSelect = document.getElementById("product_size");
+        var selectedIdInput = document.getElementById("selected_id");
+        var addToBasketLink = document.getElementById("add_to_basket");
+    
+        // وظيفة لتحديث قيمة الـ input ورابط "إضافة إلى السلة"
+        function updateSelectedSize() {
+            var selectedSize = productSizeSelect.value;
+            selectedIdInput.value = selectedSize;
+    
+            // تحقق من وجود حجم محدد
+            if (selectedSize === "") {
+                addToBasketLink.href = "#"; // تعطيل الرابط إذا لم يكن هناك حجم محدد
+                addToBasketLink.classList.add("disabled"); // إضافة فصل CSS لتعطيل الزر (اختياري)
+                addToBasketLink.setAttribute("aria-disabled", "true"); // لتعطيل التفاعل مع الرابط
+            } else {
+                addToBasketLink.classList.remove("disabled"); // إزالة فصل CSS لتعطيل الزر
+                addToBasketLink.removeAttribute("aria-disabled"); // إزالة تعطيل التفاعل مع الرابط
+    
+                // استخدام route() بدلاً من replace() لتوليد الرابط بشكل ديناميكي
+                var basketLink = "{{ route('add_clohing_to_basket', ['id1' => ':id1', 'id2' => ':id2']) }}";
+                basketLink = basketLink.replace(':id1', selectedSize).replace(':id2', {{ $product->id }});
+                addToBasketLink.href = basketLink;
+            }
+        }
+    
+        // تحديث عند تحميل الصفحة لأول مرة
+        updateSelectedSize();
+    
+        // تحديث عند تغيير الحجم المختار
+        productSizeSelect.addEventListener("change", updateSelectedSize);
+    });
+    </script>
+    
 @endsection

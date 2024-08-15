@@ -26,8 +26,8 @@ class UserpageController extends Controller
     {
         $messages = message::get();
         $products = product::paginate(9);
-        $clothing_products = clothingproduct::paginate(9);
-        return view('user_page.home', compact('products', 'clothing_products', 'messages'));
+
+        return view('user_page.home', compact('products', 'messages'));
     }
 
     public function about()

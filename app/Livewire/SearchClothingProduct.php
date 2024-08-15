@@ -12,30 +12,36 @@ class SearchClothingProduct extends Component
 
     public $search = '';
     public $sectionId;
+    public $filter = 'all'; // Ensure you have this property for filtering
     protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        $clothing_products = ClothingProduct::where('name', 'like', "%{$this->search}%")->orwhere('description', 'like', "%{$this->search}%")
-            ->where('section_id', $this->sectionId)
-            ->paginate(10);
+        // Query with sectionId, search and filter
+        $clothing_products = ClothingProduct::where('section_id', $this->sectionId)
+            ->where(function($query) {
+                $query->where('name', 'like', "%{$this->search}%")
+                      ->orWhere('description', 'like', "%{$this->search}%");
+            })
+            ->when($this->filter !== 'all', function($query) {
+                $query->where('type', $this->filter);
+            })
+            ->paginate(5);
 
         return view('livewire.search-clothing-product', [
             'clothing_products' => $clothing_products,
         ]);
     }
 
-    public function searchProducts()
-    {
-        // استخدام paginate() بدلاً من get()
-        $this->clothing_products = ClothingProduct::where('name', 'like', '%' . $this->search . '%')
-            ->where('section_id', $this->sectionId)
-            ->paginate(10);
-    }
-
     public function updatedSearch()
     {
-        $this->searchProducts();
+        $this->resetPage();
+    }
+
+    public function changeFilter($filter)
+    {
+        $this->filter = $filter;
+        $this->resetPage();
     }
 
     public function mount($sectionId)

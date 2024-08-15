@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 	<!-- fontawesome -->
 	<link rel="stylesheet" href="{{URL::asset('assets/css/all.min.css')}}">
+
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="{{URL::asset('assets/bootstrap/css/bootstrap.min.css')}}">
 	<!-- owl carousel -->

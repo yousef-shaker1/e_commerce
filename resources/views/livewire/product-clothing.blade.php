@@ -11,19 +11,12 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="input-group mb-3">
-                <input wire:model.live='search' type='text' class="form-control" placeholder="Search products...">
-            </div>
-        </div>
-    </div>
 
     <!-- products -->
     <div class="product-section">
         <div class="container">
             <div class="row clothing-product-lists">
-                @forelse ($clothing_products as $clothing_product)
+                @foreach ($clothing_products as $clothing_product)
                     <div class="col-lg-4 col-md-6 text-center {{ $clothing_product->type }}">
                         <div class="single-product-item">
                             <div class="product-image">
@@ -37,11 +30,7 @@
                             </a>
                         </div>
                     </div>
-                @empty
-                <tr>
-                    <td colspan="10" class="text-center bg-warning text-white fw-bold">No product Found</td>
-                </tr>
-                @endforelse
+                @endforeach
             </div>
             
             <!-- Pagination -->

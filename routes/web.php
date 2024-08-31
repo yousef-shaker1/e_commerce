@@ -64,11 +64,14 @@ Route::get('/show_single_clohing_basket/{id}', [BasketController::class, 'show_s
 
 //order
 Route::Post('/send_order/{id}', [OrderController::class, 'send_order'])->name('send_order');
-//clothing_order
-Route::Post('/send_clothing_order/{id}', [ClothingOrderController::class, 'send_clothing_order'])->name('send_clothing_order');
-
 Route::get('/success', [OrderController::class, 'success'])->name('success');
 Route::get('/cancel', [OrderController::class, 'cancel'])->name('cancel');
+//clothing_order
+Route::Post('/send_clothing_order/{id}', [ClothingOrderController::class, 'send_clothing_order'])->name('send_clothing_order');
+Route::get('/success_clothing', [ClothingOrderController::class, 'success_clothing'])->name('success_clothing');
+Route::get('/cancel_clothing', [ClothingOrderController::class, 'cancel_clothing'])->name('cancel_clothing');
+
+
 
 
 

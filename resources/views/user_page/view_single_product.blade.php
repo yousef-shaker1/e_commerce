@@ -107,7 +107,7 @@
             </table>
         </div>
         <div class="col-md-4">
-            <div class="card mt-5">
+            <div class="card mt-2">
                 <div class="card-body text-center">
                     @if(!empty(Auth::user()->name))
                         <div class="mb-3">
@@ -124,6 +124,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 @endsection

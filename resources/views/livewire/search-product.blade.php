@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-        <div class="product-section mt-120 mb-120">
+        <div class="product-section mt-5 mb-120">
             <div class="container">
                 <div class="row product-lists">
                     @forelse ($products as $product)

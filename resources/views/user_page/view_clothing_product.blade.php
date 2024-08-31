@@ -30,7 +30,7 @@
     </div>
     <!-- end breadcrumb section -->
 
-    <div class="product-section mt-150 mb-150">
+    <div class="product-section mt-5 mb-150">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">

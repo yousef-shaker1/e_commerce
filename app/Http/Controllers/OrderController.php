@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Stripe\Stripe;
 use App\Mail\okorder;
+use App\Models\clothingproduct;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Support\Facades\Log;
 use App\Models\order;
 use App\Models\basket;
 use App\Models\message;
@@ -12,7 +17,6 @@ use App\Models\customer;
 use App\Mail\completedorder;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
-use App\Models\clothingproduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -100,8 +104,38 @@ class OrderController extends Controller
          */
     public function success()
     {
-        session()->flash('success', 'تم الدفع بنجاح المنتج قيد التنفيذ');
-        return redirect()->back();
+        try {
+            // جلب الطلب الأحدث من قاعدة البيانات
+            $order = Order::latest()->first();
+    
+            // تحقق إذا كان الطلب موجودًا
+            if (!$order) {
+                session()->flash('error', 'لم يتم العثور على الطلب.');
+                return redirect()->back();
+            }
+    
+            // توليد QR Code
+            $qrCode = new QrCode('Order ID: ' . $order->id);
+            $qrCode->setSize(150);
+            $writer = new PngWriter();
+            $result = $writer->write($qrCode);
+    
+            // الحصول على محتوى الصورة كـ Base64
+            $qrCodeImage = base64_encode($result->getString());
+    
+            // إعداد اسم الملف للفاتورة
+            $filename = 'invoice_' . $order->id . '.pdf';
+    
+            // تحميل العرض
+            $pdf = Pdf::loadView('invoice', compact('order', 'qrCodeImage'));
+            return $pdf->download($filename);
+    
+        } catch (\Exception $e) {
+            // إذا حدث خطأ، سيتم تسجيله ويمكنك عرض رسالة خطأ مناسبة
+            Log::error('Error generating invoice: ' . $e->getMessage());
+            session()->flash('error', 'حدث خطأ أثناء توليد الفاتورة.');
+            return redirect()->back();
+        }
     }
     public function cancel()
     {

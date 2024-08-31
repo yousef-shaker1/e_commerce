@@ -34,7 +34,9 @@
     color: white;
     text-decoration: none;
 }
-
+.custom-btn-width {
+    margin-right: 8px; /* or a specific width like 200px */
+}
 .buy-now-btn i {
     margin-right: 8px;
 }
@@ -116,10 +118,11 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
                                         </form>
                                     </div>
                                     <div class="col-6">
-                                        <a href="{{ route('show_single_basket', $basket->product->id) }}" class="btn buy-now-btn">
+                                        <a href="{{ route('show_single_basket', $basket->product->id) }}" class="btn buy-now-btn" style="width: 150px; display: block;">
                                             <i class="fas fa-shopping-cart"></i> شراء الآن
                                         </a>
                                     </div>
+                                    
                                 </div>
                             </div> 
                           </div>                                

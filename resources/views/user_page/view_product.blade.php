@@ -19,6 +19,10 @@
         z-index: -1;
         opacity: 0.8;
     }
+    .reduce-margin-top {
+        margin-top: 100px; /* Adjust value as needed */
+        margin-bottom: -100px; /* Adjust value as needed */
+    }
 </style>
 @livewireStyles
 @endsection
@@ -44,7 +48,7 @@
     </div>
 </div>
 
-<div class="product-section mt-150 mb-150">
+<div class="product-section mt-150 mb-150"> <!-- Reduced top margin -->
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
@@ -55,7 +59,6 @@
         </div>
     </div>
     @livewire('SearchProduct', ['sectionId' => $section->id])
-    
 </div>
 
 <div class="logo-carousel-section">

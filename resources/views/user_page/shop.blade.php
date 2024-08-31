@@ -23,6 +23,10 @@
         .breadcrumb-text h1 {
             color: #51495e; /* اللون البنفسجي */
         }
+        .custom-margin-top {
+        margin-top: -100px; /* Adjust the value as needed */
+        margin-bottom: 30px; /* Adjust the value as needed */
+    }
 </style>
 @livewireStyles
 @endsection
@@ -50,7 +54,7 @@
     <!-- end breadcrumb section -->
 
   <!-- products -->
-<div class="product-section mt-150 mb-150">
+<div class="product-section mt-100 mb-150">
 	<div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
@@ -60,7 +64,7 @@
                 </div>
             </div>
         </div>
-			@livewire('Shop')
+			@livewire('shop')
 	</div>
 </div>
 

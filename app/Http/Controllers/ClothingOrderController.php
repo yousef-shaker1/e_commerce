@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Stripe\Stripe;
 use App\Models\size;
 use App\Mail\okorder;
-use App\Models\order;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Support\Facades\Log;
 use App\Models\customer;
 use App\Models\relationsize;
 use Illuminate\Http\Request;
@@ -62,8 +65,8 @@ class ClothingOrderController extends Controller
                 ],
             ],
             'mode' => 'payment',
-            'success_url' => route('success'),
-            'cancel_url' => route('cancel'),
+            'success_url' => route('success_clothing'),
+            'cancel_url' => route('cancel_clothing'),
         ]);
         
         //Create order:
@@ -80,7 +83,7 @@ class ClothingOrderController extends Controller
         ]);
         $productName = $clothing_product->name;
         $address = $customer->address;
-        Mail::to(Auth::user()->email)->send(new okorder($productName, $date, $address));
+        // Mail::to(Auth::user()->email)->send(new okorder($productName, $date, $address));
 
         clothesbasket::where('customer_id', $customer->id)->where('product_id', $id)->delete();
 
@@ -92,13 +95,43 @@ class ClothingOrderController extends Controller
     }
     }
 
-    public function success()
+    public function success_clothing()
     {
-        session()->flash('success', 'تم الدفع بنجاح المنتج قيد التنفيذ');
-        return redirect()->back();
+        try {
+            // جلب الطلب الأحدث من قاعدة البيانات
+            $clothingorder = clothingorder::latest()->first();
+    
+            // تحقق إذا كان الطلب موجودًا
+            if (!$clothingorder) {
+                session()->flash('error', 'لم يتم العثور على الطلب.');
+                return redirect()->back();
+            }
+    
+            // توليد QR Code
+            $qrCode = new QrCode('Order ID: ' . $clothingorder->id);
+            $qrCode->setSize(150);
+            $writer = new PngWriter();
+            $result = $writer->write($qrCode);
+    
+            // الحصول على محتوى الصورة كـ Base64
+            $qrCodeImage = base64_encode($result->getString());
+     
+            // إعداد اسم الملف للفاتورة
+            $filename = 'invoice_' . $clothingorder->id . '.pdf';
+    
+            // تحميل العرض
+            $pdf = Pdf::loadView('clothing', compact('clothingorder', 'qrCodeImage'));
+            return $pdf->download($filename);
+    
+        } catch (\Exception $e) {
+            // إذا حدث خطأ، سيتم تسجيله ويمكنك عرض رسالة خطأ مناسبة
+            Log::error('Error generating invoice: ' . $e->getMessage());
+            session()->flash('error', 'حدث خطأ أثناء توليد الفاتورة.');
+            return redirect()->back();
+        }
     }
 
-    public function cancel()
+    public function cancel_clothing()
     {
         session()->flash('cancel', 'فشلت عملية الدفع');
         return redirect()->back();

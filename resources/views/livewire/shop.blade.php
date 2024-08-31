@@ -1,6 +1,10 @@
 <div>
-    <div class="text-center my-2">
-        <input wire:model.live="search" type="text" class="form-control" placeholder="search...">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <input wire:model.live='search' type='text' class="form-control" placeholder="Search products...">
+            </div>
+        </div>
     </div>
     
     <div class="row product-lists">

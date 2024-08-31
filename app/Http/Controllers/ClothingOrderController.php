@@ -83,7 +83,7 @@ class ClothingOrderController extends Controller
         ]);
         $productName = $clothing_product->name;
         $address = $customer->address;
-        // Mail::to(Auth::user()->email)->send(new okorder($productName, $date, $address));
+        Mail::to(Auth::user()->email)->send(new okorder($productName, $date, $address));
 
         clothesbasket::where('customer_id', $customer->id)->where('product_id', $id)->delete();
 

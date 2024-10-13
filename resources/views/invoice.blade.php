@@ -11,8 +11,19 @@
             padding: 0;
             font-family: Arial, sans-serif;
             font-size: 17px; /* حجم الخط الأصغر */
+            font-family: 'Amiri', sans-serif;
+            direction: rtl; /* صفحة RTL بالكامل */
+            text-align: right;
         }
 
+        .ltr-text {
+            direction: ltr;
+            text-align: left;
+        }
+        .rtl-text {
+            direction: rtl;
+            text-align: right;
+        }
         .invoice-container {
             padding: 24px;
             max-width: 750px;
@@ -135,7 +146,7 @@
             <p><span class="label">Order Date:</span> {{ $order->day }}</p>
         </div>
         <table class="invoice-table">
-            <thead>
+            <thead> 
                 <tr>
                     <th>Product Name</th>
                     <th>Quantity</th>

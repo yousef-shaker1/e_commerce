@@ -48,7 +48,9 @@ class BasketController extends Controller
     public function show_single_clohing_basket($id){
         $clothingproduct = clothingproduct::where('id', $id)->first();
         $size_id = relationsize::where('product_id', $clothingproduct->id)->first();
-        $size = size::where('id', $size_id->size_id)->first();
+        $customer = customer::where('email' , Auth::user()->email)->first();
+        $sizes = clothesbasket::where('customer_id', Auth::user()->id)->where('product_id', $id)->first();
+        $size = size::where('id',$sizes->size_id)->first();
         return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size'));
     }
 

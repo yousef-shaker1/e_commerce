@@ -48,7 +48,7 @@ class OrderController extends Controller
     $date = request()->input('date');
     $count = request()->input('count');
     if ($request->count < $product->amount){
-        
+    
         Stripe::setApiKey(config('services.stripe.secret'));
     
         $session = Session::create([
@@ -84,7 +84,7 @@ class OrderController extends Controller
         ]);
 
         basket::where('customer_id', $customer->id)->where('product_id', $id)->delete();
-        
+
         $nameproduct = $product->name;
         $address = $customer->address;
         Mail::to(Auth::user()->email)->send(new completedorder($nameproduct, $date, $address));

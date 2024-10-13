@@ -45,7 +45,7 @@
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
                         <p>Fresh and Organic</p>
-                        <h1>Shop</h1>
+                        <h1>section</h1>
                     </div>
                 </div>
             </div>

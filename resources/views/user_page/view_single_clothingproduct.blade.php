@@ -132,7 +132,9 @@
                 <div class="card-body text-center">
                     @if(!empty(Auth::user()->name))
                     <div class="mb-3">
-                        <a class="btn btn-custom-primary btn-block"  href="{{ route('add_clohing_to_basket', ['id1' => $sizes->first()->size->id, 'id2' => $product->id]) }}" id="add_to_basket" onclick="if(document.getElementById('product_size').value === '') { alert('من فضلك اختار مقاس المنتج.'); return false; }">إضافة إلى السلة</a>
+                        <a class="btn btn-custom-primary btn-block"  
+                        href="{{ route('add_clohing_to_basket', ['id1' => $sizes->first()->size->id, 'id2' => $product->id]) }}" 
+                            id="add_to_basket" onclick="if(document.getElementById('product_size').value === '') { alert('من فضلك اختار مقاس المنتج.'); return false; }">إضافة إلى السلة</a>
                     </div>
                     @else
                         <div class="mb-3">

@@ -16,7 +16,7 @@
                     <nav class="main-menu">
                         <ul>
                             <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('shop') }}">shop</a></li>
+                            <li><a href="{{ route('shop') }}">section</a></li>
                             <li><a href="{{ route('bestseller') }}">best seller</a></li>
                             <li><a href="{{ route('importantproducts') }}">important products</a></li>
                             <li><a href="{{ route('Previousorders') }}">Previous orders</a></li>

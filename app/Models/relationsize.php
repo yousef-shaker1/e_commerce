@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class relationsize extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['size_id', 'amount', 'product_id'];
 
     public function size(){
         return $this->belongsTo(size::class);

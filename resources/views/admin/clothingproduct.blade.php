@@ -113,9 +113,8 @@
 
                                             @can('حذف منتج الملابس')
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                                data-toggle="modal" href="#modaldemo9" title="حذف">حذف<i
-                                                    class="las la-trash"></i></a>
+                                            data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-toggle="modal"
+                                            data-target="#modaldemo9" title="حذف">حذف<i class="las la-trash"></i></a>
                                             @endcan
                                         </td>
                                     </tr>
@@ -257,15 +256,18 @@
                                         <option value="{{ $section->id }}">{{ $section->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                                <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
-                                <br>
-                                <a id="current_img_link" href="#"><img id="current_img" src="#"
-                                        style="width: 80px; height: 50px;"></a>
-                                <br>
-                                <label for="img">صورة القسم</label>
-                                <input type="file" class="form-control" id="img" name="img">
-                        </div>
+                                <div>
+                                    <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
+                                    <br>
+                                    <a id="current_img_link" href="#" onclick="return false;">
+                                        <img id="current_img" src="#" style="width: 80px; height: 50px;">
+                                    </a>
+                                    <br>
+                                </div>
+                                <div class="mb-3">
+                                    <label>اختر صورة جديدة:</label>
+                                    <input type="file" id="img" name="img" class="form-control" onchange="previewImage(event)">
+                                </div>
 
                 </div>
                 <div class="modal-footer">
@@ -276,34 +278,33 @@
             </div>
         </div>
     </div>
-
-
-    <!-- delete -->
-    <div class="modal" id="modaldemo9">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">حذف المنتج</h6><button aria-label="Close" class="close"
-                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <form action="{{ route('colthingproduct.destroy', $i) }}" method="post">
-                    @method('delete')
-                    @csrf
-                    <div class="modal-body">
-                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                        <input type="hidden" name="id" id="id" value="">
-                        <input class="form-control" name="name" id="name" type="text" vlaue=""
-                            readonly>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                    </div>
+        
+<!-- delete -->
+<div class="modal" id="modaldemo9">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">حذف القسم</h6>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <form action="{{ route('colthingsection.destroy', $i) }}" method="post">
+                @method('delete')
+                @csrf
+                <div class="modal-body">
+                    <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                    <input type="hidden" name="id" id="id" value="">
+                    <input class="form-control" name="name" id="name" type="text" value="" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                    <button type="submit" class="btn btn-danger">تاكيد</button>
+                </div>
             </form>
         </div>
     </div>
-    
+</div>
 
 
 
@@ -344,18 +345,37 @@
         });
 
         $(document).ready(function() {
-            $('#modaldemo9').on('show.bs.modal', function(event) {
-                // الحصول على الزر الذي أطلق الحدث
-                var button = $(event.relatedTarget);
-                // استخراج المعلومات من سمات البيانات
-                var id = button.data('id');
-                var name = button.data('name');
-                // تحديث محتوى الحقول في النموذج داخل الـ modal
-                var modal = $(this);
-                modal.find('.modal-body #id').val(id);
-                modal.find('.modal-body #name').val(name);
-            });
-        });
+    $('#modaldemo9').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // الزر الذي أطلق الحدث
+        var id = button.data('id'); // الحصول على الـ ID من data-id
+        var name = button.data('name'); // الحصول على الـ name من data-name
+        var modal = $(this);
+        
+        // تحديث القيم في المودال
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #name').val(name);
+    });
+});
+
+
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+    
+            reader.onload = function() {
+                const imgElement = document.getElementById('current_img');
+                imgElement.src = reader.result; 
+    
+                const linkElement = document.getElementById('current_img_link');
+                linkElement.href = reader.result; 
+            };
+    
+            if (file) {
+                reader.readAsDataURL(file); 
+            }
+        }
         
     </script>
+
 @endsection

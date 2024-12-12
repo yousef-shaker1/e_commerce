@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class order extends Model
 {
     use HasFactory;
-    protected $guarded= [];
+    protected $fillable= ['customer_id', 'day', 'product_id', 'count', 'status'];
     public function customer(){
         return $this->belongsTo(customer::class);
     }

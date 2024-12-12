@@ -77,7 +77,6 @@ class SectionProduct extends Component
             'name' => $validateData['name'],
         ]);
         session()->flash('message', 'section created Successfully');
-        $this->resetInput();
         $this->dispatch('close-modal');
     }
 
@@ -102,7 +101,6 @@ class SectionProduct extends Component
         $section->save();
     
         session()->flash('message', 'section updated Successfully');
-        $this->resetInput();
         $this->dispatch('close-modal');
     }
 
@@ -113,7 +111,6 @@ class SectionProduct extends Component
         }
         $section->delete();
         session()->flash('message', 'section updated Successfully');
-        $this->resetInput();
         $this->dispatch('close-modal');
     }
 

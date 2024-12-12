@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class product extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['name', 'img', 'description', 'price', 'amount', 'section_id'];
     public function section(){
         return $this->belongsTo(section::class);
     }

@@ -171,15 +171,20 @@
                             <input type="hidden" name="id" id="id" value="">
                             <label for="section_name" class="col-form-label">اسم القسم:</label>
                             <input class="form-control" name="name" id="section_name" type="text">
-                            <div class="form-group">
+
+                            <div>
                                 <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
                                 <br>
-                                <a id="current_img_link" href="#"><img id="current_img" src="#"
-                                        style="width: 80px; height: 50px;"></a>
+                                <a id="current_img_link" href="#" onclick="return false;">
+                                    <img id="current_img" src="#" style="width: 80px; height: 50px;">
+                                </a>
                                 <br>
-                                <label for="img">صورة القسم</label>
-                                <input type="file" class="form-control" id="img" name="img">
                             </div>
+                            <div class="mb-3">
+                                <label>اختر صورة جديدة:</label>
+                                <input type="file" id="img" name="img" class="form-control" onchange="previewImage(event)">
+                            </div>
+                            
                         </div>
 
                 </div>
@@ -251,16 +256,30 @@
 
         $(document).ready(function() {
             $('#modaldemo9').on('show.bs.modal', function(event) {
-                // الحصول على الزر الذي أطلق الحدث
                 var button = $(event.relatedTarget);
-                // استخراج المعلومات من سمات البيانات
                 var id = button.data('id');
                 var section_name = button.data('section_name');
-                // تحديث محتوى الحقول في النموذج داخل الـ modal
                 var modal = $(this);
                 modal.find('.modal-body #id').val(id);
                 modal.find('.modal-body #section_name').val(section_name);
             });
         });
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+    
+            reader.onload = function() {
+                const imgElement = document.getElementById('current_img');
+                imgElement.src = reader.result; 
+    
+                const linkElement = document.getElementById('current_img_link');
+                linkElement.href = reader.result; 
+            };
+    
+            if (file) {
+                reader.readAsDataURL(file); 
+            }
+        }
     </script>
 @endsection

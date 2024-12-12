@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class basket extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['product_id','customer_id'];
 
     public function customer(){
         return $this->belongsTo(customer::class);

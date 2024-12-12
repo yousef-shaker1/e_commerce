@@ -14,10 +14,6 @@ class SectionController extends Controller
     function __construct()
     {
     $this->middleware('permission:اقسام المنتجات', ['only' => ['index']]);
-    $this->middleware('permission:اضافة قسم', ['only' => ['create','store']]);
-    $this->middleware('permission:تعديل القسم', ['only' => ['show']]);
-    $this->middleware('permission:تعديل المستخدم', ['only' => ['edit','update']]);
-    $this->middleware('permission:حذف القسم', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

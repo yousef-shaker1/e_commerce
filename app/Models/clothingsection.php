@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class clothingsection extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['name','img'];
 }
 

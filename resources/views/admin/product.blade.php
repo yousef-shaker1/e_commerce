@@ -263,14 +263,19 @@
                                         <option value="{{ $section->id }}">{{ $section->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
-                            <br>
-                            <a id="current_img_link" href="#"><img id="current_img" src="#"
-                                    style="width: 80px; height: 50px;"></a>
-                            <br>
-                            <label for="img">صورة القسم</label>
-                            <input type="file" class="form-control" id="img" name="img">
+                                <div>
+                                    <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
+                                    <br>
+                                    <a id="current_img_link" href="#" onclick="return false;">
+                                        <img id="current_img" src="#" style="width: 80px; height: 50px;">
+                                    </a>
+                                    <br>
+                                </div>
+                                <div class="mb-3">
+                                    <label>اختر صورة جديدة:</label>
+                                    <input type="file" id="img" name="img" class="form-control" onchange="previewImage(event)">
+                                </div>
+                                
                         </div>
 
                 </div>
@@ -359,5 +364,22 @@
                 modal.find('.modal-body #name').val(name);
             });
         });
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+    
+            reader.onload = function() {
+                const imgElement = document.getElementById('current_img');
+                imgElement.src = reader.result; 
+    
+                const linkElement = document.getElementById('current_img_link');
+                linkElement.href = reader.result;  
+            };
+    
+            if (file) {
+                reader.readAsDataURL(file);  
+            }
+        }
     </script>
+
 @endsection

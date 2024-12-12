@@ -36,6 +36,7 @@ class UserpageController extends Controller
         return view('user_page.about', compact('messages'));
     }
 
+
     public function error()
     {
         return view('user_page.404');

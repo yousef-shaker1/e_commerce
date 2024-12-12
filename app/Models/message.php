@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class message extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+    protected $fillable=['message', 'customer_id'];
     public function customer(){
         return $this->belongsTo(customer::class);
     }

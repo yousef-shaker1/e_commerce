@@ -1,4 +1,5 @@
 @extends('layouts.master_admin')
+
 @section('css')
     <style>
         .navbar-custom {
@@ -17,7 +18,7 @@
 @endsection
 
 @section('title')
-     منتجات الملابس
+    منتجات الملابس
 @endsection
 
 @section('content')
@@ -47,6 +48,7 @@
             </button>
         </div>
     @endif
+
     @if ($errors->any())
         <div class='alert alert-danger'>
             @foreach ($errors->all() as $error)
@@ -62,8 +64,8 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         @can('اضافة منتج الملابس')
-                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#exampleModal">اضافة منتج جديد</a>
+                            <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
+                                data-toggle="modal" href="#exampleModal">اضافة منتج جديد</a>
                         @endcan
                     </div>
 
@@ -91,30 +93,34 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td><a href="{{ Storage::url($product->img) }}"><img
-                                            src="{{ Storage::url($product->img) }}"
-                                            style="width: 80px; height: 50px;"></a></td>
+                                                    src="{{ Storage::url($product->img) }}"
+                                                    style="width: 80px; height: 50px;"></a></td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->price }} $</td>
                                         <td>{{ $product->type }}</td>
-                                        <td><a href='{{ route('show_size_product', $product->id) }}'>مشاهدة مقاسات المنتج</a></td>
+                                        <td><a href='{{ route('show_size_product', $product->id) }}'>مشاهدة مقاسات
+                                                المنتج</a></td>
                                         <td>{{ $product->section->name }}</td>
                                         <td>
                                             @can('تعديل منتج الملابس')
-                                            <a class="modal-effect btn btn-sm btn-info custom-btn"
-                                                data-effect="effect-scale" data-id="{{ $product->id }}"
-                                                data-name="{{ $product->name }}"  data-description="{{ $product->description }}" 
-                                                data-price="{{ $product->price }}" data-type="{{ $product->type }}"  data-size="{{ $product->size }}" 
-                                                data-img="{{ $product->img }}" data-section_id="{{ $product->section->id }}"
-                                                data-toggle="modal" href="#exampleModal2" title="تعديل">تعديل
-                                                <i class="las la-pen"></i>
-                                            </a>
+                                                <a class="modal-effect btn btn-sm btn-info custom-btn"
+                                                    data-effect="effect-scale" data-id="{{ $product->id }}"
+                                                    data-name="{{ $product->name }}"
+                                                    data-description="{{ $product->description }}"
+                                                    data-price="{{ $product->price }}" data-type="{{ $product->type }}"
+                                                    data-size="{{ $product->size }}" data-img="{{ $product->img }}"
+                                                    data-section_id="{{ $product->section->id }}" data-toggle="modal"
+                                                    href="#exampleModal2" title="تعديل">تعديل
+                                                    <i class="las la-pen"></i>
+                                                </a>
                                             @endcan
 
                                             @can('حذف منتج الملابس')
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                            data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-toggle="modal"
-                                            data-target="#modaldemo9" title="حذف">حذف<i class="las la-trash"></i></a>
+                                                <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                    data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                                                    data-toggle="modal" data-target="#modaldemo9" title="حذف">حذف<i
+                                                        class="las la-trash"></i></a>
                                             @endcan
                                         </td>
                                     </tr>
@@ -127,24 +133,26 @@
                             @if ($products->onFirstPage())
                                 <li class="page-item disabled"><span class="page-link">السابق</span></li>
                             @else
-                                <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                                <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link"
+                                        rel="prev">السابق</a></li>
                             @endif
-                    
+
                             <!-- أرقام الصفحات -->
-                            @foreach(range(1, $products->lastPage()) as $page)
+                            @foreach (range(1, $products->lastPage()) as $page)
                                 <li class="page-item {{ $page == $products->currentPage() ? 'active' : '' }}">
                                     <a href="{{ $products->url($page) }}" class="page-link">{{ $page }}</a>
                                 </li>
                             @endforeach
-                    
+
                             <!-- زر الصفحة التالية -->
                             @if ($products->hasMorePages())
-                                <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                                <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link"
+                                        rel="next">التالي</a></li>
                             @else
                                 <li class="page-item disabled"><span class="page-link">التالي</span></li>
                             @endif
                         </ul>
-                    {{-- @endif --}}
+                        {{-- @endif --}}
                     </div>
                 </div>
             </div>
@@ -178,11 +186,11 @@
                             <div class="form-group">
                                 <label for="type">نوع المنتج</label>
                                 <select name="type" id="type" class="form-control" required>
-                                  <option value="" selected disabled> -حدد النوع-</option>
-                                      <option value="رجالي">رجالي</option>
-                                      <option value="حريمي">حريمي</option>
-                                      <option value="اطفالي">اطفالي</option>
-                              </select>
+                                    <option value="" selected disabled> -حدد النوع-</option>
+                                    <option value="رجالي">رجالي</option>
+                                    <option value="حريمي">حريمي</option>
+                                    <option value="اطفالي">اطفالي</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="name">القسم التابع لية</label>
@@ -225,9 +233,8 @@
                         enctype="multipart/form-data">
                         @method('PATCH')
                         @csrf
-                        <div class="form-group">
                             <div class="form-group">
-                              <input type="hidden" class="form-control" id="id" name="id">
+                                <input type="hidden" class="form-control" id="id" name="id">
                                 <label for="name">اسم المنتج</label>
                                 <input type="text" class="form-control" id="name" name="name">
                             </div>
@@ -242,11 +249,11 @@
                             <div class="form-group">
                                 <label for="type">نوع المنتج</label>
                                 <select name="type" id="type" class="form-control" required>
-                                  <option value="" selected disabled> -حدد النوع-</option>
-                                      <option value="رجالي">رجالي</option>
-                                      <option value="حريمي">حريمي</option>
-                                      <option value="اطفالي">اطفالي</option>
-                              </select>
+                                    <option value="" selected disabled> -حدد النوع-</option>
+                                    <option value="رجالي">رجالي</option>
+                                    <option value="حريمي">حريمي</option>
+                                    <option value="اطفالي">اطفالي</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="name">القسم التابع لية</label>
@@ -266,55 +273,60 @@
                                 </div>
                                 <div class="mb-3">
                                     <label>اختر صورة جديدة:</label>
-                                    <input type="file" id="img" name="img" class="form-control" onchange="previewImage(event)">
+                                    <input type="file" id="img" name="img" class="form-control"
+                                        onchange="previewImage(event)">
                                 </div>
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">تاكيد</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                            </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">تاكيد</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+        <!-- row closed -->
+    </div>
+
+
+    <!-- delete -->
+    <div class="modal" id="modaldemo9">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">حذف القسم</h6>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form action="{{ route('colthingsection.destroy', $i) }}" method="post">
+                    @method('delete')
+                    @csrf
+                    <div class="modal-body">
+                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                        <input type="hidden" name="id" id="id" value="">
+                        <input class="form-control" name="name" id="name" type="text" value=""
+                            readonly>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-        
-<!-- delete -->
-<div class="modal" id="modaldemo9">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content modal-content-demo">
-            <div class="modal-header">
-                <h6 class="modal-title">حذف القسم</h6>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('colthingsection.destroy', $i) }}" method="post">
-                @method('delete')
-                @csrf
-                <div class="modal-body">
-                    <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                    <input type="hidden" name="id" id="id" value="">
-                    <input class="form-control" name="name" id="name" type="text" value="" readonly>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-danger">تاكيد</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
-
-
-    <!-- row closed -->
-    </div>
     <!-- Container closed -->
-    </div>
+    {{-- </div> --}}
 @endsection
 @section('js')
-    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             $('#exampleModal2').on('show.bs.modal', function(event) {
@@ -345,37 +357,35 @@
         });
 
         $(document).ready(function() {
-    $('#modaldemo9').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // الزر الذي أطلق الحدث
-        var id = button.data('id'); // الحصول على الـ ID من data-id
-        var name = button.data('name'); // الحصول على الـ name من data-name
-        var modal = $(this);
-        
-        // تحديث القيم في المودال
-        modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #name').val(name);
-    });
-});
+            $('#modaldemo9').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // الزر الذي أطلق الحدث
+                var id = button.data('id'); // الحصول على الـ ID من data-id
+                var name = button.data('name'); // الحصول على الـ name من data-name
+                var modal = $(this);
+
+                // تحديث القيم في المودال
+                modal.find('.modal-body #id').val(id);
+                modal.find('.modal-body #name').val(name);
+            });
+        });
 
 
 
         function previewImage(event) {
             const file = event.target.files[0];
             const reader = new FileReader();
-    
+
             reader.onload = function() {
                 const imgElement = document.getElementById('current_img');
-                imgElement.src = reader.result; 
-    
+                imgElement.src = reader.result;
+
                 const linkElement = document.getElementById('current_img_link');
-                linkElement.href = reader.result; 
+                linkElement.href = reader.result;
             };
-    
+
             if (file) {
-                reader.readAsDataURL(file); 
+                reader.readAsDataURL(file);
             }
         }
-        
     </script>
-
 @endsection

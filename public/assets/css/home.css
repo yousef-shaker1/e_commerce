@@ -1,0 +1,91 @@
+.breadcrumb-section:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-image: url("/assets/img/shop3.png");
+  background-size: cover; 
+  background-position: center; 
+  z-index: -1;
+  opacity: 0.8;
+  }
+
+  .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem; /* Adjust as needed */
+  }
+
+.testimonail-section {
+  background-color: #f9f9f9;
+  padding: 60px 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  }
+
+  .testimonail-section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #333;
+  }
+
+  .testimonial-sliders {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+
+  .single-testimonial-slider {
+      background-color: #fff;
+      border: 1px solid #e5e5e5;
+      padding: 30px;
+      margin: 15px;
+      width: calc(33.33% - 30px); /* Adjust width based on your grid */
+      max-width: 350px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .client-meta {
+      position: relative;
+  }
+
+  .client-avatar img {
+      width: 80px; /* Adjust size based on your design */
+      height: 80px; /* Adjust size based on your design */
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .client-details h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333;
+  }
+
+  .testimonial-body {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 20px;
+  }
+
+  .last-icon {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: #999;
+  }
+
+  .last-icon i {
+      margin-top: 10px;
+  }

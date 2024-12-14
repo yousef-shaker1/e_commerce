@@ -23,10 +23,8 @@
 @endsection
 
 @section('content')
-        @livewire('SectionProduct')
-    <!-- row closed -->
+        @livewire('section-product')
     </div>
-    <!-- Container closed -->
     </div>
     @livewireScripts
 @endsection

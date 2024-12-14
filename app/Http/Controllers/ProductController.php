@@ -44,7 +44,7 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['img'] = $request->file('img')->store('product', 'public');
         product::create($data);
-        session()->flash('Add', 'تم اضافة منتج جديد بنجاح');
+        session()->flash('success', 'تم اضافة منتج جديد بنجاح');
         return redirect()->back();
     }
 
@@ -80,7 +80,7 @@ class ProductController extends Controller
                 unset($data['img']);
             }
         $product->update($data);
-        session()->flash('edit', 'تم تعديل المنتج بنجاح');
+        session()->flash('success', 'تم تعديل المنتج بنجاح');
         return redirect()->back();
     }
 

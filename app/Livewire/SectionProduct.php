@@ -80,7 +80,7 @@ class SectionProduct extends Component
         $this->dispatch('close-modal');
     }
 
-    public function updateStudent()
+    public function updateSection()
     {
         $validator = $this->validate($this->updateRules());
         $section = section::find($this->id);

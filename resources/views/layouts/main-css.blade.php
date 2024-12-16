@@ -1,4 +1,4 @@
-	<!-- favicon -->
+<!-- favicon -->
 	<title>@yield('title')</title>
 	<link rel="shortcut icon" type="image/png" href="{{URL::asset('assets/img/favicon.png')}}">
 	<!-- google font -->
@@ -27,52 +27,52 @@
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 	<style>
-.nav-btn {
-    padding: 10px 20px;
-    margin-left: 15px; /* تعديل المسافة هنا */
-    border: none;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
+  .nav-btn {
+      padding: 10px 20px;
+      margin-left: 15px; /* تعديل المسافة هنا */
+      border: none;
+      border-radius: 5px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+  }
 
-.header-icons {
-    display: flex;
-    align-items: center;
-}
+  .header-icons {
+      display: flex;
+      align-items: center;
+  }
 
-.header-icons .nav-btn {
-    margin-left: 20px; 
-}
-        .main-menu ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: space-around; 
-            align-items: center;
-        }
+  .header-icons .nav-btn {
+      margin-left: 20px; 
+  }
+  .main-menu ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: space-around; 
+      align-items: center;
+  }
 
-        .main-menu li {
-            margin: 0 10px; 
-        }
+  .main-menu li {
+      margin: 0 10px; 
+  }
 
-        .header-icons {
-            display: flex;
-            align-items: center;
-        }
+  .header-icons {
+      display: flex;
+      align-items: center;
+  }
 
-        .header-icons a {
-            margin: 0 5px;
-        }
-        .site-logo img {
-        width: 100px; 
-        height: auto; 
-        }
-        .site-logo {
-            margin-top: -10px; 
-        }
+  .header-icons a {
+      margin: 0 5px;
+  }
+  .site-logo img {
+  width: 100px; 
+  height: auto; 
+  }
+  .site-logo {
+      margin-top: -10px; 
+  }
 
 .main-header-notification {
     position: absolute;
@@ -100,4 +100,4 @@
 }
 
 	</style>
-	@yield('css')
+@yield('css')

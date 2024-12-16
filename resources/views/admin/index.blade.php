@@ -7,7 +7,7 @@
 @endsection
 
 @section('title')
- الرئيسية
+ home
 @endsection
 
 @section('content')
@@ -75,7 +75,7 @@
                 <div class="card-header bg-transparent">
                     <h4 class="main-content-label">الاوردرات</h4>
                 </div>
-                <div style="max-width: 900px; margin: auto;">
+                <div style="max-width: 400px; margin: auto;">
                     {{ $chartjs2->render() }}
                 </div>
             </div>

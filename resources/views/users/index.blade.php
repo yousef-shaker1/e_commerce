@@ -15,9 +15,10 @@ users
           <h3>Users Management</h3>
       </div>
       @can('اضافة مستخدم')
-      <div class="pull-right">
-        <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-      </div>
+      <div class="pull-right" style="width: 1000px;">
+        <a class="btn btn-success" href="{{ route('users.create') }}">Create New User</a>
+    </div>
+    
       @endcan
   </div>
 </div>

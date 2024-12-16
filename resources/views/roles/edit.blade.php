@@ -11,7 +11,7 @@
 
 
 <div class="row">
-  <div class="col-lg-12 margin-tb">
+  <div class="col-lg-12 margin-tb" style="width: 1000px;">
       <div class="pull-left">
           <h3>Edit Role</h3>
       </div>

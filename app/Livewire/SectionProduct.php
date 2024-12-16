@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+ 
 class SectionProduct extends Component
 {
     use WithPagination, WithFileUploads;

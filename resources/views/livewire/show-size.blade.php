@@ -18,56 +18,55 @@
             </button>
         </div>
     @endif
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        @can('اضافة مقاس')
-                        <button type="button" class="modal-effect btn btn-outline-primary btn-block" data-bs-toggle="modal" data-bs-target="#addSizeModal">
-                            اضافة مقاس
-                          </button>
-                        @endcan
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="example1" class="table key-buttons text-md-nowrap">
-                            <thead>
-                                <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">المقاس</th>
-                                    <th class="border-bottom-0">العمليات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 0; ?>
-                                @foreach ($sizes as $size)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $size->size }}</td>
-                                        <td>
-                                            @can('حذف مقاس')
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteSizeModal" wire:click="deleteSize({{$size->id}})" class="modal-effect btn btn-sm btn-danger">Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center">
-                            {{ $sizes->links() }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+    
+    <table class="table table-borderless table-hover" style="width: 1000px">
+        <div class="input-group mb-3">
+            <input wire:model.live="search" placeholder="Search" class="form-control form-control-lg" type="text">
         </div>
+                <div class="d-flex justify-content-between">
+            @can('اضافة مقاس')
+                <button type="button" class="modal-effect btn btn-outline-primary btn-block" data-bs-toggle="modal"
+                    data-bs-target="#addSizeModal">
+                    Add Size
+                </button>
+            @endcan
+        </div>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th class="border-bottom-0">size</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($sizes as $size)
+                <tr>
+                    <td class="mb-0 text-muted">{{ $sizes->firstItem() + $loop->index }}</td>
+                    <td class="mb-0 text-muted">{{ $size->size }}</td>
+                    <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span class="text-muted sr-only">Action</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
 
+                            @can('حذف مقاس')
+                                <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#deleteSizeModal" wire:click="deleteSize({{ $size->id }})">
+                                    Remove
+                                </button>
+                            @endcan
+                        </div>
+                    </td>
+                </tr>
 
-
-        <!-- row closed -->
+            @empty
+                <tr>
+                    <td colspan="10" class="text-center">No sizes found</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center my-4">
+        {{ $sizes->links() }}
     </div>
-    <!-- Container closed -->
-</div>
 </div>

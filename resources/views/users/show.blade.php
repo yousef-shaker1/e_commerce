@@ -10,7 +10,7 @@
 @section('content')
 
 <div class="row">
-  <div class="col-lg-12 margin-tb">
+  <div class="col-lg-12 margin-tb" style="width: 1000px;">
       <div class="pull-left">
           <h3> Show User</h3>
       </div>
@@ -19,9 +19,9 @@
       </div>
   </div>
 </div>
+<br>
 
-
-<div class="row">
+<div class="row" style="width: 1000px;">
   <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
           <strong>Name:</strong>

@@ -101,9 +101,6 @@ Route::get('/show_size_product/{id}', [clothing_productController::class, 'show_
 Route::Post('/add_single_size/{id}', [clothing_productController::class, 'add_single_size'])->name('add_single_size');
 Route::resource('/order', OrderController::class);
 
-Route::get('/orderstatus1/{id}', [OrderController::class, 'status1'])->name('order.status1');
-Route::get('/orderstatus2/{id}', [OrderController::class, 'status2'])->name('order.status2');
-Route::get('/orderstatus3/{id}', [OrderController::class, 'status3'])->name('order.status3');
 Route::get('/show_message', [OrderController::class, 'show_message'])->name('show_message');
 Route::delete('/del_massage/{id}', [OrderController::class, 'del_massage'])->name('del_massage');
 

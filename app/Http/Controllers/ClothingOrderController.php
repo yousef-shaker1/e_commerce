@@ -31,8 +31,7 @@ class ClothingOrderController extends Controller
     }
     public function index()
     {
-        $orders =  clothingorder::paginate(10);
-        return view('admin.clothing_order',compact('orders'));
+        return view('admin.clothing_order');
     }
 
     public function send_clothing_order(Request $request, $id)

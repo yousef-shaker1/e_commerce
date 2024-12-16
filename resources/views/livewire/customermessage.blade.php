@@ -8,63 +8,45 @@
             </button>
         </div>
     @endif
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card mg-b-20">
-                <div class="card-header pb-0">
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="example1" class="table key-buttons text-md-nowrap">
-                            <thead>
-                                <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">اسم العميل</th>
-                                    <th class="border-bottom-0">بريد العميل</th>
-                                    <th class="border-bottom-0">هاتف العميل</th>
-                                    <th class="border-bottom-0">الرسالة</th>
-                                    <th class="border-bottom-0">العمليات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 0; ?>
-                                @foreach ($messages as $message)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $message->customer->name }}</td>
-                                        <td>{{ $message->customer->email }}</td>
-                                        <td>{{ $message->customer->phone }}</td>
-                                        <td>{{ $message->message }}</td>
-                                        <td>
-                                            @can('حذف اراء العملاء')
-                                                <button type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteMassageModal"
-                                                    wire:click="deleteStudent({{ $message->id }})"
-                                                    class="btn btn-danger">حذف</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center">
-                            {{ $messages->links() }}
+
+    <table class="table table-borderless table-hover" style="width: 1000px">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th class="border-bottom-0">name</th>
+                <th class="border-bottom-0">email</th>
+                <th class="border-bottom-0">phone</th>
+                <th class="border-bottom-0">message</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($messages as $message)
+                <tr>
+                    <td class="mb-0 text-muted">{{ $messages->firstItem() + $loop->index }}</td>
+                    <td class="mb-0 text-muted">{{ $message->customer->name }}</td>
+                    <td class="mb-0 text-muted">{{ $message->customer->email }}</td>
+                    <td class="mb-0 text-muted">{{ $message->customer->phone }}</td>
+                    <td class="mb-0 text-muted">{{ $message->message }}</td>
+
+                    <td class="mb-0 text-muted"><button class="btn btn-sm dropdown-toggle more-horizontal"
+                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="text-muted sr-only">Action</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            @can('حذف اراء العملاء')
+                                <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#deleteMassageModal" wire:click="deleteStudent({{ $message->id }})">
+                                    Remove
+                                </button>
+                            @endcan
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- End Basic modal -->
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center my-4">
+        {{ $messages->links() }}
     </div>
-
-
-
-
-
-    <!-- row closed -->
-</div>
-<!-- Container closed -->
 </div>

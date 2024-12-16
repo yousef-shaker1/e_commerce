@@ -3825,7 +3825,7 @@ input[type="button"].btn-block {
   pointer-events: none;
   content: "";
   background-color: #fff;
-  border: #adb5bd solid 1px;
+  border: #595c60 solid 1px;
 }
 
 .custom-control-label::after {
@@ -3892,7 +3892,7 @@ input[type="button"].btn-block {
   left: calc(-2.25rem + 2px);
   width: calc(1rem - 4px);
   height: calc(1rem - 4px);
-  background-color: #adb5bd;
+  background-color: #595c60;
   border-radius: 0.5rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
   transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4192,7 +4192,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range:disabled::-webkit-slider-thumb {
-  background-color: #adb5bd;
+  background-color: #595c60;
 }
 
 .custom-range:disabled::-webkit-slider-runnable-track {
@@ -4200,7 +4200,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range:disabled::-moz-range-thumb {
-  background-color: #adb5bd;
+  background-color: #595c60;
 }
 
 .custom-range:disabled::-moz-range-track {
@@ -4208,7 +4208,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range:disabled::-ms-thumb {
-  background-color: #adb5bd;
+  background-color: #595c60;
 }
 
 .custom-control-label::before,
@@ -10161,7 +10161,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
   pre,
   blockquote {
-    border: 1px solid #adb5bd;
+    border: 1px solid #595c60;
     page-break-inside: avoid;
   }
   thead {

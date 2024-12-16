@@ -14,7 +14,7 @@ roles
       <div class="pull-left">
           <h3>Role Management</h3>
       </div>
-      <div class="pull-right">
+      <div class="pull-right" style="width: 1000px;">
       @can('اضافة صلاحية')
           <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
           @endcan

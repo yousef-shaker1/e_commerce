@@ -19,7 +19,7 @@
 @endsection
 
 @section('title')
-     اراء العملاء
+reviews
 @endsection
 
 @section('content')
@@ -27,7 +27,6 @@
     @livewireScripts
 @endsection
 @section('js')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       window.addEventListener('close-modal', event => {
           $('#deleteMassageModal').modal('hide');

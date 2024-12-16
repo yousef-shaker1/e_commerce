@@ -12,11 +12,17 @@ class ShowSize extends Component
     protected $paginationTheme = 'bootstrap';
     public $id;
     public $size;
+    public $search;
 
     public function render()
     {
-        $sizes = size::paginate(7);
+        $sizes = size::where('size', 'like', "%{$this->search}%")->paginate(7);
         return view('livewire.show-size', compact('sizes'));
+    }
+
+    public function updatedSearch()
+    {
+        $this->dispatch('searchUpdated');
     }
 
     public function rules(){
@@ -49,7 +55,7 @@ class ShowSize extends Component
     public function destroySize()
     {
         size::find($this->id)->delete();
-        session()->flash('message','size Deleted Successfully');
+        session()->flash('delete','size Deleted Successfully');
         $this->dispatch('close-modal');
     }
     

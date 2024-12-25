@@ -49,14 +49,6 @@ class SectionController extends Controller
         //
     }
 
-            /**
-             * Update the specified resource in storage.
-             */
-    
-    
-    /**
-     * Remove the specified resource from storage.
-     */
 
     
 }

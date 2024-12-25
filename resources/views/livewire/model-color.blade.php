@@ -13,7 +13,7 @@ aria-hidden="true">
         <form wire:submit.prevent="saveColor">
             <div class="modal-body">
                 <div class="mb-3">
-                    <label>Color Name</label>
+                    <label>Name</label>
                     <input type="text" wire:model.live="name" class="form-control">
                     @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>

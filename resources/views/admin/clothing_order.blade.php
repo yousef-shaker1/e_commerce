@@ -10,8 +10,8 @@
 
 @section('content')
         @livewire('order-clothing-admin')
-    </div>
-    </div>
+    {{-- </div>
+    </div> --}}
     @livewireScripts
 @endsection
 

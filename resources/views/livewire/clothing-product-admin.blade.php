@@ -40,9 +40,15 @@
                 <th class="border-bottom-0">description</th>
                 <th class="border-bottom-0">price</th>
                 <th class="border-bottom-0">type</th>
+                @can('عرض حجم وسعر المنتج')
                 <th class="border-bottom-0">amount&size</th>
+                @endcan
+                @can('عرض لون المنتج')
                 <th class="border-bottom-0">colors</th>
+                @endcan
+                @can('عرض صور المنتج الملابس')
                 <th class="border-bottom-0">images</th>
+                @endcan
                 <th class="border-bottom-0">section</th>
                 <th>Action</th>
             </tr>
@@ -57,12 +63,18 @@
                     <td class="mb-0 text-muted">{{ $product->description }}</td>
                     <td class="mb-0 text-muted">{{ $product->price }}</td>
                     <td class="mb-0 text-muted">{{ $product->type }}</td>
+                    @can('عرض حجم وسعر المنتج')
                     <td> <a href='{{ route('show_size_product', $product->id) }}'>view size
                         </a></td>
+                    @endcan
+                    @can('عرض لون المنتج')
                     <td> <a href='{{ route('show_color_product', $product->id) }}'>view color
                         </a></td>
+                    @endcan
+                    @can('عرض صور المنتج الملابس')
                     <td> <a href='{{ route('show_images_product', $product->id) }}'>view images
                         </a></td>
+                    @endcan
                     <td class="mb-0 text-muted">{{ $product->section->name }}</td>
                     <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">

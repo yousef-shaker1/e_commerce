@@ -13,14 +13,14 @@
                 <form wire:submit.prevent="saveSection">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>اسم القسم</label>
+                            <label>Name</label>
                             <input type="text" wire:model.live="name" class="form-control">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label>صورة القسم</label>
+                            <label>image</label>
                             <input type="file" wire:model.live="img" class="form-control">
                             @error('img')
                                 <span class="text-danger">{{ $message }}</span>
@@ -51,14 +51,14 @@
                 <form wire:submit.prevent="updateSection">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>اسم القسم</label>
+                            <label>Name</label>
                             <input type="text" wire:model.live="name" class="form-control">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
+                            <label for="current_img" class="col-form-label">currency image:</label>
                             <br><br>
                             @if ($this->img && is_object($this->img))
                                 <div>
@@ -74,7 +74,7 @@
                             <br>
                         </div>
                         <div class="mb-3">
-                            <label>صورة القسم</label>
+                            <label>image</label>
                             <input type="file" wire:model.live="img" class="form-control">
                             @error('img')
                                 <span class="text-danger">{{ $message }}</span>
@@ -104,7 +104,7 @@
                 <form wire:submit.prevent="destroyStudent">
                     <div class="modal-body">
                         <h4>Are you sure you want to delete this data ?</h4>
-                        <label>اسم القسم</label>
+                        <label>name</label>
                         <input type="text" wire:model.lazy="name" class="form-control" readonly>
                     </div>
                     <div class="modal-footer">

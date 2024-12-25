@@ -3,8 +3,10 @@
 @section('title')
 عرض المنتج 
 @endsection
+
 @section('css')
 <style>
+/* Loader */
 .loader {
     display: flex;
     justify-content: center;
@@ -12,6 +14,25 @@
     height: 100vh;
 }
 
+.loader-inner .circle {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #3498db;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Breadcrumb */
 .breadcrumb-section:after {
     position: absolute;
     left: 0;
@@ -26,6 +47,19 @@
     opacity: 0.8;
 }
 
+.breadcrumb-section .breadcrumb-text p {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.breadcrumb-section .breadcrumb-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Buttons */
 .btn-custom-primary {
     background-color: #3498db;
     border-color: #3498db;
@@ -46,7 +80,58 @@
 .btn-custom-secondary:hover {
     background-color: #7f8c8d;
     border-color: #7f8c8d;
-} 
+}
+
+/* Product Gallery */
+.product-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.product-gallery img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.product-gallery img:hover {
+    transform: scale(1.1);
+}
+
+/* Product Image */
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Alerts */
+.alert {
+    animation: slide-down 0.5s ease-out;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Disabled Button */
+#add_to_basket.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 </style>
 @endsection
 
@@ -70,7 +155,6 @@
     </div>
 </div>
 
-
 @if (session()->has('message'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{ session()->get('message') }}</strong>
@@ -79,6 +163,7 @@
         </button>
     </div>
 @endif
+
 <div class="container mt-5">
     <h2 class="mb-4 text-center">عرض المنتج</h2>
 
@@ -87,69 +172,29 @@
         <div class="col-md-3">
             <div class="product-gallery">
                 @foreach($images as $img)
-                    <div class="mb-3" style="margin-left: -100px;">
-                        <a href="{{ Storage::url($img->image) }}">
-                            <img src="{{ Storage::url($img->image) }}" alt="صورة المنتج" class="img-fluid rounded shadow-sm" style="width: 100px; height: auto;">
-                        </a>
-                    </div>
+                    <a href="{{ Storage::url($img->image) }}">
+                        <img src="{{ Storage::url($img->image) }}" alt="صورة المنتج" class="img-fluid rounded shadow-sm">
+                    </a>
                 @endforeach
             </div>
         </div>
 
-        <!-- صورة المنتج الرئيسية مع الوصف -->
+        <!-- صورة المنتج الرئيسية -->
         <div class="col-md-6">
-            <div class="product-image text-center mb-4" style="margin-left: -510px;">
+            <div class="product-image text-center mb-4">
                 <a href="{{ Storage::url($product->img) }}">
-                    <img src="{{ Storage::url($product->img) }}" alt="صورة المنتج" class="img-fluid" style="max-width: 60%; height: auto;">
+                    <img src="{{ Storage::url($product->img) }}" alt="صورة المنتج" class="img-fluid">
                 </a>
             </div>
         </div>
 
-        <!-- معلومات المنتج وخياراته بجانب الصورة -->
         <div class="col-md-3">
             @livewire('show-single-clothing-product', ['id' => $product->id])
         </div>
     </div>
 </div>
-
 @endsection
 
-
-
 @section('js')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var productSizeSelect = document.getElementById("product_size");
-        var selectedIdInput = document.getElementById("selected_id");
-        var addToBasketLink = document.getElementById("add_to_basket");
-    
-        // وظيفة لتحديث قيمة الـ input ورابط "إضافة إلى السلة"
-        function updateSelectedSize() {
-            var selectedSize = productSizeSelect.value;
-            selectedIdInput.value = selectedSize;
-    
-            // تحقق من وجود حجم محدد
-            if (selectedSize === "") {
-                addToBasketLink.href = "#"; // تعطيل الرابط إذا لم يكن هناك حجم محدد
-                addToBasketLink.classList.add("disabled"); // إضافة فصل CSS لتعطيل الزر (اختياري)
-                addToBasketLink.setAttribute("aria-disabled", "true"); // لتعطيل التفاعل مع الرابط
-            } else {
-                addToBasketLink.classList.remove("disabled"); // إزالة فصل CSS لتعطيل الزر
-                addToBasketLink.removeAttribute("aria-disabled"); // إزالة تعطيل التفاعل مع الرابط
-    
-                // استخدام route() بدلاً من replace() لتوليد الرابط بشكل ديناميكي
-                var basketLink = "{{ route('add_clohing_to_basket', ['id1' => ':id1', 'id2' => ':id2']) }}";
-                basketLink = basketLink.replace(':id1', selectedSize).replace(':id2', {{ $product->id }});
-                addToBasketLink.href = basketLink;
-            }
-        }
-    
-        // تحديث عند تحميل الصفحة لأول مرة
-        updateSelectedSize();
-    
-        // تحديث عند تغيير الحجم المختار
-        productSizeSelect.addEventListener("change", updateSelectedSize);
-    });
-    </script>
-    
+
 @endsection

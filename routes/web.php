@@ -81,11 +81,13 @@ Route::get('/cancel_clothing', [ClothingOrderController::class, 'cancel_clothing
 //=====================adminpage=========================
 
 Route::get('/dashboard', [UserpageController::class, 'dashboard'])->middleware(['auth', 'verified','Is_admin'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::get('/all_customer', [CustomerController::class, 'allcustomer'])->name('all_customer');
     
 Route::resource('/section', SectionController::class);
@@ -95,13 +97,12 @@ Route::resource('/colthingproduct', clothing_productController::class);
 
 Route::get('/view_images/{id}', [ProductController::class, 'view_images'])->name('view_images');
 Route::get('/show_images_product/{id}', [clothing_productController::class, 'show_images_product'])->name('show_images_product');
-Route::Post('/add_new_size/{id}', [clothing_productController::class, 'addsize'])->name('addsize');
 Route::get('/show_size', [clothing_productController::class, 'show_size'])->name('show_size');
-Route::Post('/add_size', [clothing_productController::class, 'add_size'])->name('add_size');
 
-Route::delete('/deletesize/{id}', [clothing_productController::class, 'deletesize'])->name('deletesize');
+// Route::Post('/add_new_size/{id}', [clothing_productController::class, 'addsize'])->name('addsize');
+// Route::delete('/deletesize/{id}', [clothing_productController::class, 'deletesize'])->name('deletesize');
+// Route::Post('/add_single_size/{id}', [clothing_productController::class, 'add_single_size'])->name('add_single_size');
 Route::get('/show_size_product/{id}', [clothing_productController::class, 'show_size_product'])->name('show_size_product');
-Route::Post('/add_single_size/{id}', [clothing_productController::class, 'add_single_size'])->name('add_single_size');
 Route::resource('/order', OrderController::class);
 
 Route::get('/show_message', [OrderController::class, 'show_message'])->name('show_message');
@@ -109,8 +110,6 @@ Route::delete('/del_massage/{id}', [OrderController::class, 'del_massage'])->nam
 
 Route::controller(ClothingOrderController::class)->group(function(){
     Route::get('/clothing_order', 'index')->name('clothing_order');
-    // Route::delete('/delete_order/{id}', 'destory')->name('clothing_order');
-    // Route::delete('delete_order/{id}', 'destory')->name('delete_clothingorder');
 });
 
 Route::get('/colors', [ColorController::class, 'index'])->name('colors');

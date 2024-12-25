@@ -73,19 +73,19 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
 
-                            @can('قبول الاوردر')
+                            @can('قبول اوردر الملابس')
                                 <a wire:click="status1({{ $order->id }})" class="btn btn-primary btn-sm mb-1">قبول</a>
                             @endcan
 
-                            @can('رفض الاوردر')
+                            @can('رفض اوردر الملابس')
                                 <a wire:click="status2({{ $order->id }})" class="btn btn-danger btn-sm mb-1">رفض</a>
                             @endcan
 
-                            @can('اتمام الاوردر')
+                            @can('اتمام اوردر الملابس')
                                 <a wire:click="status3({{ $order->id }})" class="btn btn-success btn-sm mb-1">اتمام</a>
                             @endcan
 
-                            @can('حذف الاوردر')
+                            @can('حذف اوردر الملابس')
                                 <button class="dropdown-item" type="button" data-bs-toggle="modal"
                                     data-bs-target="#destroyOrderModal" wire:click="deleteOrder({{ $order->id }})">
                                     Remove

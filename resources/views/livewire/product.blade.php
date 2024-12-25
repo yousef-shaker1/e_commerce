@@ -40,7 +40,9 @@
                 <th class="border-bottom-0">price</th>
                 <th class="border-bottom-0">amount</th>
                 <th class="border-bottom-0">section</th>
+                @can('عرض صور المنتج')
                 <th class="border-bottom-0">images</th>
+                @endcan
                 <th>Action</th>
             </tr>
         </thead>
@@ -55,7 +57,9 @@
                     <td class="mb-0 text-muted">{{ $product->price }}</td>
                     <td class="mb-0 text-muted">{{ $product->amount }}</td>
                     <td class="mb-0 text-muted">{{ $product->section->name }}</td>
-                    <td class="mb-0 text-muted"><a href="{{ route('view_images', $product->id) }}">view images</a></td>
+                    @can('عرض صور المنتج')
+                        <td class="mb-0 text-muted"><a href="{{ route('view_images', $product->id) }}">view images</a></td>
+                    @endcan
                     <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <span class="text-muted sr-only">Action</span>

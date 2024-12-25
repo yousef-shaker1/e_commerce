@@ -43,7 +43,7 @@
                         <div class="mb-3">
                             <label for="type">type</label>
                             <select wire:model.live="type" class="form-control" required>
-                                <option value="" selected> -حدد النوع-</option>
+                                <option value="" selected> -select type-</option>
                                 <option value="رجالي">رجالي</option>
                                 <option value="حريمي">حريمي</option>
                                 <option value="اطفالي">اطفالي</option>
@@ -55,7 +55,7 @@
                         <div class="mb-3">
                             <label>Section</label>
                             <select wire:model.live="section_id" class="form-control" required>
-                                <option value="" selected> -حدد القسم-</option>
+                                <option value="" selected> -select section-</option>
                                 @foreach ($sections as $section)
                                     <option value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach
@@ -96,7 +96,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
+                            <label for="current_img" class="col-form-label">currency image:</label>
                             <br><br>
                             @if ($this->img && is_object($this->img))
                                 <div>
@@ -138,7 +138,7 @@
                         <div class="mb-3">
                             <label>type</label>
                             <select wire:model.live="type" class="form-control" required>
-                                <option value="" selected disabled> -حدد النوع-</option>
+                                <option value="" selected disabled> -select type-</option>
                                 <option value="رجالي">رجالي</option>
                                 <option value="حريمي">حريمي</option>
                                 <option value="اطفالي">اطفالي</option>
@@ -151,7 +151,7 @@
                         <div class="mb-3">
                             <label>Section</label>
                             <select wire:model.live="section_id" class="form-control" required>
-                                <option value="" selected disabled> -حدد القسم-</option>
+                                <option value="" selected disabled> -select section-</option>
                                 @foreach ($sections as $section)
                                     <option value="{{ $section->id }}">{{ $section->name }}</option>
                                 @endforeach

@@ -24,12 +24,12 @@
             <input wire:model.live="search" placeholder="Search" class="form-control form-control-lg" type="text">
         </div>
                 <div class="d-flex justify-content-between">
-            {{-- @can('اضافة لون') --}}
+            @can('اضافة لون')
                 <button type="button" class="modal-effect btn btn-outline-primary btn-block" data-bs-toggle="modal"
                     data-bs-target="#addColorModal">
                     Add color
                 </button>
-            {{-- @endcan --}}
+            @endcan
         </div>
         <thead>
             <tr>
@@ -49,12 +49,12 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
 
-                            {{-- @can('حذف لون') --}}
+                            @can('حذف لون')
                                 <button class="dropdown-item" type="button" data-bs-toggle="modal"
                                     data-bs-target="#deleteColorModal" wire:click="deleteColor({{ $color->id }})">
                                     Remove
                                 </button>
-                            {{-- @endcan --}}
+                            @endcan
                         </div>
                     </td>
                 </tr>

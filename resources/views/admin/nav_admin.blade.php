@@ -32,8 +32,11 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="#">Profile</a>
           <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activities</a>
-        </div>
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="dropdown-item">Logout</button>
+        </form>
+                </div>
       </li>
     </ul>
   </nav>
@@ -83,7 +86,7 @@
               </a>
             </li>
             @endcan
-            @can('اقسام المنتجات')
+            @can('اقسام منتجات الملابس')
             <li class="nav-item">
               <a class="nav-link pl-3" href="{{ route('colthingsection.index') }}"><span class="ml-1 item-text">Clothing</span></a>
             </li>
@@ -99,7 +102,7 @@
               <span class="ml-3 item-text">Product</span>
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="product-elements">
-              @can('اقسام المنتجات')
+              @can('المنتجات')
               <li class="nav-item">
                   <a class="nav-link pl-3" href="{{ route('product.index') }}">
                       <span class="ml-1 item-text">Product</span>
@@ -131,13 +134,13 @@
               </a>
           </li>
           @endcan
-          {{-- @can('الالوان') --}}
+          @can('الالوان')
           <li class="nav-item">
               <a class="nav-link pl-3" href="{{ route('colors') }}">
                   <span class="ml-1 item-text">Colors</span>
               </a>
           </li>
-          {{-- @endcan --}}
+          @endcan
       </ul>
   </li>
   
@@ -193,31 +196,7 @@
       </ul>
   </li>
 
-  <p class="text-muted nav-heading mt-4 mb-1">
-      <span>Customers</span>
-  </p>
-  <li class="nav-item dropdown">
-      <a href="#customer-elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-          <i class="fe fe-box fe-16"></i>
-          <span class="ml-3 item-text">Customers</span>
-      </a>
-      <ul class="collapse list-unstyled pl-4 w-100" id="customer-elements">
-        @can('اراء العملاء')
-          <li class="nav-item">
-              <a class="nav-link pl-3" href="{{ route('show_message') }}">
-                  <span class="ml-1 item-text">reviews</span>
-              </a>
-          </li>
-          @endcan
-          @can('العملاء')
-          <li class="nav-item">
-              <a class="nav-link pl-3" href="{{ route('all_customer') }}">
-                  <span class="ml-1 item-text">all_customer</span>
-              </a>
-          </li>
-          @endcan
-      </ul>
-  </li>
+
   <p class="text-muted nav-heading mt-4 mb-1">
       <span>roles</span>
   </p>

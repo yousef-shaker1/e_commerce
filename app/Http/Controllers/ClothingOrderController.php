@@ -68,19 +68,6 @@ class ClothingOrderController extends Controller
 
         }
 
-        if ($size_product !== null) {
-            
-        }
-        // } else {
-        // }
-        // }
-        
-        // if ($request->count > $size_product_amount) {
-        //     return back()->withErrors('الكمية المطلوبة تتجاوز الحد المتاح للون المنتج.');
-        // }
-        // if ($request->count > $size->amount) {
-        //     return back()->withErrors('الكمية المطلوبة تتجاوز الحد المتاح للمقاس.');
-        // }
 
         Stripe::setApiKey(config('services.stripe.secret'));
 

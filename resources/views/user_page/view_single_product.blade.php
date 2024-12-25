@@ -5,48 +5,61 @@
 @endsection
 @section('css')
 <style>
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.breadcrumb-section {
+    background: linear-gradient(90deg, rgba(255, 165, 0, 0.7), rgba(255, 99, 71, 0.7)), 
+                url('/path-to-background.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 60px 0;
 }
 
-.breadcrumb-section:after {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-    background-image: url("/assets/img/img3.webp");
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.8;
+.product-img {
+    border: 5px solid #eee;
+    border-radius: 15px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.product-img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .btn-custom-primary {
-    background-color: #3498db;
-    border-color: #3498db;
-    color: #fff;
+    background: linear-gradient(45deg, #ff7f50, #ff4500);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-custom-primary:hover {
-    background-color: #2980b9;
-    border-color: #2980b9;
+    background: linear-gradient(45deg, #ff6347, #ff0000);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.btn-custom-secondary {
-    background-color: #95a5a6;
-    border-color: #95a5a6;
-    color: #fff;
+.image-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+.image-grid img {
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-custom-secondary:hover {
-    background-color: #7f8c8d;
-    border-color: #7f8c8d;
-} 
+.image-grid img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
 </style>
 @endsection
 
@@ -57,19 +70,14 @@
     </div>
 </div>
 
+
+
 <div class="breadcrumb-section breadcrumb-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 text-center">
-                <div class="breadcrumb-text">
-                    <p>We sale fresh fruits</p>
-                    <h1>About Us</h1>
-                </div>
-            </div>
-        </div>
+    <div class="breadcrumb-text">
+        <p>منتجات طازجة وعالية الجودة</p>
+        <h1>{{ $product->name }}</h1>
     </div>
 </div>
-
 @if (session()->has('Add'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{ session()->get('Add') }}</strong>
@@ -80,53 +88,44 @@
 @endif
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">عرض المنتج</h2>
     <div class="row">
-        <div class="col-md-8">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>اسم المنتج</th>
-                        <th>الصورة</th>
-                        <th>الوصف</th>
-                        <th>السعر</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><h5>{{ $product->name }}</h5></td>
-                        <td>
-                            <a href="{{ Storage::url($product->img) }}">
-                                <img src="{{ Storage::url($product->img) }}" alt="صورة المنتج" class="product-img img-fluid" style="width: 100px; height: auto;">
-                            </a>
-                        </td>
-                        <td><h5>{{ $product->description }}</h5></td>
-                        <td><h5>{{ $product->price }} $</h5></td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- صورة المنتج والمواصفات -->
+        <div class="col-md-8 text-center">
+            <a href="{{ Storage::url($product->img) }}">
+                <img src="{{ Storage::url($product->img) }}" alt="صورة المنتج" class="product-img img-fluid mb-4" style="max-width: 300px;">
+            </a>
+            <h2>{{ $product->name }}</h2>
+            <p class="text-muted">{{ $product->description }}</p>
+            <h3 class="text-primary">{{ $product->price }} $</h3>
         </div>
+
+        <!-- أزرار الإجراء -->
         <div class="col-md-4">
-            <div class="card mt-2">
+            <div class="card shadow-lg">
                 <div class="card-body text-center">
-                    @if(!empty(Auth::user()->name))
-                        <div class="mb-3">
-                            <a class="btn btn-custom-primary btn-block" href="{{ route('add_basket', $product->id) }}">إضافة إلى السلة</a>
-                        </div>
+                    @if(App\Models\basket::where('customer_id', Auth::user()->id)->where('product_id', $product->id)->exists())
+                    <a href="{{ route('show_single_basket', $product->id) }}" class="btn btn-custom-primary btn-block mb-3">اطلب الان</a>
+                    @elseif(Auth::check())
+                    <a href="{{ route('add_basket', $product->id) }}" class="btn btn-custom-primary btn-block mb-3">إضافة إلى السلة</a>
                     @else
-                        <div class="mb-3">
-                            <a class="btn btn-custom-primary btn-block" href="{{ route('login') }}">من فضلك سجل الدخول</a>
-                        </div>
+                        <a href="{{ route('login') }}" class="btn btn-custom-primary btn-block mb-3">سجل الدخول للشراء</a>
                     @endif
-                    <div>
-                        <a href="{{ route('section_product_view', $product->section->id) }}" class="btn btn-custom-secondary btn-block">عودة إلى الصفحة السابقة</a>
-                    </div>
+                    <a href="{{ route('section_product_view', $product->section->id) }}" class="btn btn-custom-secondary btn-block">عودة للصفحة السابقة</a>
                 </div>
             </div>
         </div>
-        
+    </div>
+
+    <!-- الصور الإضافية -->
+    <div class="image-grid">
+        @foreach($images as $img)
+        <a href="{{ Storage::url($img->image) }}">
+            <img src="{{ Storage::url($img->image) }}" alt="صورة إضافية">
+        </a>
+        @endforeach
     </div>
 </div>
+<br>
 @endsection
 
 

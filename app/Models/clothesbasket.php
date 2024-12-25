@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class clothesbasket extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id','customer_id','size_id'];
+    protected $fillable = ['product_id','customer_id','size_id', 'color_id'];
     public function customer(){
         return $this->belongsTo(customer::class);
     }

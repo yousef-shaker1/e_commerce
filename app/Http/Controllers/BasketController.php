@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\size;
 use App\Models\basket;
+use App\Models\Color_Size;
 use App\Models\product;
 use App\Models\customer;
 use App\Models\relationsize;
 use Illuminate\Http\Request;
 use App\Models\clothesbasket;
+use App\Models\Color_Product;
 use App\Models\clothingproduct;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,7 +53,17 @@ class BasketController extends Controller
         $customer = customer::where('email' , Auth::user()->email)->first();
         $sizes = clothesbasket::where('customer_id', Auth::user()->id)->where('product_id', $id)->first();
         $size = size::where('id',$sizes->size_id)->first();
-        return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size'));
+        $color_product = Color_Product::where('product_id', $id)->first();
+
+        if ($color_product == null) {
+            return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'color_product'));
+        }
+        $size_product = Color_Size::where('color_product_id', $color_product->id)
+            ->where('size_id', $size->id)
+            ->first();
+
+        return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'color_product', 'size_product'));
+
     }
 
     /**

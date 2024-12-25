@@ -6,7 +6,7 @@ use App\Models\size;
 use App\Models\relationsize;
 use Illuminate\Http\Request;
 use App\Models\clothingproduct;
-use App\Models\clothingsection;
+use App\Models\Product_Image;
 use App\Http\Requests\check_addsize;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\checkclothingproduct;
@@ -137,5 +137,10 @@ class clothing_productController extends Controller
 
         session()->flash('edit', 'تم اضافة المقاس بنجاح');
         return redirect()->back();
+    }
+
+    public function show_images_product($id){
+        $images = Product_Image::where('product_id', $id)->get();
+        return view('admin.images_product', compact('id', 'images'));
     }
 }

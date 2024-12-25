@@ -6,13 +6,16 @@ use App\Models\User;
 use App\Models\order;
 use App\Models\message;
 use App\Models\product;
+use App\Models\Product_Image;
 use App\Models\section;
+use App\Models\Product_Image_Admin;
 use App\Models\customer;
 use App\Models\relationsize;
 use Illuminate\Http\Request;
 use App\Models\clothingorder;
 use App\Models\clothingproduct;
 use App\Models\clothingsection;
+use App\Models\Color_Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -125,7 +128,8 @@ class UserpageController extends Controller
     public function viewsingleproduct($id)
     {
     $product = product::where('id', $id)->first();
-    return view('user_page.view_single_product', compact('product'));
+    $images = Product_Image_Admin::where('product_id', $id)->get();
+    return view('user_page.view_single_product', compact('product', 'images'));
     }
     
     public function mesage_customer(Request $request)
@@ -154,9 +158,11 @@ class UserpageController extends Controller
 
     public function clothing_viewproduct($id)
     {
-    $product = clothingproduct::where('id', $id)->first();
-    $sizes = relationsize::where('product_id', $id)->get();
-    return view('user_page.view_single_clothingproduct', compact('product', 'sizes'));
+        $colors = Color_Product::where('product_id', $id)->get();
+        $product = clothingproduct::where('id', $id)->first();
+        $sizes = relationsize::where('product_id', $id)->get();
+        $images = Product_Image::where('product_id', $id)->get();
+        return view('user_page.view_single_clothingproduct', compact('product', 'sizes', 'colors', 'images'));
     }
         
         /**

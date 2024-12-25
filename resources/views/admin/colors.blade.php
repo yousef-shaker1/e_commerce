@@ -1,21 +1,22 @@
 @extends('layouts.master_admin')
 @section('css')
+  
 @livewireStyles
 @endsection
 
 @section('title')
-    المقاسات 
+    colors 
 @endsection
 
 @section('content')
-@livewire('show-size')
+@livewire('colors')
 @livewireScripts
 @endsection
 @section('js')
 <script>
   window.addEventListener('close-modal', event => {
-      $('#deleteSizeModal').modal('hide');
-      $('#addSizeModal').modal('hide');
+      $('#deleteColorModal').modal('hide');
+      $('#addColorModal').modal('hide');
   });
 </script>
 @endsection

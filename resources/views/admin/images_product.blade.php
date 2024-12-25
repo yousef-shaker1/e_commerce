@@ -1,21 +1,22 @@
 @extends('layouts.master_admin')
 @section('css')
+  
 @livewireStyles
 @endsection
 
 @section('title')
-    المقاسات 
+    images 
 @endsection
 
 @section('content')
-@livewire('show-size')
+@livewire('images-product', ['id' => $id])
 @livewireScripts
 @endsection
 @section('js')
 <script>
   window.addEventListener('close-modal', event => {
-      $('#deleteSizeModal').modal('hide');
-      $('#addSizeModal').modal('hide');
+      $('#deleteImageModal').modal('hide');
+      $('#addImageModal').modal('hide');
   });
 </script>
 @endsection

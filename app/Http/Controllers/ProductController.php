@@ -23,6 +23,10 @@ class ProductController extends Controller
         return view('admin.product');
     }
 
+    public function view_images($id){
+        return view ('admin.view_images', compact('id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

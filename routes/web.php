@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ProductController;
@@ -92,6 +93,8 @@ Route::resource('/product', ProductController::class);
 Route::resource('/colthingsection', clothing_sectionController::class);
 Route::resource('/colthingproduct', clothing_productController::class);
 
+Route::get('/view_images/{id}', [ProductController::class, 'view_images'])->name('view_images');
+Route::get('/show_images_product/{id}', [clothing_productController::class, 'show_images_product'])->name('show_images_product');
 Route::Post('/add_new_size/{id}', [clothing_productController::class, 'addsize'])->name('addsize');
 Route::get('/show_size', [clothing_productController::class, 'show_size'])->name('show_size');
 Route::Post('/add_size', [clothing_productController::class, 'add_size'])->name('add_size');
@@ -106,13 +109,13 @@ Route::delete('/del_massage/{id}', [OrderController::class, 'del_massage'])->nam
 
 Route::controller(ClothingOrderController::class)->group(function(){
     Route::get('/clothing_order', 'index')->name('clothing_order');
-    Route::get('/clothing_order_status1/{id}', 'status1')->name('clothing_order.status1');
-    Route::get('/clothing_order_status2/{id}', 'status2')->name('clothing_order.status2');
-    Route::get('/clothing_order_status3/{id}', 'status3')->name('clothing_order.status3');
-    Route::delete('/delete_order/{id}', 'destory')->name('clothing_order');
-    Route::delete('delete_order/{id}', 'destory')->name('delete_clothingorder');
+    // Route::delete('/delete_order/{id}', 'destory')->name('clothing_order');
+    // Route::delete('delete_order/{id}', 'destory')->name('delete_clothingorder');
 });
 
+Route::get('/colors', [ColorController::class, 'index'])->name('colors');
+Route::get('/show_color_product/{id}', [ColorController::class, 'show_color_product'])->name('show_color_product');
+Route::get('/view_size_and_price/{id}', [ColorController::class, 'view_size_and_price'])->name('view_size_and_price');
 
 //permission
 Route::group(['middleware' => ['auth']], function() {

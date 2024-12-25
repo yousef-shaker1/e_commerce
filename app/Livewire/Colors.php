@@ -2,22 +2,21 @@
 
 namespace App\Livewire;
 
-use App\Models\size;
 use Livewire\Component;
+use App\Models\Color;
 use Livewire\WithPagination;
 
-class ShowSize extends Component
+class Colors extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $id;
-    public $size;
+    public $name;
     public $search;
-
     public function render()
     {
-        $sizes = size::where('size', 'like', "%{$this->search}%")->paginate(7);
-        return view('livewire.show-size', compact('sizes'));
+        $colors = Color::where('name','like',"%{$this->search}%")->paginate(10);
+        return view('livewire.colors',compact('colors'));
     }
 
     public function updatedSearch()
@@ -27,7 +26,7 @@ class ShowSize extends Component
 
     public function rules(){
         return [
-            'size' => 'required|min:1|max:10',
+            'name' => 'required|min:1|max:30',
         ];
     }
     
@@ -36,25 +35,25 @@ class ShowSize extends Component
         $this->validateOnly($fields);
     }
     
-    public function saveSize()
+    public function saveColor()
     {
         $valisatedData = $this->validate();
-        size::create($valisatedData);
-        session()->flash('message','size created Successfully');
+        Color::create($valisatedData);
+        session()->flash('message','color created Successfully');
         $this->dispatch('close-modal');
     }
     
-    public function deleteSize(int $id)
+    public function deleteColor(int $id)
     {
-        $size = size::find($id);
+        $color = Color::find($id);
         $this->id = $id;
-        $this->size = $size->size;
+        $this->name = $color->name;
     }
 
-    public function destroySize()
+    public function destroyColor()
     {
-        size::find($this->id)->delete();
-        session()->flash('delete','size Deleted Successfully');
+        Color::find($this->id)->delete();
+        session()->flash('delete','Color Deleted Successfully');
         $this->dispatch('close-modal');
     }
     
@@ -66,6 +65,6 @@ class ShowSize extends Component
     public function resetInput()
     {
         $this->id = '';
-        $this->size = '';
+        $this->name = '';
     }
 }

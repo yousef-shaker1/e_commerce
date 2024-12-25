@@ -83,8 +83,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="header-icons" style="margin-top: -5px; text-align: right;">
-                                        <a class="shopping-cart" href="{{ route('show_basket') }}"><i class="fas fa-shopping-cart"></i></a>
+                                    <div class="header-icons" style="margin-top: 2px; text-align: right;">
+                                        <a class="shopping-cart" href="{{ route('show_basket') }}">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <?php $customer = App\Models\customer::where('email', Auth::user()->email)->first();?>
+                                            @if (Auth::user())
+                                                <span class="cart-count">{{ App\Models\clothesbasket::where('customer_id', Auth::user()->id)->count() + App\Models\basket::where('customer_id', Auth::user()->id)->count()}}</span>
+                                            @endif
+                                        </a>
+                                        
                                         @endif
                                         
                                         @if (Auth::user())

@@ -41,6 +41,8 @@
                 <th class="border-bottom-0">price</th>
                 <th class="border-bottom-0">type</th>
                 <th class="border-bottom-0">amount&size</th>
+                <th class="border-bottom-0">colors</th>
+                <th class="border-bottom-0">images</th>
                 <th class="border-bottom-0">section</th>
                 <th>Action</th>
             </tr>
@@ -56,6 +58,10 @@
                     <td class="mb-0 text-muted">{{ $product->price }}</td>
                     <td class="mb-0 text-muted">{{ $product->type }}</td>
                     <td> <a href='{{ route('show_size_product', $product->id) }}'>view size
+                        </a></td>
+                    <td> <a href='{{ route('show_color_product', $product->id) }}'>view color
+                        </a></td>
+                    <td> <a href='{{ route('show_images_product', $product->id) }}'>view images
                         </a></td>
                     <td class="mb-0 text-muted">{{ $product->section->name }}</td>
                     <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"

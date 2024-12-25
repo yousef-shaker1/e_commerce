@@ -1,21 +1,27 @@
 @extends('layouts.master_admin')
 @section('css')
-@livewireStyles
+
+    @livewireStyles
 @endsection
 
 @section('title')
-    المقاسات 
+    size and price 
 @endsection
 
 @section('content')
-@livewire('show-size')
-@livewireScripts
+        @livewire('view-size-and-price', ['id' => $id])
+    {{-- </div>
+    </div> --}}
+    @livewireScripts
 @endsection
+
 @section('js')
+
 <script>
   window.addEventListener('close-modal', event => {
-      $('#deleteSizeModal').modal('hide');
       $('#addSizeModal').modal('hide');
+      $('#UpdateSizeModal').modal('hide');
+      $('#deleteSizeModal').modal('hide');
   });
 </script>
 @endsection

@@ -99,5 +99,21 @@
     overflow-y: auto;
 }
 
+.shopping-cart {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #d43838;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+
 	</style>
 @yield('css')

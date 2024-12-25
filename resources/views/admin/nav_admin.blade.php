@@ -116,12 +116,12 @@
           </ul>
       </li>
       <p class="text-muted nav-heading mt-4 mb-1">
-        <span>size</span>
+        <span>Product Settings</span>
     </p>
     <li class="nav-item dropdown">
       <a href="#size-elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
           <i class="fe fe-box fe-16"></i>
-          <span class="ml-3 item-text">Sizes</span>
+          <span class="ml-3 item-text">Settings</span>
       </a>
       <ul class="collapse list-unstyled pl-4 w-100" id="size-elements">
           @can('المقاسات')
@@ -131,6 +131,13 @@
               </a>
           </li>
           @endcan
+          {{-- @can('الالوان') --}}
+          <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('colors') }}">
+                  <span class="ml-1 item-text">Colors</span>
+              </a>
+          </li>
+          {{-- @endcan --}}
       </ul>
   </li>
   

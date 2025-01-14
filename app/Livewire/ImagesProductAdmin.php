@@ -28,7 +28,7 @@ class ImagesProductAdmin extends Component
     public function rules()
     {
         return [
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ];
     }
 

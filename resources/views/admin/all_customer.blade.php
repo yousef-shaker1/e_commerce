@@ -22,7 +22,8 @@
 
 @section('content')
 
-    <table class="table table-borderless table-hover" style="width: 1000px">
+<div class="container">
+    <table class="table table-borderless table-hover" style="width: 100%;">
         <thead>
             <tr>
                 <th>#</th>
@@ -34,40 +35,39 @@
             </tr>
         </thead>
         <tbody>
-            <?php $i = 0; ?>
             @forelse ($customers as $customer)
-            <?php $i++?>
                 <tr>
                     <td class="mb-0 text-muted">{{ $customers->firstItem() + $loop->index }}</td>
-
                     <td class="mb-0 text-muted">{{ $customer->name }}</td>
                     <td class="mb-0 text-muted">{{ $customer->email }}</td>
                     <td class="mb-0 text-muted">{{ $customer->phone }}</td>
-                    <td>{{ \App\Models\basket::where('customer_id', $customer->id)->count() + \App\Models\clothesbasket::where('customer_id', $customer->id)->count()}}</td>
+                    <td>{{ \App\Models\basket::where('customer_id', $customer->id)->count() + \App\Models\clothesbasket::where('customer_id', $customer->id)->count() }}</td>
                     <td>{{ \App\Models\order::where('customer_id', $customer->id)->count() + \App\Models\clothingorder::where('customer_id', $customer->id)->count() }}</td>
                 </tr>
-                @empty
-                    <tr>
-                        <td colspan="10" class="text-center">No sizes found</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        <ul class="pagination justify-content-center">
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">No sizes found</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center my-4">
+        <ul class="pagination">
             <!-- زر الصفحة السابقة -->
             @if ($customers->onFirstPage())
                 <li class="page-item disabled"><span class="page-link">السابق</span></li>
             @else
                 <li class="page-item"><a href="{{ $customers->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
             @endif
-    
+
             <!-- أرقام الصفحات -->
             @foreach(range(1, $customers->lastPage()) as $page)
                 <li class="page-item {{ $page == $customers->currentPage() ? 'active' : '' }}">
                     <a href="{{ $customers->url($page) }}" class="page-link">{{ $page }}</a>
                 </li>
             @endforeach
-    
+
             <!-- زر الصفحة التالية -->
             @if ($customers->hasMorePages())
                 <li class="page-item"><a href="{{ $customers->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
@@ -75,6 +75,9 @@
                 <li class="page-item disabled"><span class="page-link">التالي</span></li>
             @endif
         </ul>
+    </div>
+</div>
+
 @endsection
 @section('js')
 

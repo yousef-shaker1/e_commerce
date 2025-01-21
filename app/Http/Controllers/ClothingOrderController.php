@@ -49,7 +49,7 @@ class ClothingOrderController extends Controller
 
         $size_id = $basket->size_id;
         $size = relationsize::where('product_id', $id)->where('size_id', $size_id)->first();
-        $color_product = Color_Product::where('product_id', $id)->first();
+        $color_product = Color_Product::where('product_id', $id)->where('color_id', $basket->color_id)->first();
 
         if ($color_product === null) {
             $size_product = null;

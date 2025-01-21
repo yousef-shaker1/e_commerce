@@ -40,41 +40,66 @@ class ShowSingleClothingProduct extends Component
         }
     }
 
+
     public function updatedSelectedColor($colorId)
     {
+        // البحث عن المنتج المرتبط باللون المختار
         $this->colorProduct = Color_Product::where('color_id', $colorId)->first();
-
+    
         if ($this->colorProduct) {
+            // جلب المقاسات المرتبطة باللون المختار
             $colorSizes = Color_Size::where('color_product_id', $this->colorProduct->id)->get();
-            $this->sizes = $colorSizes->pluck('size_id');
-            $sizeNames = size::whereIn('id', $this->sizes)->get();
-            $this->sizes = $sizeNames;
+            $this->sizes = size::whereIn('id', $colorSizes->pluck('size_id'))->get();
         } else {
+            // إذا لم يكن هناك منتج مرتبط، إعادة تعيين المقاسات إلى مصفوفة فارغة
             $this->sizes = [];
         }
+    
+        // إعادة تعيين القيم الأخرى عند تغيير اللون
+        $this->selectedSize = null;
+        $this->price = null;
+        $this->amount = null;
     }
-
+    
     public function updatedSelectedSize($sizeId)
     {
         if ($this->colorProduct) {
             $colorSize = Color_Size::where('color_product_id', $this->colorProduct->id)
                 ->where('size_id', $sizeId)
                 ->first();
-
-                
-                if ($colorSize) {
+    
+            if ($colorSize) {
                 $this->price = $colorSize->price;
                 $this->amount = $colorSize->amount;
+    
+                if ($this->amount == 0) {
+                    session()->flash('error', 'هذا المنتج غير متوفر بالمخزون.');
+                }
             } else {
-                $this->price = null;
+                $this->resetPriceAndAmount();
             }
         } else {
-            $relationSize = relationsize::where('product_id', $this->id)->where('size_id', $sizeId)->first();
-            $this->amount = $relationSize->amount;
+            $relationSize = relationsize::where('product_id', $this->id)
+                ->where('size_id', $sizeId)
+                ->first();
+    
+            if ($relationSize) {
+                $this->amount = $relationSize->amount;
+            } else {
+                $this->amount = 0;
+            }
+    
             $this->price = null;
         }
     }
-
+    
+    // وظيفة لإعادة تعيين السعر والكمية
+    private function resetPriceAndAmount()
+    {
+        $this->price = null;
+        $this->amount = null;
+    }
+    
     //product has color and size
     public function addToBasket(){
 

@@ -100,7 +100,6 @@ class UserpageController extends Controller
 
         $productIds = clothingorder::where('customer_id', $customer->id)->pluck('product_id')->toArray();
         $clothingproducts = clothingproduct::whereIn('id', $productIds)->get();
-        // return $products;
         $clothingsection = $clothingproducts->pluck('section_id');
         $clothingsections = clothingproduct::whereIn('section_id', $clothingsection)->paginate(9);
         return view('user_page.importantproducts', compact('sections', 'clothingsections'));

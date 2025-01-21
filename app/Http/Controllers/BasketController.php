@@ -53,7 +53,7 @@ class BasketController extends Controller
         $customer = customer::where('email' , Auth::user()->email)->first();
         $sizes = clothesbasket::where('customer_id', Auth::user()->id)->where('product_id', $id)->first();
         $size = size::where('id',$sizes->size_id)->first();
-        $color_product = Color_Product::where('product_id', $id)->first();
+        $color_product = Color_Product::where('product_id', $id)->where('color_id', $sizes->color_id)->first();
 
         if ($color_product == null) {
             return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'color_product'));

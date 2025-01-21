@@ -7,7 +7,7 @@
 <style>
 .breadcrumb-section {
     background: linear-gradient(90deg, rgba(255, 165, 0, 0.7), rgba(255, 99, 71, 0.7)), 
-                url('/path-to-background.jpg') center/cover no-repeat;
+    url('/path-to-background.jpg') center/cover no-repeat;
     color: white;
     text-align: center;
     padding: 60px 0;

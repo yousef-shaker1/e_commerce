@@ -16,6 +16,8 @@ use App\Http\Controllers\ClothingOrderController;
 use App\Http\Controllers\ColthingBasketController;
 use App\Http\Controllers\clothing_productController;
 use App\Http\Controllers\clothing_sectionController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,12 @@ use App\Http\Controllers\clothing_sectionController;
 
 //+++++++++++++++++++++++userpage++++++++++++++++++++++++++++++++++++
 Route::resource('/customer',CustomerController::class);
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
 
 Route::controller(UserpageController::class)->group(function(){
     Route::get('/', 'index')->name('home');
@@ -51,6 +59,7 @@ Route::controller(UserpageController::class)->group(function(){
     
 });
 
+});
 
 //basket
 Route::controller(BasketController::class)->group(function(){

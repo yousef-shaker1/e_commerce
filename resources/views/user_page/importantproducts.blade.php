@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-    importent_products
+    {{ __('page.Important Products') }}
 @endsection
 
 @section('css')
@@ -13,9 +13,9 @@
   width: 100%;
   height: 100%;
   content: "";
-  background-image: url("/assets/img/shop3.png"); /* تأكد من أن المسار صحيح */
-  background-size: cover; /* تجعل الصورة تغطي العنصر بالكامل */
-  background-position: center; /* تضبط الصورة في المركز */
+  background-image: url("/assets/img/shop3.png");
+  background-size: cover; 
+  background-position: center;
   z-index: -1;
   opacity: 0.8;
 }
@@ -35,8 +35,8 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Fresh and Organic</p>
-                        <h1>Shop</h1>
+                        <p>{{ __('page.Premium_and_Organic') }}</p>
+                    <h1>{{ __('page.Important Products') }}</h1>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
           <div class="row">
               <div class="col-lg-8 offset-lg-2 text-center">
                   <div class="section-title">
-                      <h3><span class="orange-text">Our </span>importent-products</h3>
+                      <h3><span class="orange-text">{{ __('page.our') }} </span> {{ __('page.Important Products') }}</h3>
                   </div>
               </div>
           </div>
@@ -95,14 +95,14 @@
         <!-- Pagination للقسم العادي -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <h4 class="my-4">الاجهزة</h4>
+                <h4 class="my-4">{{ __('page.Electronics') }}</h4>
             </div>
         </div>
         <ul class="pagination justify-content-center">
             @if ($sections->onFirstPage())
-                <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                <li class="page-item disabled"><span class="page-link">{{ __('pagination.previous') }}</span></li>
             @else
-                <li class="page-item"><a href="{{ $sections->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                <li class="page-item"><a href="{{ $sections->previousPageUrl() }}" class="page-link" rel="prev">{{ __('pagination.previous') }}</a></li>
             @endif
     
             @foreach(range(1, $sections->lastPage()) as $page)
@@ -112,23 +112,23 @@
             @endforeach
     
             @if ($sections->hasMorePages())
-                <li class="page-item"><a href="{{ $sections->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                <li class="page-item"><a href="{{ $sections->nextPageUrl() }}" class="page-link" rel="next">{{ __('pagination.next') }}</a></li>
             @else
-                <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                <li class="page-item disabled"><span class="page-link">{{ __('pagination.next') }}</span></li>
             @endif
         </ul>
     
         <!-- Pagination لقسم منتجات الملابس -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <h4 class="my-4">الملابس</h4>
+                <h4 class="my-4">{{ __('page.Clothing') }}</h4>
             </div>
         </div>
         <ul class="pagination justify-content-center">
             @if ($clothingsections->onFirstPage())
-                <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                <li class="page-item disabled"><span class="page-link">{{ __('pagination.previous') }}</span></li>
             @else
-                <li class="page-item"><a href="{{ $clothingsections->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                <li class="page-item"><a href="{{ $clothingsections->previousPageUrl() }}" class="page-link" rel="prev">{{ __('pagination.previous') }}</a></li>
             @endif
     
             @foreach(range(1, $clothingsections->lastPage()) as $page)
@@ -138,9 +138,9 @@
             @endforeach
     
             @if ($clothingsections->hasMorePages())
-                <li class="page-item"><a href="{{ $clothingsections->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                <li class="page-item"><a href="{{ $clothingsections->nextPageUrl() }}" class="page-link" rel="next">{{ __('pagination.next') }}</a></li>
             @else
-                <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                <li class="page-item disabled"><span class="page-link">{{ __('pagination.next') }}</span></li>
             @endif
         </ul>
     </div>

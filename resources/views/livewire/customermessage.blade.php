@@ -47,6 +47,6 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-center my-4">
-        {{ $messages->links() }}
+        {{ $messages->links('pagination::simple-bootstrap-5') }}
     </div>
 </div>

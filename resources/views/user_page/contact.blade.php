@@ -13,9 +13,9 @@ contact
   width: 100%;
   height: 100%;
   content: "";
-  background-image: url("/assets/img/shop3.png"); /* تأكد من أن المسار صحيح */
-  background-size: cover; /* تجعل الصورة تغطي العنصر بالكامل */
-  background-position: center; /* تضبط الصورة في المركز */
+  background-image: url("/assets/img/shop3.png"); 
+  background-size: cover; 
+  background-position: center;
   z-index: -1;
   opacity: 0.8;
 }
@@ -35,8 +35,7 @@ contact
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Get 24/7 Support</p>
-						<h1>Contact us</h1>
+						<h1>{{ __('page.Contact') }}</h1>
 					</div>
 				</div>
 			</div>
@@ -58,32 +57,32 @@ contact
 								</button>
 						</div>
 						@endif
-						<h2>Please write your opinion about using the site: </h2>
+						<h2>{{ __('page.Opinion_Request') }}</h2>
 						
 					</div>
 				 	<div id="form_status"></div>
 					<div class="contact-form">
 						<form method="POST" action="{{ route('mesage_customer') }}" id="fruitkha-contact" onSubmit="return valid_datas( this );">
 							@csrf
-							<p><textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea></p>
+							<p><textarea name="message" id="message" cols="30" rows="10" placeholder="{{ __('page.Message') }}" ></textarea></p>
 							<input type="hidden" name="token" value="FsWga4&@f6aw" />
-							<p><input type="submit" value="Submit"></p>
+							<p><input type="submit" value="{{ __('page.Submit') }}"></p>
 						</form>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="contact-form-wrap">
 						<div class="contact-form-box">
-							<h4><i class="fas fa-map"></i> Shop Address</h4>
-							<p>34/8, East Hukupara <br> Gifirtok, Sadan. <br> Country Name</p>
+							<h4><i class="fas fa-map"></i> {{ __('page.Shop_Address') }}</h4>
+							<p>{{ __('page.Shop_Address_Details') }}</p>
 						</div>
 						<div class="contact-form-box">
-							<h4><i class="far fa-clock"></i> Shop Hours</h4>
-							<p>MON - FRIDAY: 8 to 9 PM <br> SAT - SUN: 10 to 8 PM </p>
+							<h4><i class="far fa-clock"></i> {{ __('page.Shop_Hours') }}</h4>
+							<p>{{ __('page.Shop_Hours_Details') }}</p>
 						</div>
 						<div class="contact-form-box">
-							<h4><i class="fas fa-address-book"></i> Contact</h4>
-							<p>Phone: +20 01101336383 <br> Email: youssefshaker2cool@gmail.com</p>
+							<h4><i class="fas fa-address-book"></i> {{ __('page.Contact') }}</h4>
+							<p>{{ __('page.Contact_Details') }}</p>
 						</div>
 					</div>
 				</div>
@@ -94,14 +93,19 @@ contact
 
 	<!-- find our location -->
 	<div class="find-location blue-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<p> <i class="fas fa-map-marker-alt"></i> Find Our Location</p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p> <i class="fas fa-map-marker-alt"></i> {{ __('page.Find_Us') }}</p>
+                <!-- Embed Google Map -->
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3459.482313127923!2d31.235413915202148!3d30.04442018183116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145847deea2b48b7%3A0x22cf7127cfab6a88!2sTahrir%20Square%2C%20Cairo%2C%20Egypt!5e0!3m2!1sen!2seg!4v1675334023103!5m2!1sen!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 	<!-- end find our location -->
 
 @endsection

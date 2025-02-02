@@ -1,0 +1,107 @@
+    .nav-btn {
+        padding: 10px 20px;
+        margin-left: 15px;
+        /* تعديل المسافة هنا */
+        border: none;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .header-icons {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-icons .nav-btn {
+        margin-left: 20px;
+    }
+
+    .main-menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .main-menu li {
+        margin: 0 10px;
+    }
+
+    .header-icons {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-icons a {
+        margin: 0 5px;
+    }
+
+    .site-logo img {
+        width: 100px;
+        height: auto;
+    }
+
+    .site-logo {
+        margin-top: -10px;
+    }
+
+    .main-header-notification {
+        position: absolute;
+        top: 5px;
+        left: -25px;
+    }
+
+    .notification-badge {
+        position: absolute;
+        top: -10px;
+        right: 0;
+        border-radius: 50%;
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+
+    .dropdown-menu {
+        width: 350px;
+    }
+
+    .main-notification-list.Notification-scroll {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .shopping-cart {
+        position: relative;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #d43838;
+        color: white;
+        border-radius: 50%;
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .dropdown-menu {
+        min-width: 150px;
+        max-width: 180px;
+        text-align: right;
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    .dropdown-item {
+        color: #333 !important;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+        color: #000 !important;
+    }

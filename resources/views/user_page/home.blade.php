@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-    home
+    {{ __('page.Home') }}
 @endsection
 
 @section('css')
@@ -22,14 +22,15 @@
                 <div class="col-lg-9 offset-lg-2 text-center">
                     <div class="hero-text">
                         <div class="hero-text-tablecell">
-                            <p class="subtitle">Fresh & Organic</p>
-                            <h1>Delicious Seasonal Fruits</h1>
+                            <p class="subtitle">{{ __('page.hero_subtitle') }}</p>
+                            <h1>{{ __('page.hero_title') }}</h1>
                             <div class="hero-btns">
-                                <a href="{{ route('shop') }}" class="boxed-btn">shop</a>
-                                <a href="{{ route('contact') }}" class="bordered-btn">Contact Us</a>
+                                <a href="{{ route('shop') }}" class="boxed-btn">{{ __('page.shop_now') }}</a>
+                                <a href="{{ route('contact') }}" class="bordered-btn">{{ __('page.contact_us') }}</a>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -45,8 +46,8 @@
                             <i class="fas fa-shipping-fast"></i>
                         </div>
                         <div class="content">
-                            <h3>Free Shipping</h3>
-                            <p>When order over $75</p>
+                            <h3>{{ __('page.free_shipping_title') }}</h3>
+                            <p>{{ __('page.free_shipping_desc') }}</p>
                         </div>
                     </div>
                 </div>
@@ -56,8 +57,8 @@
                             <i class="fas fa-phone-volume"></i>
                         </div>
                         <div class="content">
-                            <h3>24/7 Support</h3>
-                            <p>Get support all day</p>
+                            <h3>{{ __('page.support_title') }}</h3>
+                            <p>{{ __('page.support_desc') }}</p>
                         </div>
                     </div>
                 </div>
@@ -67,12 +68,13 @@
                             <i class="fas fa-sync"></i>
                         </div>
                         <div class="content">
-                            <h3>Refund</h3>
-                            <p>Get refund within 3 days!</p>
+                            <h3>{{ __('page.refund_title') }}</h3>
+                            <p>{{ __('page.refund_desc') }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            
 
         </div>
     </div>
@@ -84,11 +86,12 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="section-title">
-                        <h3><span class="orange-text">Our</span> Products</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
-                            beatae optio.</p>
+                        <h3><span class="orange-text">{{ __('page.our') }}</span> {{ __('page.products') }}</h3>
+                        <p>{{ __('page.products_desc') }}</p>
                     </div>
                 </div>
+            </div>
+            
             </div>
 
                         
@@ -104,7 +107,7 @@
                                     <h3>{{ $product->name }} </h3>
                                     <h3>{{ $product->description }}</h3>
                                     <h3>{{ $product->price }} $</h3>
-                                    <a href="{{ route('product_view', $product->id) }}" class="cart-btn"><i class="fas fa-shopping-cart"></i>اضف الي السلة</a>
+                                    <a href="{{ route('product_view', $product->id) }}" class="cart-btn"><i class="fas fa-shopping-cart"></i>{{ __('page.add to cart') }}</a>
                                 </div>
                             </div>
                         @endforeach
@@ -112,9 +115,9 @@
                     <ul class="pagination justify-content-center">
                         <!-- زر الصفحة السابقة -->
                         @if ($products->onFirstPage())
-                            <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                            <li class="page-item disabled"><span class="page-link">{{ __('pagination.previous') }}</span></li>
                         @else
-                            <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                            <li class="page-item"><a href="{{ $products->previousPageUrl() }}" class="page-link" rel="prev">{{ __('pagination.previous') }}</a></li>
                         @endif
                 
                         <!-- أرقام الصفحات -->
@@ -126,9 +129,9 @@
                 
                         <!-- زر الصفحة التالية -->
                         @if ($products->hasMorePages())
-                            <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                            <li class="page-item"><a href="{{ $products->nextPageUrl() }}" class="page-link" rel="next">{{ __('pagination.next') }}</a></li>
                         @else
-                            <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                            <li class="page-item disabled"><span class="page-link">{{ __('pagination.next') }}</span></li>
                         @endif
                     </ul>
                     @livewire('product_clothing')
@@ -144,7 +147,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>آراء العملاء</h3>
+                    <h3>{{ __('page.customer_reviews') }}</h3>
                 </div>
                 <div class="col-lg-10 offset-lg-1">
                     <div class="testimonial-sliders">

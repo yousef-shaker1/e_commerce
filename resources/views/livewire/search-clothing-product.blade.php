@@ -46,7 +46,7 @@
             
             <!-- Pagination -->
             <div class="pagination-wrapper mt-4 text-center">
-                {{ $clothing_products->links() }}
+                {{ $clothing_products->links('pagination::simple-bootstrap-5') }}
             </div>
         </div>
     </div>

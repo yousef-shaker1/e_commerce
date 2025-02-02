@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-    shop
+    {{ __('page.Best Seller') }}
 @endsection
 
 @section('css')
@@ -13,9 +13,9 @@
   width: 100%;
   height: 100%;
   content: "";
-  background-image: url("/assets/img/shop3.png"); /* تأكد من أن المسار صحيح */
-  background-size: cover; /* تجعل الصورة تغطي العنصر بالكامل */
-  background-position: center; /* تضبط الصورة في المركز */
+  background-image: url("/assets/img/shop3.png"); 
+  background-size: cover;
+  background-position: center;
   z-index: -1;
   opacity: 0.8;
 }
@@ -35,8 +35,8 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Fresh and Organic</p>
-                        <h1>Shop</h1>
+                        <p>{{ __('page.Premium_and_Organic') }}</p>
+                        <h1>{{ __('page.Shop') }}</h1>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
           <div class="row">
               <div class="col-lg-8 offset-lg-2 text-center">
                   <div class="section-title">
-                      <h3><span class="orange-text">Our </span>Best Sellers</h3>
+                      <h3><span class="orange-text">{{ __('page.our') }} </span>{{ __('page.Best Seller') }}</h3>
                   </div>
               </div>
           </div>

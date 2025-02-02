@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-Previousorders
+    {{ __('page.Previous Orders') }}
 @endsection
 
 @section('css')
@@ -13,9 +13,9 @@ Previousorders
   width: 100%;
   height: 100%;
   content: "";
-  background-image: url("/assets/img/Previousorders.jpg"); /* تأكد من أن المسار صحيح */
-  background-size: cover; /* تجعل الصورة تغطي العنصر بالكامل */
-  background-position: center; /* تضبط الصورة في المركز */
+  background-image: url("/assets/img/Previousorders.jpg"); 
+  background-size: cover; 
+  background-position: center;
   z-index: -1;
   opacity: 0.8;
 }
@@ -35,8 +35,8 @@ Previousorders
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Fresh and Organic</p>
-                        <h1>Shop</h1>
+                        <p>{{ __('page.Premium_and_Organic') }}</p>
+                        <h1>{{ __('page.Previous Orders') }}</h1>
                     </div>
                 </div>
             </div>
@@ -56,16 +56,16 @@ Previousorders
                           <thead>
                               <tr>
                                   <th class="border-bottom-0">#</th>
-                                  <th class="border-bottom-0">اسم العميل</th>
-                                  <th class="border-bottom-0">تليفون العميل</th>
-                                  <th class="border-bottom-0">عنوان العميل</th>
-                                  <th class="border-bottom-0">تاريخ وصول الاوردر</th>
-                                  <th class="border-bottom-0">اسم المنتج</th>
-                                  <th class="border-bottom-0">مقاس المنتج</th>
-                                  <th class="border-bottom-0">الكمية</th>
-                                  <th class="border-bottom-0">سعر المنتج</th>
-                                  <th class="border-bottom-0">المجموع</th>
-                                  <th class="border-bottom-0">حالة الاوردر</th>
+                                  <th class="border-bottom-0">{{ __('page.Customer_Name') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Customer_Phone') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Customer_Address') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Order_Arrival_Date') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Product_Name') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Product_Size') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Quantity') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Product_Price') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Total') }}</th>
+                                  <th class="border-bottom-0">{{ __('page.Order_Status') }}</th>                                  
                               </tr>
                           </thead>
                           <tbody>
@@ -122,9 +122,9 @@ Previousorders
                   <ul class="pagination justify-content-center">
                     <!-- زر الصفحة السابقة -->
                     @if ($orders->onFirstPage())
-                        <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                        <li class="page-item disabled"><span class="page-link">{{ __('pagination.previous') }}</span></li>
                     @else
-                        <li class="page-item"><a href="{{ $orders->previousPageUrl() }}" class="page-link" rel="prev">السابق</a></li>
+                        <li class="page-item"><a href="{{ $orders->previousPageUrl() }}" class="page-link" rel="prev">{{ __('pagination.previous') }}</a></li>
                     @endif
             
                     <!-- أرقام الصفحات -->
@@ -136,9 +136,9 @@ Previousorders
             
                     <!-- زر الصفحة التالية -->
                     @if ($orders->hasMorePages())
-                        <li class="page-item"><a href="{{ $orders->nextPageUrl() }}" class="page-link" rel="next">التالي</a></li>
+                        <li class="page-item"><a href="{{ $orders->nextPageUrl() }}" class="page-link" rel="next">{{ __('pagination.next') }}</a></li>
                     @else
-                        <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                        <li class="page-item disabled"><span class="page-link">{{ __('pagination.next') }}</span></li>
                     @endif
                 </ul>
               </div>

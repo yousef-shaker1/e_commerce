@@ -15,9 +15,15 @@ class Product extends Component
     use WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $id;
-    public $name;
+    public $name = [
+        'ar' => '',
+        'en' => ''
+    ];
+    public $description = [
+        'ar' => '',
+        'en' => ''
+    ];
     public $img;
-    public $description;
     public $price;
     public $amount;
     public $search;
@@ -34,8 +40,8 @@ class Product extends Component
     {
         return [
             'img' => 'required|image',
-            'name' => 'required|min:2|max:20',
-            'description' => 'required|min:5|max:100',
+            'name.*' => 'required|min:2|max:20',
+            'description.*' => 'required|min:5|max:100',
             'price' => 'required',
             'amount' => 'required',
             'section_id' => 'required|exists:sections,id',
@@ -46,8 +52,8 @@ class Product extends Component
     {
         return [
             'img' => 'nullable',
-            'name' => 'nullable|min:2|max:20',
-            'description' => 'nullable|min:5|max:100',
+            'name.*' => 'nullable|min:2|max:20',
+            'description.*' => 'nullable|min:5|max:100',
             'price' => 'nullable',
             'amount' => 'nullable',
             'section_id' => 'nullable',
@@ -65,11 +71,11 @@ class Product extends Component
         if($product){
             $this->id = $product->id;
             $this->img = $product->img;
-            $this->name = $product->name;
+            $this->name =  $product->getTranslations('name');
             $this->amount = $product->amount;
             $this->section_id = $product->product_id;
             $this->price = $product->price;
-            $this->description = $product->description;
+            $this->description =  $product->getTranslations('description');
         } else {
             return redirect()->back();
         }

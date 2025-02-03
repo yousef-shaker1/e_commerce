@@ -15,7 +15,10 @@ class ColthingSection extends Component
     use WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $id;
-    public $name;
+    public $name = [
+        'ar' => '',
+        'en' => ''
+    ];
     public $img;
 
     public function render()
@@ -27,7 +30,7 @@ class ColthingSection extends Component
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:20',
+            'name.*' => 'required|min:2|max:20',
             'img' => 'required|image',
         ];    
     }
@@ -35,7 +38,7 @@ class ColthingSection extends Component
     protected function updateRules()
     {
         return [
-            'name' => 'nullable|min:2|max:20',
+            'name.*' => 'nullable|min:2|max:20',
             'img' => 'nullable',
         ];
     }
@@ -49,7 +52,7 @@ class ColthingSection extends Component
     {
         $section = clothingsection::find($id);
         if($section){
-            $this->name = $section->name;
+            $this->name = $section->getTranslations('name');//['ar', 'en']
             $this->img = $section->img;
             $this->id = $section->id;
         } else {
@@ -85,9 +88,7 @@ class ColthingSection extends Component
     {
         $validator = $this->validate($this->updateRules());
         $section = clothingsection::find($this->id);
-        // Check if a new image is provided
         if ($this->img instanceof UploadedFile) {
-            // Delete the old image if it exists
             if (!empty($section->img) && Storage::disk('public')->exists($section->img)) {
                 Storage::disk('public')->delete($section->img);
             }

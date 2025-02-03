@@ -13,9 +13,16 @@
                 <form wire:submit.prevent="saveSection">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>Name</label>
-                            <input type="text" wire:model.live="name" class="form-control">
-                            @error('name')
+                            <label>Name-ar</label>
+                            <input type="text" wire:model.live="name.ar" class="form-control">
+                            @error('name.ar')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label>Name-en</label>
+                            <input type="text" wire:model.live="name.en" class="form-control">
+                            @error('name.en')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -51,12 +58,21 @@
                 <form wire:submit.prevent="updateSection">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>Name</label>
-                            <input type="text" wire:model.live="name" class="form-control">
-                            @error('name')
+                            <label>Name-ar</label>
+                            <input type="text" wire:model.live="name.ar" class="form-control">
+                            @error('name.ar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        
+                        <div class="mb-3">
+                            <label>Name-en</label>
+                            <input type="text" wire:model.live="name.en" class="form-control">
+                            @error('name.en')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        
                         <div class="mb-3">
                             <label for="current_img" class="col-form-label">currency image:</label>
                             <br><br>

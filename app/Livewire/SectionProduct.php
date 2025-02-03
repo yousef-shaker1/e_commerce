@@ -14,7 +14,10 @@ class SectionProduct extends Component
     use WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $id;
-    public $name;
+    public $name = [
+        'ar' => '',
+        'en' => ''
+    ];
     public $img;
 
     public function render()
@@ -26,7 +29,7 @@ class SectionProduct extends Component
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:20',
+            'name.*' => 'nullable|min:2|max:20',
             'img' => 'required|image',
         ];    
     }
@@ -34,7 +37,7 @@ class SectionProduct extends Component
     protected function updateRules()
     {
         return [
-            'name' => 'nullable|min:2|max:20',
+            'name.*' => 'nullable|min:2|max:20',
             'img' => 'nullable',
         ];
     }
@@ -48,9 +51,9 @@ class SectionProduct extends Component
     {
         $section = section::find($id);
         if($section){
-            $this->name = $section->name;
-            $this->img = $section->img;
+            $this->name = $section->getTranslations('name');//['ar', 'en']
             $this->id = $section->id;
+            $this->img = $section->img;
         } else {
             return redirect()->back();
         }

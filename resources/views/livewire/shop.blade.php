@@ -1,9 +1,9 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="input-group mb-3">
-                <input wire:model.live='search' type='text' class="form-control" placeholder="Search products...">
-            </div>
+            {{-- <div class="input-group mb-3">
+                <input wire:model='search' type='text' class="form-control" placeholder="Search products...">
+            </div> --}}
         </div>
     </div>
     

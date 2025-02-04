@@ -31,10 +31,23 @@ class Product extends Component
     
     public function render()
     {
-        $products = ModelsProduct::with('section')->where('name', 'like', "%{$this->search}%")->paginate(10);
+        $products = ModelsProduct::with('section')
+        ->where(function ($query) {
+            $query->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.ar')) LIKE ?", ["%{$this->search}%"])
+                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.en')) LIKE ?", ["%{$this->search}%"])
+                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(description, '$.ar')) LIKE ?", ["%{$this->search}%"])
+                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(description, '$.en')) LIKE ?", ["%{$this->search}%"]);
+        })
+        ->paginate(10);
         $sections = section::all();
         return view('livewire.product', compact('products', 'sections'));
     }
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
 
     public function rules()
     {

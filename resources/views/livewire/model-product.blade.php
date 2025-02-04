@@ -68,6 +68,14 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label>Image</label>
+                            <input type="file" wire:model.live="img" class="form-control">
+                            @error('img')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click="closeModal"
@@ -123,13 +131,6 @@
                             @enderror
                         </div>
                         
-                        <div class="mb-3">
-                            <label>Description</label>
-                            <input type="text" wire:model.live="description" class="form-control">
-                            @error('description')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
 
                         <div class="mb-3">
                             <label>Price</label>

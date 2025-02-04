@@ -2,9 +2,9 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="input-group mb-3">
+                {{-- <div class="input-group mb-3">
                     <input wire:model.live='search' type='text' class="form-control" placeholder="Search products...">
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="product-section mt-5 mb-120">
@@ -29,7 +29,7 @@
                     @endforelse
                 </div>
                 <div class="d-flex justify-content-center my-4">
-                    {{ $products->links('pagination::simple-bootstrap-5') }}
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

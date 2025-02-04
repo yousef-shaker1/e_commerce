@@ -38,29 +38,29 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){ 
-
-Route::controller(UserpageController::class)->group(function(){
-    Route::get('/', 'index')->name('home');
-    Route::get('/about', 'about')->name('about');
-    Route::get('/shop','shop')->name('shop');
-    Route::get('/contact','contact')->name('contact');
-    Route::get('/bestseller', 'bestseller')->name('bestseller');
-    Route::get('/notification/markall', 'markall')->name('notification.markall');
-    Route::get('/show_single_product/{id}', 'show_single_product')->name('show_single_product');
-    Route::get('/importantproducts', 'importantproducts')->name('importantproducts')->middleware('auth');
-    Route::get('/Previousorders', 'Previousorders')->name('Previousorders')->middleware('auth');
-    Route::Post('/mesage_customer', 'mesage_customer')->name('mesage_customer')->middleware('auth');
-    //product
-    Route::get('/section/viewproduct/{id}', 'section_viewproduct')->name('section_product_view');
-    Route::get('/viewproduct/{id}', 'viewsingleproduct')->name('product_view');
-    //clothing_product
-    Route::get('/clothingsection/product_view/{id}', 'clothing_section_viewproduct')->name('clothing_section_product_view');
-    Route::get('/clothingproduct_view/{id}', 'clothing_viewproduct')->name('clothing_product_view');
+        
+        Route::controller(UserpageController::class)->group(function(){
+            Route::get('/', 'index')->name('home');
+            Route::get('/about', 'about')->name('about');
+            Route::get('/shop','shop')->name('shop');
+            Route::get('/contact','contact')->name('contact');
+            Route::get('/bestseller', 'bestseller')->name('bestseller');
+            Route::get('/notification/markall', 'markall')->name('notification.markall');
+            Route::get('/show_single_product/{id}', 'show_single_product')->name('show_single_product');
+            Route::get('/importantproducts', 'importantproducts')->name('importantproducts')->middleware('auth');
+            Route::get('/Previousorders', 'Previousorders')->name('Previousorders')->middleware('auth');
+            Route::Post('/mesage_customer', 'mesage_customer')->name('mesage_customer')->middleware('auth');
+            //product
+            Route::get('/section/viewproduct/{id}', 'section_viewproduct')->name('section_product_view');
+            Route::get('/viewproduct/{id}', 'viewsingleproduct')->name('product_view');
+            //clothing_product
+            Route::get('/clothingsection/product_view/{id}', 'clothing_section_viewproduct')->name('clothing_section_product_view');
+            Route::get('/clothingproduct_view/{id}', 'clothing_viewproduct')->name('clothing_product_view');
+            
+        });
+        
+    });
     
-});
-
-});
-
 //basket
 Route::controller(BasketController::class)->group(function(){
     Route::get('/show_basket', 'show_basket')->name('show_basket')->middleware('auth');

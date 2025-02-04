@@ -8,14 +8,13 @@ use App\Models\clothingsection;
 
 class Shop extends Component
 {
-    // public $sections;
-    // public $clothing_sections;
     public $search;
 
     public function render()
     {
-        $sections = section::where('name', 'like', "%{$this->search}%")->get();
-        $clothing_sections = clothingsection::where('name', 'like', "%{$this->search}%")->get();
+
+        $sections = section::get();
+        $clothing_sections = clothingsection::get();
         return view('livewire.shop', compact('sections', 'clothing_sections'));
     }
 }

@@ -119,9 +119,9 @@ class UserpageController extends Controller
 
     public function section_viewproduct($id)
     {
-    $products = product::where('section_id', $id)->get();
+    // $products = product::where('section_id', $id)->get();
     $section = section::where('id', $id)->first();
-    return view('user_page.view_product', compact('products', 'section'));
+    return view('user_page.view_product', compact('section'));
     }
         
     public function viewsingleproduct($id)

@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
         'Is_admin' => \App\Http\Middleware\Is_admin::class,
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
-        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         'user.token' => \App\Http\Middleware\CheckToken::class,
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,

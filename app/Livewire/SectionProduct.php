@@ -29,7 +29,7 @@ class SectionProduct extends Component
     public function rules()
     {
         return [
-            'name.*' => 'nullable|min:2|max:20',
+            'name.*' => 'required|min:2|max:20',
             'img' => 'required|image',
         ];    
     }

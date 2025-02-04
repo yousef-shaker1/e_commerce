@@ -6,7 +6,7 @@
 <!-- count down -->
 <script src="{{URL::asset('assets/js/jquery.countdown.js')}}"></script>
 <!-- isotope -->
-<script src="{URL::asset('assets/js/jquery.isotope-3.0.6.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.isotope-3.0.6.min.js')}}"></script>
 <!-- waypoints -->
 <script src="{{URL::asset('assets/js/waypoints.js')}}"></script>
 <!-- owl carousel -->
@@ -16,6 +16,7 @@
 <!-- mean menu -->
 <script src="{{URL::asset('assets/js/jquery.meanmenu.min.js')}}"></script>
 <!-- sticker js -->
+
 <!-- main js -->
 <script src="{{URL::asset('assets/js/main.js')}}"></script>
 

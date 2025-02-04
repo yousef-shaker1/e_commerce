@@ -152,5 +152,4 @@
 @endsection
 
 @section('js')
-    <script src="{{ URL::asset('assets/js/sticker.js') }}"></script>
 @endsection

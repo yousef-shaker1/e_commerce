@@ -15,7 +15,6 @@ class product extends Model
     protected $fillable = ['name', 'img', 'description', 'price', 'amount', 'section_id'];
 
     public $translatable = ['name', 'description'];
-    
 
     protected $casts = [
         'name' => 'array',

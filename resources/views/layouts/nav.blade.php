@@ -30,46 +30,53 @@
                         
                                         <!-- 🔔 أيقونة الإشعارات -->
                                         <div class="user_option">
-                                            <div class="container mt-5">
+                                            <div class="container mt-3">
                                                 <div class="dropdown nav-item main-header-notification">
-                                                    <a class="new nav-link position-relative" href="#" id="notificationDropdown" data-toggle="dropdown">
-                                                        <span class="notification-badge bg-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
-                                                        <i class="fa fa-bell notification-icon" aria-hidden="true"></i>
+                                                    <a class="new nav-link position-relative d-flex align-items-center" href="#" id="notificationDropdown" data-toggle="dropdown">
+                                                        <span class="notification-badge bg-danger text-white rounded-circle px-2 py-1">
+                                                            {{ Auth::user()->unreadNotifications->count() }}
+                                                        </span>
+                                                        <i class="fa fa-bell notification-icon ml-2" aria-hidden="true" style="font-size: 1.5rem;"></i>
                                                     </a>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown" style="width: 350px;">
+                                                    <div class="dropdown-menu dropdown-menu-right shadow-lg border-0" aria-labelledby="notificationDropdown" style="width: 350px; border-radius: 10px; overflow: hidden;">
                                                         <div class="main-message-list chat-scroll">
+                                                            
+                                                            <!-- هيدر الإشعارات -->
                                                             <div class="menu-header-content bg-primary text-right p-3">
-                                                                <div class="d-flex">
-                                                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الإشعارات</h6>
-                                                                    <span class="badge badge-pill badge-warning ml-auto my-auto">
-                                                                        <a href="{{ route('notification.markall') }}" class="text-white">قراءة الكل</a>
-                                                                    </span>
+                                                                <div class="d-flex align-items-center">
+                                                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold flex-grow-1">الإشعارات</h6>
+                                                                    <a href="{{ route('notification.markall') }}" class="badge badge-warning text-white px-2 py-1">قراءة الكل</a>
                                                                 </div>
                                                                 <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12">
                                                                     عدد الإشعارات غير المقروءة: {{ Auth::user()->unreadNotifications->count() }}
                                                                 </p>
                                                             </div>
-                                                            <div class="main-notification-list Notification-scroll p-2">
+                                        
+                                                            <!-- قائمة الإشعارات -->
+                                                            <div class="main-notification-list Notification-scroll p-2" style="max-height: 300px; overflow-y: auto;">
                                                                 @foreach (Auth::user()->unreadNotifications as $not)
-                                                                    <a class="d-flex p-3 border-bottom align-items-center" href="{{ route('show_single_product', $not->data['pro_id']) }}">
-                                                                        <div class="notifyimg bg-pink">
-                                                                            <i class="la la-file-alt text-white"></i>
+                                                                    <a class="d-flex p-3 border-bottom align-items-center notification-item" href="{{ route('show_single_product', $not->data['pro_id']) }}" style="transition: background 0.3s;">
+                                                                        <div class="notifyimg bg-pink d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px;">
+                                                                            <i class="la la-file-alt text-white" style="font-size: 1.2rem;"></i>
                                                                         </div>
                                                                         <div class="ml-3">
-                                                                            <h5 class="notification-label mb-1">منتج جديد {{ $not->data['product'] }}</h5>
-                                                                            <div class="notification-subtext text-muted">{{ $not->created_at }}</div>
+                                                                            <h5 class="notification-label mb-1 font-weight-bold text-dark">منتج جديد: {{ $not->data['product'] }}</h5>
+                                                                            <div class="notification-subtext text-muted" style="font-size: 0.85rem;">{{ $not->created_at->diffForHumans() }}</div>
                                                                         </div>
                                                                     </a>
                                                                 @endforeach
                                                             </div>
-                                                            <div class="dropdown-footer text-center p-2">
-                                                                <a href="" class="text-primary">عرض الكل</a>
+                                        
+                                                            <!-- الفوتر -->
+                                                            <div class="dropdown-footer text-center p-2 bg-light">
+                                                                <a href="#" class="text-primary font-weight-bold">عرض الكل</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                         
                                         <!-- 🛒 أيقونة سلة المشتريات -->
                                         <a class="shopping-cart" href="{{ route('show_basket') }}">

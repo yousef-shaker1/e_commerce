@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('clothingproducts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->json('name');
             $table->string('img')->nullable();
-            $table->text('description');
+            $table->json('description');
             $table->string('price');
-            $table->string('type', 50);
+            $table->json('type', 50);
             $table->foreignId('section_id')->constrained('clothingsections')->cascadeOnDelete();
             $table->timestamps();
         });

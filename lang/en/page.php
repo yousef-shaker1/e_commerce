@@ -34,6 +34,7 @@ return [
   'support_desc' => 'Get support all day',
   'refund_title' => 'Refund',
   'refund_desc' => 'Get refund within 3 days!',
+  'search' => 'search',
 
   'our' => 'Our',
   'products' => 'Products',

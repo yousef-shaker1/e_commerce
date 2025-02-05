@@ -63,7 +63,7 @@ return [
   'Product_Price' => 'سعر المنتج',
   'Total' => 'المجموع',
   'Order_Status' => 'حالة الاوردر',
-
+  'search' => 'ابحث',
   'Opinion_Request' => 'يرجى كتابة رأيك حول استخدام الموقع:',
   'Message' => 'رسالة',
   'Submit' => 'إرسال',

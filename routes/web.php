@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Livewire;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -18,7 +19,7 @@ use App\Http\Controllers\clothing_productController;
 use App\Http\Controllers\clothing_sectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 //+++++++++++++++++++++++userpage++++++++++++++++++++++++++++++++++++
 Route::resource('/customer',CustomerController::class);
+
 
 Route::group(
     [
@@ -51,14 +53,14 @@ Route::group(
             Route::get('/Previousorders', 'Previousorders')->name('Previousorders')->middleware('auth');
             Route::Post('/mesage_customer', 'mesage_customer')->name('mesage_customer')->middleware('auth');
             //product
-            Route::get('/section/viewproduct/{id}', 'section_viewproduct')->name('section_product_view');
-            Route::get('/viewproduct/{id}', 'viewsingleproduct')->name('product_view');
+            // Route::get('/section/viewproduct/{id}', 'section_viewproduct')->name('section_product_view');
+            Route::get('/section/viewproduct/{id}/{search?}','section_viewproduct')->name('section_product_view');
+            Route::get('/viewproduct/{id}', 'viewsingleproduct')->middleware('auth')->name('product_view');
             //clothing_product
             Route::get('/clothingsection/product_view/{id}', 'clothing_section_viewproduct')->name('clothing_section_product_view');
-            Route::get('/clothingproduct_view/{id}', 'clothing_viewproduct')->name('clothing_product_view');
+            Route::get('/clothingproduct_view/{id}', 'clothing_viewproduct')->middleware('auth')->name('clothing_product_view');
             
         });
-        
     });
     
 //basket

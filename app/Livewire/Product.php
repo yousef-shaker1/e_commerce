@@ -48,7 +48,6 @@ class Product extends Component
         $this->resetPage();
     }
 
-
     public function rules()
     {
         return [

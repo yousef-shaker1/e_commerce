@@ -117,11 +117,19 @@ class UserpageController extends Controller
     }
     
 
-    public function section_viewproduct($id)
+    public function section_viewproduct(Request $request, $id)
     {
-    // $products = product::where('section_id', $id)->get();
-    $section = section::where('id', $id)->first();
-    return view('user_page.view_product', compact('section'));
+        $query = $request->input('search');
+        $products = Product::where('section_id', $id)
+            ->where(function ($q) use ($query) {
+                $q->where('name->ar', 'LIKE', "%{$query}%")
+                    ->orWhere('name->en', 'LIKE', "%{$query}%")
+                    ->orWhere('description->ar', 'LIKE', "%{$query}%")
+                    ->orWhere('description->en', 'LIKE', "%{$query}%");
+            })
+            ->paginate(10);
+            $section = section::where('id', $id)->first();
+        return view('user_page.view_product', compact('products', 'section'));
     }
         
     public function viewsingleproduct($id)

@@ -11,7 +11,10 @@ class Colors extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $id;
-    public $name;
+    public $name = [
+        'ar' => '',
+        'en' => ''
+    ];
     public $search;
     public function render()
     {
@@ -26,7 +29,7 @@ class Colors extends Component
 
     public function rules(){
         return [
-            'name' => 'required|min:1|max:30',
+            'name.*' => 'required|min:1|max:30',
         ];
     }
     

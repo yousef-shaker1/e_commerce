@@ -28,31 +28,31 @@
     </div>
 
     @if ($price)
-        <h4 class="text-success">Price: {{ $price }}$</h4>
+        <h4 class="text-success">{{ __('page.price') }}: {{ $price }}$</h4>
     @else
-        <h4 class="text-success">Price: {{ $product->price }}$</h4>
+        <h4 class="text-success">{{ __('page.price') }}: {{ $product->price }}$</h4>
     @endif
 
     @if ($price)
         <div class="alert alert-info mt-3 d-flex align-items-center" role="alert">
             <i class="bi bi-info-circle-fill me-2"></i>
-            <span>السعر تم تغييره بناءً على المقاس الذي اخترته.</span>
+            <span>{{ __('page.change_price') }}</span>
         </div>
     @else
         <div class="alert alert-warning mt-3 d-flex align-items-center" role="alert">
             <i class="bi bi-exclamation-circle-fill me-2"></i>
-            <span>يرجى اختيار مقاس لتحديد السعر المحدد.</span>
+            <span>{{ __('page.select_size')  }}</span>
         </div>
         @endif
 
     @if ($amount == 0 && $selectedSize == true)
-        <h4 class="text-danger">Out of stock</h4>
+        <h4 class="text-danger">{{ __('page.stoke') }}</h4>
     @endif
     @if($check_color)
 
     <!-- الألوان -->
     <div class="colors-section mt-4">
-        <h5 class="mb-3">الألوان المتاحة:</h5>
+        <h5 class="mb-3">{{ __('page.color_now') }}</h5>
         <div class="d-flex flex-wrap justify-content-start">
             @foreach ($colors as $color)
                 <div class="color-thumbnail text-center mx-2">
@@ -70,9 +70,9 @@
     </div>
     <!-- المقاسات -->
     <div class="form-group mt-4">
-        <h5 class="mb-3">اختيار المقاس:</h5>
+        <h5 class="mb-3">{{ __('page.choose_size') }}:</h5>
         <select wire:model.live="selectedSize" class="form-control custom-select" id="product_size" name="product_size">
-            <option value="">من فضلك اختار مقاس</option>
+            <option value="">{{ __('page.plase_choose_size') }}</option>
             @foreach ($sizes as $size)
                 <option value="{{ $size->id }}">{{ $size->size }}</option>
             @endforeach
@@ -82,9 +82,9 @@
 
     @else
     <div class="form-group mt-4">
-        <h5 class="mb-3">اختيار المقاس:</h5>
+        <h5 class="mb-3">{{ __('page.choose_size') }}:</h5>
         <select wire:model.live="selectedSize" class="form-control custom-select" id="product_size" name="product_size">
-            <option value="">من فضلك اختار مقاس</option>
+            <option value="">{{ __('page.plase_choose_size') }}</option>
             @foreach ($relationSizes as $size)
                 <option value="{{ $size->size->id }}">{{ $size->size->size }}</option>
             @endforeach
@@ -101,32 +101,32 @@
                 wire:click="addToBasket" 
                 id="add_to_basket"
                 wire:disabled="!selectedColor || !selectedSize">
-                    إضافة إلى السلة
+                    {{ __('page.add_to_car') }}
                 </a>
                 <a class="btn btn-primary btn-block" 
                 wire:click="OrderNow" 
                 id="ordernow"
                 wire:disabled="!selectedColor || !selectedSize">
-                    اطلب الان
+                    {{ __("page.order_now") }}
                 </a>
             @else
             <a class="btn btn-primary btn-block" 
             wire:click="add_To_Basket" 
             id="add_to_basket">
-                إضافة إلى السلة
+                {{ __('page.add_to_car') }}
             </a>
             <a class="btn btn-primary btn-block" 
             wire:click="Order_Now" 
             id="order_now">
-                اطلب الان
+                {{ __("page.order_now") }}
             </a>
             @endif
         @else
-            <a class="btn btn-primary btn-block" href="{{ route('login') }}">من فضلك سجل الدخول</a>
+            <a class="btn btn-primary btn-block" href="{{ route('login') }}">{{ __('page.login_please') }}</a>
         @endif
         <a href="{{ route('clothing_section_product_view', $product->section->id) }}"
             class="btn btn-secondary btn-block mt-2">
-            عودة إلى الصفحة السابقة
+            {{ __('page.back_to_page') }}
         </a>
     </div>
 </br>

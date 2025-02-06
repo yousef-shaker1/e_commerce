@@ -13,12 +13,21 @@
                 <form wire:submit.prevent="saveProduct">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>Name</label>
-                            <input type="text" wire:model.live="name" class="form-control">
-                            @error('name')
+                            <label>Name-ar</label>
+                            <input type="text" wire:model.live="name.ar" class="form-control">
+                            @error('name.ar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        
+                        <div class="mb-3">
+                            <label>Name-en</label>
+                            <input type="text" wire:model.live="name.en" class="form-control">
+                            @error('name.en')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label>Image</label>
                             <input type="file" wire:model.live="img" class="form-control">
@@ -27,9 +36,17 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label>Description</label>
-                            <input type="text" wire:model.live="description" class="form-control">
-                            @error('description')
+                            <label>Description-ar</label>
+                            <input type="text" wire:model.live="description.ar" class="form-control">
+                            @error('description.ar')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label>Description-en</label>
+                            <input type="text" wire:model.live="description.en" class="form-control">
+                            @error('description.en')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -42,13 +59,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="type">type</label>
-                            <select wire:model.live="type" class="form-control" required>
+                            <select wire:model.live="type.ar" class="form-control" required>
                                 <option value="" selected> -select type-</option>
                                 <option value="رجالي">رجالي</option>
                                 <option value="حريمي">حريمي</option>
                                 <option value="اطفالي">اطفالي</option>
                             </select>
-                            @error('type')
+                            @error('type.ar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -89,12 +106,21 @@
                 <form wire:submit.prevent="updateProduct">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label>Name</label>
-                            <input type="text" wire:model.live="name" class="form-control">
-                            @error('name')
+                            <label>Name-ar</label>
+                            <input type="text" wire:model.live="name.ar" class="form-control">
+                            @error('name.ar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        
+                        <div class="mb-3">
+                            <label>Name-en</label>
+                            <input type="text" wire:model.live="name.en" class="form-control">
+                            @error('name.en')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label for="current_img" class="col-form-label">currency image:</label>
                             <br><br>
@@ -120,9 +146,17 @@
                         </div>
 
                         <div class="mb-3">
-                            <label>Description</label>
-                            <input type="text" wire:model.live="description" class="form-control">
-                            @error('description')
+                            <label>Description-ar</label>
+                            <input type="text" wire:model.live="description.ar" class="form-control">
+                            @error('description.ar')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label>Description-en</label>
+                            <input type="text" wire:model.live="description.en" class="form-control">
+                            @error('description.en')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -136,14 +170,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label>type</label>
-                            <select wire:model.live="type" class="form-control" required>
-                                <option value="" selected disabled> -select type-</option>
+                            <label for="type">type</label>
+                            <select wire:model.live="type.ar" class="form-control" required>
+                                <option value="" selected> -select type-</option>
                                 <option value="رجالي">رجالي</option>
                                 <option value="حريمي">حريمي</option>
                                 <option value="اطفالي">اطفالي</option>
                             </select>
-                            @error('type')
+                            @error('type.ar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

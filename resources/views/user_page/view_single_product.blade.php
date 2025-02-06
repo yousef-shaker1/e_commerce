@@ -74,10 +74,11 @@
 
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="breadcrumb-text">
-        <p>منتجات طازجة وعالية الجودة</p>
+        <p>{{ __('page.Premium_and_Organic') }}</p>
         <h1>{{ $product->name }}</h1>
     </div>
 </div>
+
 @if (session()->has('Add'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{ session()->get('Add') }}</strong>
@@ -89,7 +90,6 @@
 
 <div class="container mt-5">
     <div class="row">
-        <!-- صورة المنتج والمواصفات -->
         <div class="col-md-8 text-center">
             <a href="{{ Storage::url($product->img) }}">
                 <img src="{{ Storage::url($product->img) }}" alt="صورة المنتج" class="product-img img-fluid mb-4" style="max-width: 300px;">
@@ -104,13 +104,13 @@
             <div class="card shadow-lg">
                 <div class="card-body text-center">
                     @if(App\Models\basket::where('customer_id', Auth::user()->id)->where('product_id', $product->id)->exists())
-                    <a href="{{ route('show_single_basket', $product->id) }}" class="btn btn-custom-primary btn-block mb-3">اطلب الان</a>
+                    <a href="{{ route('show_single_basket', $product->id) }}" class="btn btn-custom-primary btn-block mb-3">{{ __('page.order_now') }}</a>
                     @elseif(Auth::check())
-                    <a href="{{ route('add_basket', $product->id) }}" class="btn btn-custom-primary btn-block mb-3">إضافة إلى السلة</a>
+                    <a href="{{ route('add_basket', $product->id) }}" class="btn btn-custom-primary btn-block mb-3">{{ __('page.add to cart') }}</a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-custom-primary btn-block mb-3">سجل الدخول للشراء</a>
+                        <a href="{{ route('login') }}" class="btn btn-custom-primary btn-block mb-3">{{ __('page.login_to_buy') }}</a>
                     @endif
-                    <a href="{{ route('section_product_view', $product->section->id) }}" class="btn btn-custom-secondary btn-block">عودة للصفحة السابقة</a>
+                    <a href="{{ route('section_product_view', $product->section->id) }}" class="btn btn-custom-secondary btn-block">{{ __('page.back_to_page') }}</a>
                 </div>
             </div>
         </div>

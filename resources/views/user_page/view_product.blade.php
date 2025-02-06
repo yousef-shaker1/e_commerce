@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-    Shop
+    {{ __('page.Shop') }}
 @endsection
 
 @section('css')
@@ -40,8 +40,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                    <p>Fresh and Organic</p>
-                    <h1>Shop</h1>
+                    <h1>{{ __('page.Shop') }}</h1>
                 </div>
             </div>
         </div>
@@ -64,7 +63,7 @@
             <div class="col-md-6">
                 <form action="{{ route('section_product_view', $section->id) }}" method="GET">
                     <div class="input-group shadow-sm">
-                        <input type="text" name="search" id="search-input" class="form-control" placeholder="ابحث عن المنتجات...">
+                        <input type="text" name="search" id="search-input" class="form-control" placeholder="{{ __('page.search_product') }}">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-search"></i> {{ __('page.search') }}
                         </button>

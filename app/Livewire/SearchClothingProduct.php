@@ -16,7 +16,7 @@ class SearchClothingProduct extends Component
     protected $paginationTheme = 'bootstrap';
 
     public function render()
-    {
+    { 
         // Query with sectionId, search and filter
         $clothing_products = ClothingProduct::where('section_id', $this->sectionId)
             ->where(function($query) {
@@ -24,7 +24,7 @@ class SearchClothingProduct extends Component
                       ->orWhere('description', 'like', "%{$this->search}%");
             })
             ->when($this->filter !== 'all', function($query) {
-                $query->where('type', $this->filter);
+                $query->whereJsonContains('type->' . 'ar', $this->filter);
             })
             ->paginate(5);
 

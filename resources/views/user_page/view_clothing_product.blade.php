@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-    shop
+{{ __('page.Shop') }}
 @endsection
 
 @section('css')
@@ -21,8 +21,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Fresh and Organic</p>
-                        <h1>Shop</h1>
+                        <h1>{{ __('page.Shop') }}</h1>
                     </div>
                 </div>
             </div>
@@ -35,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="section-title">
-                        <h3><span class="orange-text">Our</span> Products: {{ $clothing_section->name }}</h3>
+                        <h3><span class="orange-text">{{ __('page.our') }}</span> {{ __('page.products') }}: {{ $clothing_section->name }}</h3>
                     </div>
                 </div>
             </div>

@@ -52,8 +52,8 @@ return [
     |
     */
 
-// 'asset_url' => env('APP_URL', 'http://127.0.0.1:8000'), // استخدام متغير بيئة
-    'lazy_placeholder' => null,
+// 'asset_url' => env('APP_URL', 'http://127.0.0.1:8000') . '/' . app()->getLocale(),
+'lazy_placeholder' => null,
 
     /*
     |---------------------------------------------------------------------------

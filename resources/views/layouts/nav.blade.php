@@ -102,11 +102,11 @@
                         
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-globe"></i> {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                            <i class="fas fa-globe"></i> {{ session()->get('locale') == 'en' ? 'English' : 'Arabic' }}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="languageDropdown">
                                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                <a class="dropdown-item" href="{{ route('change.locale', $localeCode) }}">
                                                     {{ $properties['native'] }}
                                                 </a>
                                             @endforeach

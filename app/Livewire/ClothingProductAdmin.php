@@ -15,18 +15,34 @@ class ClothingProductAdmin extends Component
     use WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $id;
-    public $name;
+    public $name = [
+        'ar' => '',
+        'en' => ''
+    ];
+    public $description = [
+        'ar' => '',
+        'en' => ''
+    ];
+    public $type = [
+        'ar' => '',
+        'en' => ''
+    ];
     public $img;
-    public $description;
     public $price;
     public $amount;
     public $section_id;
-    public $type;
     public $search;
     
     public function render()
     {
-        $products = clothingproduct::where('name', 'like', "%{$this->search}%")->orwhere('description', 'like', "%{$this->search}%")->paginate(10);
+        $products = clothingproduct::with('section')
+        ->where(function ($query) {
+            $query->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.ar')) LIKE ?", ["%{$this->search}%"])
+                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.en')) LIKE ?", ["%{$this->search}%"])
+                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(description, '$.ar')) LIKE ?", ["%{$this->search}%"])
+                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(description, '$.en')) LIKE ?", ["%{$this->search}%"]);
+        })
+        ->paginate(10);
         $sections = clothingsection::all();
         return view('livewire.clothing-product-admin', compact('products', 'sections'));
     }
@@ -40,10 +56,11 @@ class ClothingProductAdmin extends Component
     {
         return [
             'img' => 'required|image',
-            'name' => 'required|min:2|max:20',
-            'description' => 'required|min:5|max:100',
+            'name.*' => 'required|min:2|max:20',
+            'description.*' => 'required|min:5|max:100',
             'price' => 'required',
-            'type' => 'required',
+            'type.en' => 'nullable',
+            'type.ar' => 'required',
             'section_id' => 'required|exists:sections,id',
         ];    
     }
@@ -52,10 +69,11 @@ class ClothingProductAdmin extends Component
     {
         return [
             'img' => 'nullable',
-            'name' => 'nullable|min:2|max:20',
-            'description' => 'nullable|min:5|max:100',
+            'name.*' => 'nullable|min:2|max:20',
+            'description.*' => 'nullable|min:5|max:100',
             'price' => 'nullable',
-            'type' => 'nullable',
+            'type.en' => 'nullable',
+            'type.ar' => 'nullable',
             'section_id' => 'nullable',
         ];
     }
@@ -71,11 +89,11 @@ class ClothingProductAdmin extends Component
         if($product){
             $this->id = $product->id;
             $this->img = $product->img;
-            $this->name = $product->name;
-            $this->type = $product->type;
+            $this->name = $product->getTranslations('name');
+            $this->type = $product->getTranslations('type');
             $this->section_id = $product->product_id;
             $this->price = $product->price;
-            $this->description = $product->description;
+            $this->description = $product->getTranslations('description');
         } else {
             return redirect()->back();
         }
@@ -95,8 +113,15 @@ class ClothingProductAdmin extends Component
 
     public function saveProduct(){
         $validateData = $this->validate();
-        $path = $this->img->store('product', 'public');
-
+        $path = $this->img->store('clothingproduct', 'public');
+        
+        if($validateData['type']['ar'] == 'رجالي'){
+            $validateData['type']['en'] = 'man';
+        } elseif ($validateData['type']['ar'] == 'حريمي'){
+            $validateData['type']['en'] = 'women';
+        } elseif($validateData['type']['ar'] == 'اطفالي'){
+            $validateData['type']['en'] = 'children';
+        }
         clothingproduct::create([
             'img' => $path, 
             'name' => $validateData['name'],
@@ -121,7 +146,7 @@ class ClothingProductAdmin extends Component
             }
     
             // Store the new image
-            $path = $this->img->store('product', 'public');
+            $path = $this->img->store('clothingproduct', 'public');
             $product->img = $path;
         }
         
@@ -130,6 +155,13 @@ class ClothingProductAdmin extends Component
 
         $product->price = $validator['price'];
         $product->description = $validator['description'];
+        if($validator['type']['ar'] == 'رجالي'){
+            $validator['type']['en'] = 'man';
+        } elseif ($validator['type']['ar'] == 'حريمي'){
+            $validator['type']['en'] = 'women';
+        } elseif($validator['type']['ar'] == 'اطفالي'){
+            $validator['type']['en'] = 'children';
+        }
         $product->type = $validator['type'];
         $product->section_id = $validator['section_id'] ?? $product->section_id;
         $product->save();

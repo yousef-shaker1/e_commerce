@@ -19,7 +19,7 @@ use App\Http\Controllers\clothing_productController;
 use App\Http\Controllers\clothing_sectionController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
- 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,20 +32,25 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 //+++++++++++++++++++++++userpage++++++++++++++++++++++++++++++++++++
-Route::resource('/customer',CustomerController::class);
+Route::resource('/customer', CustomerController::class);
+
+    Route::get('/change-locale/{locale}', function ($locale) {
+        $supportedLocales = config('laravellocalization.supportedLocales');
+        if (array_key_exists($locale, $supportedLocales)) {
+            session(['locale' => $locale]);
+        }
+
+        return redirect()->back();
+    })->name('change.locale');
 
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){ 
-        
-        Route::controller(UserpageController::class)->group(function(){
+    Route::middleware(['web', 'set.locale','localizationRedirect', 'localeViewPath'])->group(function () {
+
+        Route::controller(UserpageController::class)->group(function () {
             Route::get('/', 'index')->name('home');
             Route::get('/about', 'about')->name('about');
-            Route::get('/shop','shop')->name('shop');
-            Route::get('/contact','contact')->name('contact');
+            Route::get('/shop', 'shop')->name('shop');
+            Route::get('/contact', 'contact')->name('contact');
             Route::get('/bestseller', 'bestseller')->name('bestseller');
             Route::get('/notification/markall', 'markall')->name('notification.markall');
             Route::get('/show_single_product/{id}', 'show_single_product')->name('show_single_product');
@@ -54,17 +59,16 @@ Route::group(
             Route::Post('/mesage_customer', 'mesage_customer')->name('mesage_customer')->middleware('auth');
             //product
             // Route::get('/section/viewproduct/{id}', 'section_viewproduct')->name('section_product_view');
-            Route::get('/section/viewproduct/{id}/{search?}','section_viewproduct')->name('section_product_view');
+            Route::get('/section/viewproduct/{id}/{search?}', 'section_viewproduct')->name('section_product_view');
             Route::get('/viewproduct/{id}', 'viewsingleproduct')->middleware('auth')->name('product_view');
             //clothing_product
             Route::get('/clothingsection/product_view/{id}', 'clothing_section_viewproduct')->name('clothing_section_product_view');
             Route::get('/clothingproduct_view/{id}', 'clothing_viewproduct')->middleware('auth')->name('clothing_product_view');
-            
         });
     });
-    
+
 //basket
-Route::controller(BasketController::class)->group(function(){
+Route::controller(BasketController::class)->group(function () {
     Route::get('/show_basket', 'show_basket')->name('show_basket')->middleware('auth');
     Route::get('/add_basket/{id}', 'add_basket')->name('add_basket');
     Route::get('/show_single_basket/{id}', 'show_single_basket')->name('show_single_basket');
@@ -91,7 +95,7 @@ Route::get('/cancel_clothing', [ClothingOrderController::class, 'cancel_clothing
 
 //=====================adminpage=========================
 
-Route::get('/dashboard', [UserpageController::class, 'dashboard'])->middleware(['auth', 'verified','Is_admin'])->name('dashboard');
+Route::get('/dashboard', [UserpageController::class, 'dashboard'])->middleware(['auth', 'verified', 'Is_admin'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -100,7 +104,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/all_customer', [CustomerController::class, 'allcustomer'])->name('all_customer');
-    
+
 Route::resource('/section', SectionController::class);
 Route::resource('/product', ProductController::class);
 Route::resource('/colthingsection', clothing_sectionController::class);
@@ -119,7 +123,7 @@ Route::resource('/order', OrderController::class);
 Route::get('/show_message', [OrderController::class, 'show_message'])->name('show_message');
 Route::delete('/del_massage/{id}', [OrderController::class, 'del_massage'])->name('del_massage');
 
-Route::controller(ClothingOrderController::class)->group(function(){
+Route::controller(ClothingOrderController::class)->group(function () {
     Route::get('/clothing_order', 'index')->name('clothing_order');
 });
 
@@ -128,8 +132,8 @@ Route::get('/show_color_product/{id}', [ColorController::class, 'show_color_prod
 Route::get('/view_size_and_price/{id}', [ColorController::class, 'view_size_and_price'])->name('view_size_and_price');
 
 //permission
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

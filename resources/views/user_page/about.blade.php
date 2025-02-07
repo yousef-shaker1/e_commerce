@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-about
+{{ __('page.about') }}
 @endsection
 
 @section('css')
@@ -13,9 +13,9 @@ about
   width: 100%;
   height: 100%;
   content: "";
-  background-image: url("/assets/img/about3.png"); /* تأكد من أن المسار صحيح */
-  background-size: cover; /* تجعل الصورة تغطي العنصر بالكامل */
-  background-position: center; /* تضبط الصورة في المركز */
+  background-image: url("/assets/img/about3.png"); 
+  background-size: cover; 
+  background-position: center; 
   z-index: -1;
   opacity: 0.8;
 }

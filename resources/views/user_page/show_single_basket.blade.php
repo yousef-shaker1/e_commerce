@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-شراء المنتج
+{{ __('page.buy_product') }}
 @endsection
 
 @section('css')
@@ -48,7 +48,7 @@
         background-color: #7f8c8d;
         border-color: #7f8c8d;
     } 
-    </style>
+</style>
 
 @endsection
 
@@ -61,8 +61,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                    <p>We sale fresh fruits</p>
-                    <h1>About Us</h1>
+                    <h1>{{ __('page.buy_product') }}</h1>
                 </div>
             </div>
         </div>
@@ -106,16 +105,16 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
-            <h2>Shopping Cart</h2>
+            <h2>{{ __('page.Shopping_Cart') }}</h2>
             <div class="card mb-3">
                 <div class="card-body">
                     <table class="table table-hover">
           <thead>
             <tr>
-                <th>Image</th>
-              <th>Product name</th>
-              <th>description</th>
-              <th>Price</th>
+                 <th>{{ __('page.image') }}</th>
+                <th>{{ __('page.product_name') }}</th>
+                <th>{{ __('page.description') }}</th>
+                <th>{{ __('page.price') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -139,16 +138,16 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Cart Summary</h5>
+                    <h5 class="card-title">{{ __('page.order_now') }}</h5>
                     <form action="{{ route('send_order', $product->id) }}" method="POST" id="payment-form">
                         @csrf
                         <input type="hidden" id="id" name="id" value="{{ $product->id }}">
                         <div class="form-group">
-                            <label for="date">تاريخ وصول المنتج</label>
+                            <label for="date">{{ __('page.Delivery_Date') }}</label>
                             <input type="date" class="form-control" id="date" name="date" value="{{ $product->date }}" >
                         </div>
                         <div class="form-group">
-                            <label for="quantity">عدد المنتجات</label>
+                            <label for="quantity">{{ __('page.Quantity') }}</label>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -165,8 +164,8 @@
                         <div class="form-group">
                             <div>اجمالي المبلغ : <span id="total">${{ $product->price }} </span></div>
                         </div>
-                        <button type='submit' class="btn btn-primary btn-block">الدفع باستخدام سترايب</button>
-                        <a href="{{ route('show_basket') }}" class="btn btn-primary btn-block">عودة الي الصفحة السابقة</a>
+                        <button type='submit' class="btn btn-primary btn-block">{{ __('page.pay_stripe') }}</button>
+                        <a href="{{ route('show_basket') }}" class="btn btn-primary btn-block">{{ __('page.back_to_page') }}</a>
                     </form>
                     
                 </div>
@@ -179,9 +178,6 @@
 
 @section('js')
 <script src="https://checkout.stripe.com/checkout.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
     function changeQuantity(amount) {

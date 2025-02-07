@@ -55,7 +55,7 @@ class ClothingOrderController extends Controller
             $size_product = null;
             $size_product_amount = 0;
             if ($request->count > $size->amount) {
-                return back()->withErrors('الكمية المطلوبة تتجاوز الحد المتاح للمقاس.');//منغير اللوان
+                return back()->withErrors(__('page.quantity_available'));//منغير اللوان
             }
         } else {
             $size_product = Color_Size::where('color_product_id', $color_product->id)
@@ -63,7 +63,7 @@ class ClothingOrderController extends Controller
                 ->first();
             $size_product_amount = $size_product->amount;
             if ($request->count > $size_product->amount) { 
-                return back()->withErrors('الكمية المطلوبة تتجاوز الحد المتاح للمقاس.');
+                return back()->withErrors(__('page.quantity_available'));
             }
 
         }
@@ -124,7 +124,7 @@ class ClothingOrderController extends Controller
 
             // تحقق إذا كان الطلب موجودًا
             if (!$clothingorder) {
-                session()->flash('error', 'لم يتم العثور على الطلب.');
+                session()->flash('error', __('page.not_order'));
                 return redirect()->back();
             }
 
@@ -146,21 +146,21 @@ class ClothingOrderController extends Controller
         } catch (\Exception $e) {
             // إذا حدث خطأ، سيتم تسجيله ويمكنك عرض رسالة خطأ مناسبة
             Log::error('Error generating invoice: ' . $e->getMessage());
-            session()->flash('error', 'حدث خطأ أثناء توليد الفاتورة.');
+            session()->flash('error', __('page.error_invoice'));
             return redirect()->back();
         }
     }
 
     public function cancel_clothing()
     {
-        session()->flash('cancel', 'فشلت عملية الدفع');
+        session()->flash('cancel', __('page.error_payment'));
         return redirect()->back();
     }
 
     public function status1($id)
     {
         clothingorder::find($id)->update([
-            'status' => 'قبول',
+            'status' => __('page.accepted'),
         ]);
         return redirect()->back();
     }
@@ -168,7 +168,7 @@ class ClothingOrderController extends Controller
     public function status2($id)
     {
         clothingorder::find($id)->update([
-            'status' => 'رفض',
+            'status' => __('page.rejected'),
         ]);
         return redirect()->back();
     }
@@ -176,14 +176,14 @@ class ClothingOrderController extends Controller
     public function status3($id)
     {
         clothingorder::find($id)->update([
-            'status' => 'اتمام',
+            'status' => __('page.completion'),
         ]);
         return redirect()->back();
     }
     public function destory(Request $request, $id)
     {
         clothingorder::where('id', $request->id)->delete();
-        session()->flash('delete', 'تم حذف الاوردر بنجاح');
+        session()->flash('delete', __('page.delete_order'));
         return redirect()->back();
     }
 }

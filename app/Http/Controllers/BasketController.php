@@ -30,7 +30,7 @@ class BasketController extends Controller
             'customer_id' => $customer->id,
             'product_id' => $id,
         ]);
-        session()->flash('Add', 'تم اضافة الاوردر الي السلة بنجاح');
+        session()->flash('Add', __('page.order_add_to_cart'));
         return redirect()->back();
     }
     

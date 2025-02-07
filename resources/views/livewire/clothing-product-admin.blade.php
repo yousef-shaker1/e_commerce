@@ -100,7 +100,9 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="10" class="text-center">No products found</td>
+                    <td colspan="10" class="text-center table-warning text-white fw-bold py-3 border">
+                        <strong>{{ __('page.no_product') }}</strong>
+                    </td>
                 </tr>
             @endforelse
         </tbody>

@@ -88,7 +88,7 @@ class OrderController extends Controller
 
             return redirect()->away($session->url);
         } else {
-            session()->flash('error', 'للاسف الكمية غير متاحة ');
+            session()->flash('error', __('page.quantity_not_available'));
             return redirect()->back();
         }
     }
@@ -105,7 +105,7 @@ class OrderController extends Controller
 
             // تحقق إذا كان الطلب موجودًا
             if (!$order) {
-                session()->flash('error', 'لم يتم العثور على الطلب.');
+                session()->flash('error', __('page.not_order'));
                 return redirect()->back();
             }
 
@@ -127,13 +127,13 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             // إذا حدث خطأ، سيتم تسجيله ويمكنك عرض رسالة خطأ مناسبة
             Log::error('Error generating invoice: ' . $e->getMessage());
-            session()->flash('error', 'حدث خطأ أثناء توليد الفاتورة.');
+            session()->flash('error', __('page.error_invoice'));
             return redirect()->back();
         }
     }
     public function cancel()
     {
-        session()->flash('cancel', 'فشلت عملية الدفع');
+        session()->flash('cancel', __('page.error_payment'));
         return redirect()->back();
     }
 
@@ -181,7 +181,7 @@ class OrderController extends Controller
     public function del_massage(Request $request, $id)
     {
         $messages = message::where('id', $request->id)->delete();
-        session()->flash('delete', 'تم حذف التعليق بنجاح');
+        session()->flash('delete', __('page.delete_commit'));
         return redirect()->back();
     }
 }

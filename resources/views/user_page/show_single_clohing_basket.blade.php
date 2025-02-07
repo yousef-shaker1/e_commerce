@@ -1,7 +1,7 @@
 @extends('layouts.empty')
 
 @section('title')
-    شراء المنتج
+    {{ __('page.buy_product') }}
 @endsection
 
 @section('css')
@@ -58,8 +58,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>We sale fresh fruits</p>
-                        <h1>About Us</h1>
+                        <h1>{{ __('page.buy_product') }}</h1>
                     </div>
                 </div>
             </div>
@@ -104,18 +103,18 @@
     <div class="row">
         <!-- Cart Items -->
         <div class="col-lg-8">
-            <h2 class="mb-4">Shopping Cart</h2>
+            <h2 class="mb-4">{{ __('page.Shopping_Cart') }}</h2>
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                     <table class="table table-bordered align-middle text-center">
                         <thead class="table-primary">
                             <tr>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th>Description</th>
-                                <th>Size</th>
-                                <th>Color</th>
-                                <th>Price</th>
+                                <th>{{ __('page.image') }}</th>
+                                <th>{{ __('page.product_name') }}</th>
+                                <th>{{ __('page.description') }}</th>
+                                <th>{{ __('page.size') }}</th>
+                                <th>{{ __('page.color') }}</th>
+                                <th>{{ __('page.price') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,7 +137,7 @@
                                         <br>
                                         <span class="badge bg-secondary mt-2">{{ $color_product->color->name }}</span>
                                     @else
-                                        <span class="text-muted">No color available</span>
+                                        <span class="text-muted">{{__('page.color_available')}}</span>
                                     @endif
                                 </td>
                                 <td>
@@ -159,17 +158,17 @@
         <div class="col-lg-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Cart Summary</h5>
+                    <h5 class="card-title text-center">{{ __('page.order_now') }}</h5>
                     <form action="{{ route('send_clothing_order', $clothingproduct->id) }}" method="POST" id="payment-form">
                         @csrf
                         <input type="hidden" id="id" name="id" value="{{ $clothingproduct->id }}">
                         <div class="form-group mb-3">
-                            <label for="date" class="form-label">Delivery Date</label>
+                            <label for="date" class="form-label">{{ __('page.Delivery_Date') }}</label>
                             <input type="date" class="form-control" id="date" name="date" value="{{ $clothingproduct->date }}">
                             <input type="hidden" class="form-control" id="size" name="size" value="{{ $size->size }}">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="quantity" class="form-label">Quantity</label>
+                            <label for="quantity" class="form-label">{{ __('page.Quantity') }}</label>
                             <div class="input-group">
                                 <button class="btn btn-outline-primary" type="button" onclick="changeQuantity(-1)">-</button>
                                 <span id="quantity" class="form-control text-center quantity-value">1</span>
@@ -179,12 +178,12 @@
                         </div>
                         <div class="form-group mb-3">
                             <div class="d-flex justify-content-between">
-                                <span>Total:</span>
-                                <span id="total" class="fw-bold text-success">${{ $clothingproduct->price }}</span>
+                                <span>{{ __('page.Total') }}:</span>
+                                <span id="total" class="fw-bold text-success">$ {{ $clothingproduct->price }}</span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block mb-3">Pay with Stripe</button>
-                        <a href="{{ route('show_basket') }}" class="btn btn-outline-secondary btn-block">Back to Previous Page</a>
+                        <button type="submit" class="btn btn-primary btn-block mb-3">{{ __('page.pay_stripe') }}</button>
+                        <a href="{{ route('show_basket') }}" class="btn btn-outline-secondary btn-block">{{ __('page.back_to_page') }}</a>
                     </form>
                 </div>
             </div>
@@ -196,9 +195,9 @@
 
 @section('js')
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> --}}
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
 
     <script>
         function changeQuantity(amount) {

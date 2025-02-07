@@ -88,9 +88,11 @@
                             </div>
                         </div>
                     @empty
-                        <tr>
-                            <td colspan="10" class="text-center bg-warning text-white fw-bold">No product Found</td>
-                        </tr>
+                    <tr>
+                        <td colspan="10" class="text-center table-warning text-white fw-bold py-3 border">
+                            <strong>{{ __('page.no_product') }}</strong>
+                        </td>
+                    </tr>
                     @endforelse
                 </div>
                 <div class="d-flex justify-content-center my-4">
@@ -128,21 +130,5 @@
 @endsection
 
 @section('js')
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#search-input').on('keyup', function() {
-            let query = $(this).val();
-            $.ajax({
-                url: "{{ route('products.search', $section->id) }}",
-                type: "GET",
-                data: { search: query },
-                success: function(data) {
-                    $('.product-lists').html(data);
-                }
-            });
-        });
-    });
-</script> --}}
 
 @endsection

@@ -3,10 +3,10 @@
         <div class="col-md-12">
             <div class="product-filters text-center">
                 <ul class="d-inline-flex">
-                    <li class="{{ $filter === 'all' ? 'active' : '' }}" wire:click="$set('filter', 'all')">All</li>
-                    <li class="{{ $filter === 'رجالي' ? 'active' : '' }}" wire:click="$set('filter', 'رجالي')">رجالي</li>
-                    <li class="{{ $filter === 'حريمي' ? 'active' : '' }}" wire:click="$set('filter', 'حريمي')">حريمي</li>
-                    <li class="{{ $filter === 'اطفالي' ? 'active' : '' }}" wire:click="$set('filter', 'اطفالي')">اطفالي</li>
+                    <li class="{{ $filter === 'all' ? 'active' : '' }}" wire:click="$set('filter', 'all')">{{ __('page.all') }}</li>
+                    <li class="{{ $filter === 'رجالي' ? 'active' : '' }}" wire:click="$set('filter', 'رجالي')">{{ __('page.man') }}</li>
+                    <li class="{{ $filter === 'حريمي' ? 'active' : '' }}" wire:click="$set('filter', 'حريمي')">{{ __('page.woman') }}</li>
+                    <li class="{{ $filter === 'اطفالي' ? 'active' : '' }}" wire:click="$set('filter', 'اطفالي')">{{ __('page.kids') }}</li>
                 </ul>
             </div>
         </div>
@@ -14,7 +14,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="input-group mb-3">
-                <input wire:model.live='search' type='text' class="form-control" placeholder="Search products...">
+                <input wire:model.live='search' type='text' class="form-control" placeholder="{{ __('page.search_product') }}">
             </div>
         </div>
     </div>
@@ -33,13 +33,15 @@
                             <h3>{{ $clothing_product->description }}</h3>
                             <h3>{{ $clothing_product->price }} $</h3>                                
                             <a href="{{ route('clothing_product_view', $clothing_product->id) }}" class="cart-btn">
-                                <i class="fas fa-shopping-cart"></i>اضف الي السلة
+                                <i class="fas fa-shopping-cart"></i>{{ __('page.add to cart') }}
                             </a>
                         </div>
                     </div>
                 @empty
                 <tr>
-                    <td colspan="10" class="text-center bg-warning text-white fw-bold">No product Found</td>
+                    <td colspan="10" class="text-center table-warning text-white fw-bold py-3 border">
+                        <strong>{{ __('page.no_product') }}</strong>
+                    </td>
                 </tr>
                 @endforelse
             </div>

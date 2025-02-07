@@ -34,7 +34,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 //+++++++++++++++++++++++userpage++++++++++++++++++++++++++++++++++++
 Route::resource('/customer', CustomerController::class);
 
-    Route::get('/change-locale/{locale}', function ($locale) {
+    Route::get('change-locale/{locale}', function ($locale) {
         $supportedLocales = config('laravellocalization.supportedLocales');
         if (array_key_exists($locale, $supportedLocales)) {
             session(['locale' => $locale]);
@@ -65,20 +65,21 @@ Route::resource('/customer', CustomerController::class);
             Route::get('/clothingsection/product_view/{id}', 'clothing_section_viewproduct')->name('clothing_section_product_view');
             Route::get('/clothingproduct_view/{id}', 'clothing_viewproduct')->middleware('auth')->name('clothing_product_view');
         });
+
+        //basket
+        Route::controller(BasketController::class)->group(function () {
+            Route::get('/show_basket', 'show_basket')->name('show_basket')->middleware('auth');
+            Route::get('/add_basket/{id}', 'add_basket')->name('add_basket');
+            Route::get('/show_single_basket/{id}', 'show_single_basket')->name('show_single_basket');
+            Route::delete('/del_clothing_basket/{id}', 'del_clothing_basket')->name('del_clothing_basket');
+            Route::delete('/del_product_basket/{id}', 'del_product_basket')->name('del_product_basket');
+        });
+        
+        
+        //clothingbasket
+        Route::get('/add_clohing_basket/{id1}/{id2}', [ClothesbasketController::class, 'add_clothing_basket'])->name('add_clohing_to_basket');
+        Route::get('/show_single_clohing_basket/{id}', [BasketController::class, 'show_single_clohing_basket'])->name('show_single_clohing_basket');
     });
-
-//basket
-Route::controller(BasketController::class)->group(function () {
-    Route::get('/show_basket', 'show_basket')->name('show_basket')->middleware('auth');
-    Route::get('/add_basket/{id}', 'add_basket')->name('add_basket');
-    Route::get('/show_single_basket/{id}', 'show_single_basket')->name('show_single_basket');
-    Route::delete('/del_clothing_basket/{id}', 'del_clothing_basket')->name('del_clothing_basket');
-    Route::delete('/del_product_basket/{id}', 'del_product_basket')->name('del_product_basket');
-});
-
-//clothingbasket
-Route::get('/add_clohing_basket/{id1}/{id2}', [ClothesbasketController::class, 'add_clothing_basket'])->name('add_clohing_to_basket');
-Route::get('/show_single_clohing_basket/{id}', [BasketController::class, 'show_single_clohing_basket'])->name('show_single_clohing_basket');
 
 //order
 Route::Post('/send_order/{id}', [OrderController::class, 'send_order'])->name('send_order');

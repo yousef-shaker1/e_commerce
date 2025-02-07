@@ -73,7 +73,7 @@ class ShowSingleClothingProduct extends Component
                 $this->amount = $colorSize->amount;
     
                 if ($this->amount == 0) {
-                    session()->flash('error', 'هذا المنتج غير متوفر بالمخزون.');
+                    session()->flash('error', __('page.product_out_of_stock') );
                 }
             } else {
                 $this->resetPriceAndAmount();
@@ -114,7 +114,7 @@ class ShowSingleClothingProduct extends Component
                 'color_id' => $this->selectedColor,
                 'size_id' => $this->selectedSize,
             ]);
-        session()->flash('Add', 'تم اضافة الاوردر الي السلة بنجاح');
+        session()->flash('Add', __('page.order_add_to_cart'));
         return redirect()->back();
     }
 
@@ -149,7 +149,7 @@ class ShowSingleClothingProduct extends Component
                 'color_id' => $this->selectedColor,
                 'size_id' => $this->selectedSize,
             ]);
-        session()->flash('Add', 'تم اضافة الاوردر الي السلة بنجاح');
+        session()->flash('Add', __('page.order_add_to_cart'));
         return redirect()->back();
     }
 

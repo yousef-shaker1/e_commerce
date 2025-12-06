@@ -88,12 +88,11 @@ class SectionProduct extends Component
         $validator = $this->validate($this->updateRules());
         $section = section::find($this->id);
         // Check if a new image is provided
-        if ($this->img instanceof UploadedFile) {
+        if ($this->img && !$this->img instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile === false) {
             // Delete the old image if it exists
             if (!empty($section->img) && Storage::disk('public')->exists($section->img)) {
                 Storage::disk('public')->delete($section->img);
             }
-    
             // Store the new image
             $path = $this->img->store('section', 'public');
             $section->img = $path;

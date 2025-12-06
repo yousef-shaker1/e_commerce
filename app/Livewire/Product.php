@@ -52,7 +52,7 @@ class Product extends Component
     {
         return [
             'img' => 'required|image',
-            'name.*' => 'required|min:2|max:20',
+            'name.*' => 'required|min:2|max:50',
             'description.*' => 'required|min:5|max:100',
             'price' => 'required',
             'amount' => 'required',
@@ -126,7 +126,7 @@ class Product extends Component
         $validator = $this->validate($this->updateRules());
         $product = ModelsProduct::find($this->id);
         // Check if a new image is provided
-        if ($this->img instanceof UploadedFile) {
+        if ($this->img && !$this->img instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile === false) {
             // Delete the old image if it exists
             if (!empty($product->img) && Storage::disk('public')->exists($product->img)) {
                 Storage::disk('public')->delete($product->img);

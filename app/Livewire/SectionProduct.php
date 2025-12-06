@@ -99,7 +99,7 @@ class SectionProduct extends Component
         }
         
         // Update section name
-        $section->name = $validator["name"];
+        $section->name = $validator["name"]; 
         $section->save();
     
         session()->flash('message', 'section updated Successfully');

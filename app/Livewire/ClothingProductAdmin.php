@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ClothingProductAdmin extends Component
 {
     use WithPagination, WithFileUploads;
-    protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme =             'bootstrap';
     public $id;
     public $name = [
         'ar' => '',

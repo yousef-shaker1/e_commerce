@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Models\clothingorder;
 use App\Models\clothingproduct;
 use App\Models\clothingsection;
-use App\Models\Color_Product;
+use App\Models\ColorProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -165,7 +165,7 @@ class UserpageController extends Controller
 
     public function clothing_viewproduct($id)
     {
-        $colors = Color_Product::where('product_id', $id)->get();
+        $colors = ColorProduct::where('product_id', $id)->get();
         $product = clothingproduct::where('id', $id)->first();
         $sizes = relationsize::where('product_id', $id)->get();
         $images = Product_Image::where('product_id', $id)->get();

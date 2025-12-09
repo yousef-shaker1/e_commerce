@@ -8,7 +8,7 @@ use App\Models\customer;
 use App\Models\Color_Size;
 use App\Models\relationsize;
 use App\Models\clothesbasket;
-use App\Models\Color_Product;
+use App\Models\ColorProduct;
 use App\Models\clothingproduct;
 use App\Trait\Check_Size_And_Amount;
 use Illuminate\Support\Facades\Auth;
@@ -30,9 +30,9 @@ class ShowSingleClothingProduct extends Component
     public function mount($id)
     {
         $this->id = $id;
-        $this->colors = Color_Product::where('product_id', $this->id)->get();
-        $Color_Product = Color_Product::where('product_id', $this->id)->get();
-        if($Color_Product->isEmpty()){
+        $this->colors = ColorProduct::where('product_id', $this->id)->get();
+        $ColorProduct = ColorProduct::where('product_id', $this->id)->get();
+        if($ColorProduct->isEmpty()){
             $this->check_color = false;
             $this->relationSizes = relationsize::where('product_id', $this->id)->with('size')->get();
         } else {
@@ -44,7 +44,7 @@ class ShowSingleClothingProduct extends Component
     public function updatedSelectedColor($colorId)
     {
         // البحث عن المنتج المرتبط باللون المختار
-        $this->colorProduct = Color_Product::where('color_id', $colorId)->first();
+        $this->colorProduct = ColorProduct::where('color_id', $colorId)->first();
     
         if ($this->colorProduct) {
             // جلب المقاسات المرتبطة باللون المختار

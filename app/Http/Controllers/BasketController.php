@@ -10,7 +10,7 @@ use App\Models\customer;
 use App\Models\relationsize;
 use Illuminate\Http\Request;
 use App\Models\clothesbasket;
-use App\Models\Color_Product;
+use App\Models\ColorProduct;
 use App\Models\clothingproduct;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,16 +53,16 @@ class BasketController extends Controller
         $customer = customer::where('email' , Auth::user()->email)->first();
         $sizes = clothesbasket::where('customer_id', Auth::user()->id)->where('product_id', $id)->first();
         $size = size::where('id',$sizes->size_id)->first();
-        $color_product = Color_Product::where('product_id', $id)->where('color_id', $sizes->color_id)->first();
+        $ColorProduct = ColorProduct::where('product_id', $id)->where('color_id', $sizes->color_id)->first();
 
-        if ($color_product == null) {
-            return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'color_product'));
+        if ($ColorProduct == null) {
+            return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'ColorProduct'));
         }
-        $size_product = Color_Size::where('color_product_id', $color_product->id)
+        $size_product = Color_Size::where('color_product_id', $ColorProduct->id)
             ->where('size_id', $size->id)
             ->first();
 
-        return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'color_product', 'size_product'));
+        return view('user_page.show_single_clohing_basket', compact('clothingproduct', 'size', 'ColorProduct', 'size_product'));
 
     }
 

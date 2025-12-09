@@ -9,7 +9,7 @@ use App\Models\Color_Size;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Color_Product as Color_Product;
+use App\Models\ColorProduct as ColorProduct;
 
 class ShowSingleColor extends Component
 {
@@ -17,7 +17,7 @@ class ShowSingleColor extends Component
     protected $paginationTheme = 'bootstrap';
     public $id;
     public $Color_Product_id;
-    public $Color_Product;
+    public $ColorProduct;
     public $color_id;
     public $color;
     public $image;
@@ -26,7 +26,7 @@ class ShowSingleColor extends Component
 
     public function render()
     {
-        $relationcolors = Color_Product::whereHas('color', function($query) {
+        $relationcolors = ColorProduct::whereHas('color', function($query) {
             $query->where('name', 'like', "%{$this->search}%");
         })
         ->where('product_id', $this->id)
@@ -72,7 +72,7 @@ class ShowSingleColor extends Component
 
         $path = $this->image->store('clothingproduct', 'public');
 
-        $color_protuct = Color_Product::create([
+        $color_protuct = ColorProduct::create([
             'product_id' => $this->id,
             'color_id' => $validateData['color_id'],
             'image' => $path,
@@ -120,17 +120,17 @@ class ShowSingleColor extends Component
 
     public function delete_Color_Product($id)
     {
-        $color = Color_Product::where('product_id', $this->id)->where('id', $id)->first();
+        $color = ColorProduct::where('product_id', $this->id)->where('id', $id)->first();
         if($color){
             $this->Color_Product_id = $color->id;
-            $this->Color_Product = $color->color->name;
+            $this->ColorProduct = $color->color->name;
         } else {
             return redirect()->back();
         }
     }
 
     public function destroyColor(){
-        $color = Color_Product::where('id', $this->Color_Product_id)->first();
+        $color = ColorProduct::where('id', $this->Color_Product_id)->first();
         if(!empty($color->image) && Storage::disk('public')->exists($color->image)){
             Storage::disk('public')->delete($color->image);
         }

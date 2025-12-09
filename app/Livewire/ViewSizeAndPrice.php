@@ -16,9 +16,9 @@ class ViewSizeAndPrice extends Component
     public $price;
     public function render()
     {
-        $sizes = Color_Size::with('color_product')->where('color_product_id', $this->id)->get();
+        $sizes = Color_Size::with('ColorProduct')->where('color_product_id', $this->id)->get();
         $sizes_all = size::all();
-        $color = $sizes->first()?->color_product?->color?->name;//color product
+        $color = $sizes->first()?->ColorProduct?->color?->name;//color product
         return view('livewire.view-size-and-price', compact('sizes','sizes_all', 'color'));
     }
     

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\size;
-use App\Models\Color_product;
+use App\Models\ColorProduct;
 use App\Models\clothingproduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,7 +24,7 @@ class clothesbasket extends Model
         return $this->belongsTo(clothingproduct::class);
     }
 
-    public function color_product(){
-        return $this->belongsTo(Color_product::class);
+    public function ColorProduct(){
+        return $this->belongsTo(ColorProduct::class);
     }
 }

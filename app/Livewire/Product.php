@@ -64,7 +64,7 @@ class Product extends Component
     {
         return [
             'img' => 'nullable',
-            'name.*' => 'nullable|min:2|max:20',
+            'name.*' => 'nullable|min:2|max:50',
             'description.*' => 'nullable|min:5|max:100',
             'price' => 'nullable',
             'amount' => 'nullable',

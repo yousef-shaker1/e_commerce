@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\size;
+use App\Models\ColorProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,8 +14,8 @@ class Color_Size extends Model
 
     protected $fillable=['color_product_id', 'size_id', 'amount', 'price'];
 
-    public function color_product(){
-        return $this->belongsTo(Color_product::class);
+    public function ColorProduct(){
+        return $this->belongsTo(ColorProduct::class);
     }
     
 

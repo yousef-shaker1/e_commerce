@@ -17,7 +17,7 @@ use App\Models\clothesbasket;
 use App\Models\clothingorder;
 use App\Models\clothingproduct;
 use App\Models\Color_Size;
-use App\Models\Color_Product;
+use App\Models\ColorProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -49,16 +49,16 @@ class ClothingOrderController extends Controller
 
         $size_id = $basket->size_id;
         $size = relationsize::where('product_id', $id)->where('size_id', $size_id)->first();
-        $color_product = Color_Product::where('product_id', $id)->where('color_id', $basket->color_id)->first();
+        $ColorProduct = ColorProduct::where('product_id', $id)->where('color_id', $basket->color_id)->first();
 
-        if ($color_product === null) {
+        if ($ColorProduct === null) {
             $size_product = null;
             $size_product_amount = 0;
             if ($request->count > $size->amount) {
                 return back()->withErrors(__('page.quantity_available'));//منغير اللوان
             }
         } else {
-            $size_product = Color_Size::where('color_product_id', $color_product->id)
+            $size_product = Color_Size::where('color_product_id', $ColorProduct->id)
                 ->where('size_id', $basket->size_id)
                 ->first();
             $size_product_amount = $size_product->amount;
@@ -98,7 +98,7 @@ class ClothingOrderController extends Controller
             'size' => $request->size,
             'status' => 'قبول',
         ]);
-        if ($color_product == null) {
+        if ($ColorProduct == null) {
             $size->update([
                 'amount' => $size->amount - $count,
             ]);

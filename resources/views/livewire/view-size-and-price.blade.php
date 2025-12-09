@@ -46,11 +46,11 @@
                 <tr>
                     <td class="mb-0 text-muted">{{ $i }}</td>
 
-                    <td class="mb-0 text-muted">{{ $size->color_product->product->name }}</td>
-                    <td class="mb-0 text-muted">{{ $size->color_product->color->name }}</td>
-                    <td class="mb-0 text-muted">{{ $size->size->size }}</td>
-                    <td class="mb-0 text-muted">{{ $size->amount }}</td>
-                    <td class="mb-0 text-muted">{{ $size->price }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->color_product?->product?->name }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->color_product?->color?->name }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->size?->size }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->amount }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->price }}</td>
                     <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <span class="text-muted sr-only">Action</span>

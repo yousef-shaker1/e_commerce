@@ -91,6 +91,35 @@ class ShowSingleColor extends Component
         $this->reset(['color_id', 'image', 'sections']);
         $this->dispatch('close-modal');
     }
+
+    protected function updateRules()
+    {
+        return [
+            'color_id' => 'nullable|min:1|max:10',
+            'image' => 'nullable',
+        ];
+    }
+    public function editColor(){
+    $validator = $this->validate($this->updateRules());
+    $color_protuct = ColorProduct::find($this->Color_Product_id);
+    // Check if a new image is provided
+    if ($this->image && !$this->image instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile === false) {
+        // Delete the old image if it exists
+        if (!empty($color_protuct->image) && Storage::disk('public')->exists($color_protuct->image)) {
+            Storage::disk('public')->delete($color_protuct->image);
+        }
+        // Store the new image
+        $path = $this->image->store('clothingproduct', 'public');
+        $color_protuct->image = $path;
+    }
+    
+    // Update section name
+    $color_protuct->color_id = $validator["color_id"]; 
+    $color_protuct->save();
+
+    session()->flash('message', 'color protuct updated Successfully');
+    $this->dispatch('close-modal');
+    }
     public function closeModal()
     {
         $this->resetInput();
@@ -100,6 +129,17 @@ class ShowSingleColor extends Component
     {
         $this->color_id = '';
         $this->image = '';
+    }
+
+    public function edit_Color_Product($id){
+        $color = ColorProduct::where('product_id', $this->id)->where('id', $id)->first();
+        if($color){
+            $this->Color_Product_id = $color->id;
+            $this->ColorProduct = $color->color->name;
+            $this->image = $color->image;
+        } else {
+            return redirect()->back();
+        }
     }
 
 

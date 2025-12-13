@@ -98,6 +98,67 @@
     </div>
 
 
+        <div wire:ignore.self class="modal fade" id="EditColorModal" tabindex="-1" aria-labelledby="EditColorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditColorModalLabel">edit color</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click="closeModal">&times;</button>
+                </div>
+                <form wire:submit.prevent="editColor">
+                    <div class="modal-body">
+                        <label>Color</label>
+                        <select wire:model="color_id" class="form-control" required>
+                            @foreach ($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('color_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="modal-body">
+                    <div class="mb-3">
+                            <label for="current_img" class="col-form-label">الصورة الحالية للقسم:</label>
+                            <br><br>
+                            @if ($this->image && is_object($this->image))
+                                <div>
+                                    <img src="{{ $this->image->temporaryUrl() }}" style="width: 80px; height: 50px;">
+                                </div>
+                            @elseif ($this->image)
+                                <a id="current_img_link" href="{{ Storage::url($this->image) }}">
+                                    <img id="" src="{{ Storage::url($this->image) }}"
+                                        style="width: 80px; height: 50px;">
+                                </a>
+                            @endif
+                            <br>
+                    </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label>Image</label>
+                            <input type="file" wire:model="image" class="form-control">
+                            @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" wire:click="closeModal"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Delete Student Modal -->
     <div wire:ignore.self class="modal fade" id="deleteColorModal" tabindex="-1" aria-labelledby="deleteColorModalLabel"

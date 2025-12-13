@@ -20,6 +20,7 @@
 <script>
   window.addEventListener('close-modal', event => {
       $('#addColorModal').modal('hide');
+      $('#EditColorModal').modal('hide');
       $('#deleteColorModal').modal('hide');
   });
 </script>

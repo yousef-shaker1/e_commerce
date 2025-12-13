@@ -174,6 +174,10 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
 
+                            <button class="dropdown-item" type="button" data-bs-toggle="modal"
+                                data-bs-target="#EditColorModal" wire:click="edit_Color_Product({{ $color->id }})">
+                                Edit
+                            </button>
                             {{-- @can('حذف المنتج') --}}
                             <button class="dropdown-item" type="button" data-bs-toggle="modal"
                                 data-bs-target="#deleteColorModal" wire:click="delete_Color_Product({{ $color->id }})">

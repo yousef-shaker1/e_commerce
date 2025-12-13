@@ -114,7 +114,7 @@ class ShowSingleColor extends Component
     }
     
     // Update section name
-    $color_protuct->color_id = $validator["color_id"]; 
+    $color_protuct->color_id = $validator["color_id"] ?? $color_protuct->color_id; 
     $color_protuct->save();
 
     session()->flash('message', 'color protuct updated Successfully');

@@ -9,12 +9,12 @@
             </button>
         </div>
     @endif
-
+ 
     @if (session()->has('delete'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>{{ session()->get('delete') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times; </span>
             </button>
         </div>
     @endif
@@ -56,7 +56,7 @@
                             <span class="text-muted sr-only">Action</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-
+ 
                             {{-- @can('حذف المنتج') --}}
                             <button class="dropdown-item" type="button" data-bs-toggle="modal"
                                 data-bs-target="#UpdateSizeModal" wire:click="EditSize({{ $size->id }})">

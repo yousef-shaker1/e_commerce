@@ -42,12 +42,13 @@
         <tbody>
             <?php $i = 0; ?>
             @forelse ($sizes as $size)
+            {{-- @dd($size); --}}
             <?php $i++?>
                 <tr>
                     <td class="mb-0 text-muted">{{ $i }}</td>
 
-                    <td class="mb-0 text-muted">{{ $size?->color_product?->product?->name }}</td>
-                    <td class="mb-0 text-muted">{{ $size?->color_product?->color?->name }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->ColorProduct?->product?->name }}</td>
+                    <td class="mb-0 text-muted">{{ $size?->ColorProduct?->color?->name }}</td>
                     <td class="mb-0 text-muted">{{ $size?->size?->size }}</td>
                     <td class="mb-0 text-muted">{{ $size?->amount }}</td>
                     <td class="mb-0 text-muted">{{ $size?->price }}</td>
